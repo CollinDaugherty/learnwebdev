@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '../styles/button';
 
 class TutorialForm extends Component {
   render() {
@@ -37,7 +38,7 @@ class TutorialForm extends Component {
           <label for='advanced'>Advanced</label>
         </div>
 
-        <button>Submit Tutorial</button>
+        <Button>Submit Tutorial</Button>
       </form>
     );
   }
