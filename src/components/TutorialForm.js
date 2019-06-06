@@ -12,29 +12,43 @@ class TutorialForm extends Component {
         <input type='text' name='url' />
 
         <label for='categories'>Categories</label>
-        <input type='text' name='categories' />
+        <input
+          type='text'
+          name='categories'
+          placeholder='HTML, CSS, JS, React, etc.'
+        />
 
         <div>
-          <input type='radio' id='free' name='cost' />
+          <input type='radio' id='free' value='free' name='cost' />
           <label for='free'>Free</label>
 
-          <input type='radio' id='paid' name='cost' />
+          <input type='radio' id='paid' value='paid' name='cost' />
           <label for='paid'>Paid</label>
         </div>
 
         <div>
-          <input type='radio' id='article' name='medium' />
+          <input type='radio' id='article' value='article' name='medium' />
           <label for='article'>Article</label>
 
-          <input type='radio' id='video' name='medium' />
+          <input type='radio' id='video' value='video' name='medium' />
           <label for='video'>Video</label>
         </div>
 
         <div>
-          <input type='radio' id='beginner' name='difficulty' />
+          <input
+            type='radio'
+            id='beginner'
+            value='beginner'
+            name='difficulty'
+          />
           <label for='beginner'>Beginner</label>
 
-          <input type='radio' id='advanced' name='difficulty' />
+          <input
+            type='radio'
+            id='advanced'
+            value='advanced'
+            name='difficulty'
+          />
           <label for='advanced'>Advanced</label>
         </div>
 
