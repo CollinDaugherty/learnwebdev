@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import Button from '../styles/button';
+import Btn from '../styles/blocks/Button';
+import Form from '../styles/blocks/Form';
 
 class TutorialForm extends Component {
   render() {
     return (
-      <form>
+      <Form>
         <label for='title'>Title</label>
-        <input type='text' name='title' />
+        <input type='text' name='title' placeholder='Title' />
 
         <label for='url'>URL</label>
-        <input type='text' name='url' />
+        <input type='text' name='url' placeholder='URL' />
 
         <label for='categories'>Categories</label>
         <input
@@ -18,23 +19,23 @@ class TutorialForm extends Component {
           placeholder='HTML, CSS, JS, React, etc.'
         />
 
-        <div>
+        <fieldset>
           <input type='radio' id='free' value='free' name='cost' />
           <label for='free'>Free</label>
 
           <input type='radio' id='paid' value='paid' name='cost' />
           <label for='paid'>Paid</label>
-        </div>
+        </fieldset>
 
-        <div>
+        <fieldset>
           <input type='radio' id='article' value='article' name='medium' />
           <label for='article'>Article</label>
 
           <input type='radio' id='video' value='video' name='medium' />
           <label for='video'>Video</label>
-        </div>
+        </fieldset>
 
-        <div>
+        <fieldset>
           <input
             type='radio'
             id='beginner'
@@ -50,10 +51,10 @@ class TutorialForm extends Component {
             name='difficulty'
           />
           <label for='advanced'>Advanced</label>
-        </div>
+        </fieldset>
 
-        <Button>Submit Tutorial</Button>
-      </form>
+        <Btn>Submit Tutorial</Btn>
+      </Form>
     );
   }
 }

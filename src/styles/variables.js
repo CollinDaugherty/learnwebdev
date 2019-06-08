@@ -1,5 +1,6 @@
-const theme = {
+const variables = {
+  // COLORS
   primary: '#bada55'
 };
 
-export default theme;
+export default variables;
