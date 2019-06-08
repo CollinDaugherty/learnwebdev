@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 const Form = styled.form`
-  display: block;
+  display: flex;
+  flex-direction: column;
   font-size: 1.6rem;
 
   /* Text Inputs */
   input:not([type='submit']):not([type='file']):not([type='radio']) {
-    display: inline-block;
-    border: 1px solid #dedede;
-    border-radius: 3px;
+    border: ${props => props.theme.borders.border};
+    border-radius: ${props => props.theme.borders.borderRadius};
     padding: 1rem;
     outline: none;
     margin-bottom: 1rem;
@@ -20,6 +20,18 @@ const Form = styled.form`
 
   fieldset {
     border: none;
+    display: flex;
+
+    div {
+      background: red;
+      margin: 0.5rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: ${props => props.theme.borders.borderRadius};
+
+      label {
+        margin-left: 0.8rem;
+      }
+    }
   }
 `;
 
