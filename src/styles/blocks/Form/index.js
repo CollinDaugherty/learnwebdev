@@ -12,7 +12,6 @@ const Form = styled.form`
     outline: none;
     margin-bottom: 1rem;
     width: 100%;
-    max-width: 100%;
     line-height: 1;
     font-size: inherit;
   }

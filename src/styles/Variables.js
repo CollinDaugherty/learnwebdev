@@ -1,3 +1,5 @@
+import { lighten, darken } from 'polished';
+
 //=================================================
 // COLORS
 //=================================================
@@ -14,6 +16,10 @@ export const color = {
   highlight: '#ff0',
   error: '#D33C40'
 };
+
+color.primaryHover = `${darken(0.1, `${color.primary}`)};`;
+color.secondaryHover = `${darken(0.1, `${color.secondary}`)};`;
+color.accentHover = `${darken(0.1, `${color.accent}`)};`;
 
 //=================================================
 // TYPOGRAPHY
