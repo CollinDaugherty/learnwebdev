@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components';
-import theme from './styles/theme';
+import * as theme from './styles/variables';
 
 import Nav from './components/Nav';
 import MainContent from './components/MainContent';
