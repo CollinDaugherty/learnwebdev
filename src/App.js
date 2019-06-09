@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ThemeProvider } from 'styled-components';
-import * as theme from './styles/variables';
+import * as theme from './styles/Variables';
+import { GlobalStyle } from './styles/GlobalStyle';
 
 import Nav from './components/Nav';
 import MainContent from './components/MainContent';
@@ -14,6 +15,7 @@ class App extends Component {
           <Nav />
           <MainContent />
           <Footer />
+          <GlobalStyle />
         </div>
       </ThemeProvider>
     );
