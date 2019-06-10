@@ -78,7 +78,6 @@ class TutorialForm extends Component {
             <Btn>Submit Tutorial</Btn>
           </Form>
         </Card>
-        <Btn>Submit Tutorial</Btn>
       </Container>
     );
   }
