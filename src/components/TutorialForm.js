@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import TutorialItem from './TutorialItem';
 
 // Styled-Components
-import Card from '../styles/blocks/Card';
-import Btn from '../styles/blocks/Button';
-import Form from '../styles/blocks/Form';
-import Container from '../styles/blocks/Container';
+import Card from './styles/blocks/Card';
+import Btn from './styles/blocks/Button';
+import Form from './styles/blocks/Form';
+import Container from './styles/blocks/Container';
 
 class TutorialForm extends Component {
   constructor() {
