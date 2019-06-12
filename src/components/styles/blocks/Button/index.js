@@ -13,10 +13,11 @@ const Btn = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: ${props => props.theme.color.primaryHover};
-    border-color: ${props => props.theme.color.primaryHover};
+    background: ${props => props.theme.color.primaryDark};
+    border-color: ${props => props.theme.color.primaryDark};
   }
 
+  /* Secondary */
   ${props =>
     props.secondary &&
     css`
@@ -24,11 +25,12 @@ const Btn = styled.button`
       border-color: ${props => props.theme.color.secondary};
 
       &:hover {
-        background: ${props => props.theme.color.secondaryHover};
-        border-color: ${props => props.theme.color.secondaryHover};
+        background: ${props => props.theme.color.secondaryDark};
+        border-color: ${props => props.theme.color.secondaryDark};
       }
     `}
-
+  
+  /* Accent */
   ${props =>
     props.accent &&
     css`
@@ -36,13 +38,14 @@ const Btn = styled.button`
       border-color: ${props => props.theme.color.accent};
 
       &:hover {
-        background: ${props => props.theme.color.accentHover};
-        border-color: ${props => props.theme.color.accentHover};
+        background: ${props => props.theme.color.accentDark};
+        border-color: ${props => props.theme.color.accentDark};
       }
     `}
 
+  /* Outline */
   ${props =>
-    props.clear &&
+    props.outline &&
     css`
       background: transparent;
       color: ${props => {
@@ -53,19 +56,19 @@ const Btn = styled.button`
         } else {
           return props => props.theme.color.primary;
         }
-      }}
+      }};
 
       &:hover {
-        background: transparent;
-        color: ${props => {
+        background: ${props => {
           if (props.secondary) {
-            return props => props.theme.color.secondaryHover;
+            return props => props.theme.color.secondaryDark;
           } else if (props.accent) {
-            return props => props.theme.color.accentHover;
+            return props => props.theme.color.accentDark;
           } else {
-            return props => props.theme.color.primaryHover;
+            return props => props.theme.color.primaryDark;
           }
-        }}
+        }};
+        color: white;
       }
     `}
 

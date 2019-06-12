@@ -17,9 +17,13 @@ export const color = {
   error: '#D33C40'
 };
 
-color.primaryHover = `${darken(0.1, `${color.primary}`)};`;
-color.secondaryHover = `${darken(0.1, `${color.secondary}`)};`;
-color.accentHover = `${darken(0.1, `${color.accent}`)};`;
+color.primaryDark = `${darken(0.1, `${color.primary}`)};`;
+color.secondaryDark = `${darken(0.1, `${color.secondary}`)};`;
+color.accentDark = `${darken(0.1, `${color.accent}`)};`;
+
+color.primaryLight = `${lighten(0.2, `${color.primary}`)};`;
+color.secondaryLight = `${lighten(0.2, `${color.secondary}`)};`;
+color.accentLight = `${lighten(0.2, `${color.accent}`)};`;
 
 //=================================================
 // TYPOGRAPHY
