@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import * as theme from './components/styles/Variables';
 import { GlobalStyle } from './components/styles/GlobalStyle';
 
-import Nav from './components/Nav';
+import Navbar from './components/Navbar';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 
@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <div>
-          <Nav />
+          <Navbar />
           <MainContent />
           <Footer />
           <GlobalStyle />

@@ -34,4 +34,13 @@ h5 {
   line-height: ${props => props.theme.heading.lineHeight};
 }
 
+a {
+  text-decoration: none;
+  color: ${props => props.theme.color.primary};
+
+  &:hover {
+    color: ${props => props.theme.color.primaryHover};
+  }
+}
+
 `;
