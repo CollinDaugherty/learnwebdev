@@ -6,7 +6,7 @@ import { lighten, darken } from 'polished';
 
 export const color = {
   bg: '#fff',
-  alternateBg: '',
+  alternateBg: '#F5F9FB',
   darkBg: '',
 
   primary: '#0366EE',

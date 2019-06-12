@@ -1,38 +1,87 @@
 import React, { Component } from 'react';
+import TutorialItem from './TutorialItem';
+
+// Styled-Components
 import Card from '../styles/blocks/Card';
 import Btn from '../styles/blocks/Button';
 import Form from '../styles/blocks/Form';
 import Container from '../styles/blocks/Container';
 
 class TutorialForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      id: '',
+      title: '',
+      url: '',
+      instructor: '',
+      submittedBy: '',
+      categories: [],
+      cost: '',
+      medium: '',
+      difficulty: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
+
   render() {
     return (
       <Container small>
         <Card>
           <Form>
-            <label for='title'>Title</label>
-            <input type='text' name='title' id='title' placeholder='Title' />
+            <label htmlFor='title'>Title</label>
+            <input
+              type='text'
+              name='title'
+              value={this.state.title}
+              onChange={this.handleChange}
+              placeholder='Title'
+            />
 
-            <label for='url'>URL</label>
-            <input type='text' name='url' id='url' placeholder='URL' />
+            <label htmlFor='url'>URL</label>
+            <input
+              type='text'
+              name='url'
+              value={this.state.url}
+              onChange={this.handleChange}
+              placeholder='URL'
+            />
 
-            <label for='categories'>Categories</label>
+            <label htmlFor='categories'>Categories</label>
             <input
               type='text'
               name='categories'
-              id='categories'
+              value={this.state.categories}
+              onChange={this.handleChange}
               placeholder='HTML, CSS, JS, React, etc.'
             />
 
             <fieldset>
               <div>
-                <input type='radio' id='free' value='free' name='cost' />
-                <label for='free'>Free</label>
+                <input
+                  type='radio'
+                  value='free'
+                  onChange={this.handleChange}
+                  name='cost'
+                />
+                <label htmlFor='free'>Free</label>
               </div>
 
               <div>
-                <input type='radio' id='paid' value='paid' name='cost' />
-                <label for='paid'>Paid</label>
+                <input
+                  type='radio'
+                  value='paid'
+                  onChange={this.handleChange}
+                  name='cost'
+                />
+                <label htmlFor='paid'>Paid</label>
               </div>
             </fieldset>
 
@@ -40,16 +89,21 @@ class TutorialForm extends Component {
               <div>
                 <input
                   type='radio'
-                  id='article'
+                  onChange={this.handleChange}
                   value='article'
                   name='medium'
                 />
-                <label for='article'>Article</label>
+                <label htmlFor='article'>Article</label>
               </div>
 
               <div>
-                <input type='radio' id='video' value='video' name='medium' />
-                <label for='video'>Video</label>
+                <input
+                  type='radio'
+                  onChange={this.handleChange}
+                  value='video'
+                  name='medium'
+                />
+                <label htmlFor='video'>Video</label>
               </div>
             </fieldset>
 
@@ -57,27 +111,29 @@ class TutorialForm extends Component {
               <div>
                 <input
                   type='radio'
-                  id='beginner'
+                  onChange={this.handleChange}
                   value='beginner'
                   name='difficulty'
                 />
-                <label for='beginner'>Beginner</label>
+                <label htmlFor='beginner'>Beginner</label>
               </div>
 
               <div>
                 <input
                   type='radio'
-                  id='advanced'
+                  onChange={this.handleChange}
                   value='advanced'
                   name='difficulty'
                 />
-                <label for='advanced'>Advanced</label>
+                <label htmlFor='advanced'>Advanced</label>
               </div>
             </fieldset>
 
             <Btn>Submit Tutorial</Btn>
           </Form>
         </Card>
+
+        <TutorialItem data={this.state} />
       </Container>
     );
   }

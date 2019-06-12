@@ -14,6 +14,7 @@ html {
 }
 
 body {
+  background: ${props => props.theme.color.alternateBg};
   font-family: ${props => props.theme.body.fontFamily};
   font-weight: ${props => props.theme.body.fontWeight};
   font-size: ${props => props.theme.body.fontSize};
