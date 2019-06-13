@@ -11,14 +11,27 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      showTutorialForm: false
+      showTutorialForm: false,
+      showSignUpForm: false,
+      showLogInForm: false
     };
     this.renderTutorialForm = this.renderTutorialForm.bind(this);
+    this.renderSignUpForm = this.renderSignUpForm.bind(this);
   }
 
   renderTutorialForm() {
     this.setState({
-      showTutorialForm: true
+      showTutorialForm: true,
+      showSignUpForm: false,
+      showLogInForm: false
+    });
+  }
+
+  renderSignUpForm() {
+    this.setState({
+      showTutorialForm: false,
+      showSignUpForm: true,
+      showLogInForm: false
     });
   }
 
@@ -26,8 +39,14 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <div>
-          <Navbar renderTutorialForm={this.renderTutorialForm} />
-          <Content showTutorialForm={this.state.showTutorialForm} />
+          <Navbar
+            renderTutorialForm={this.renderTutorialForm}
+            renderSignUpForm={this.renderSignUpForm}
+          />
+          <Content
+            showTutorialForm={this.state.showTutorialForm}
+            showSignUpForm={this.state.showSignUpForm}
+          />
           <Footer />
           <GlobalStyle />
         </div>

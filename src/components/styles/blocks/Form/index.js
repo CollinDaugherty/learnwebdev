@@ -14,6 +14,7 @@ const Form = styled.form`
     width: 100%;
     line-height: 1;
     font-size: inherit;
+    -webkit-appearance: none;
   }
 
   fieldset {

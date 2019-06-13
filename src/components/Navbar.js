@@ -61,7 +61,9 @@ class Navbar extends Component {
             </button>
           </li>
           <li>
-            <button>Sign up / Log in</button>
+            <button onClick={this.props.renderSignUpForm}>
+              Sign up / Log in
+            </button>
           </li>
         </ul>
       </Nav>
