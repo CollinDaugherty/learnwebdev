@@ -4,7 +4,7 @@ const Card = styled.div`
   background: #fff;
   margin: ${props => props.theme.spacing.margin};
   padding: ${props => props.theme.spacing.padding};
-  border-radius: ${props => props.theme.border.borderRadius};
+  border-radius: ${props => props.theme.border.radius};
   border: 1px solid #f2f2f2;
   box-shadow: ${props => props.theme.boxShadow};
 `;

@@ -16,7 +16,7 @@ const Nav = styled.nav`
   input[type=text] {
     flex: 1;
     border: none;
-    border-radius: ${props => props.theme.border.borderRadius};
+    border-radius: ${props => props.theme.border.radius};
     background: ${props => props.theme.color.alternateBg};
     padding: 0.8rem;
     font-size: 1.5rem;
@@ -34,6 +34,12 @@ const Nav = styled.nav`
     li {
       display: inline-block;
       margin-left: 1rem;
+      padding: .5rem .8rem;
+      border-radius: ${props => props.theme.border.radius};
+
+      &:hover {
+        background: ${props => props.theme.color.alternateBg};
+      }
     }
   }
 `;
@@ -51,10 +57,7 @@ class Navbar extends Component {
             </button>
           </li>
           <li>
-            <a href='/'>Sign up</a>
-          </li>
-          <li>
-            <a href='/'>Log in</a>
+            <a href='/'>Sign up / Log in</a>
           </li>
         </ul>
       </Nav>

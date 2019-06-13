@@ -4,7 +4,7 @@ const Btn = styled.button`
   background: ${props => props.theme.color.primary};
   color: white;
   border: 3px solid ${props => props.theme.color.primary};
-  border-radius: ${props => props.theme.border.borderRadius};
+  border-radius: ${props => props.theme.border.radius};
   font-size: ${props => props.theme.body.fontSize};
   font-weight: 700;
   text-align: center;

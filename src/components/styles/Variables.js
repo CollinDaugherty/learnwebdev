@@ -58,16 +58,16 @@ export const spacing = {
 //=================================================
 
 export const border = {
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  borderColor: '#dedede',
-  borderRadius: '5px'
+  width: '1px',
+  style: 'solid',
+  color: '#dedede',
+  radius: '5px'
 };
 
 border.border = `
-  ${border.borderWidth} 
-  ${border.borderStyle} 
-  ${border.borderColor}`;
+  ${border.width} 
+  ${border.style} 
+  ${border.color}`;
 
 export const boxShadow = `0 5px 10px rgba(154, 160, 185, 0.05),
 0 15px 40px rgba(166, 173, 201, 0.2)`;

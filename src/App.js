@@ -18,7 +18,7 @@ class App extends Component {
 
   renderTutorialForm() {
     this.setState({
-      showTutorialForm: !this.state.showTutorialForm
+      showTutorialForm: true
     });
   }
 
