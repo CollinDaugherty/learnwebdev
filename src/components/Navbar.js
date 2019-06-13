@@ -34,12 +34,16 @@ const Nav = styled.nav`
     li {
       display: inline-block;
       margin-left: 1rem;
-      padding: .5rem .8rem;
-      border-radius: ${props => props.theme.border.radius};
 
-      &:hover {
-        background: ${props => props.theme.color.alternateBg};
+      a, button{
+        padding: 0.8rem;
+        border-radius: ${props => props.theme.border.radius};
+
+        &:hover {
+          background: ${props => props.theme.color.alternateBg};
+        }
       }
+      
     }
   }
 `;
@@ -57,7 +61,7 @@ class Navbar extends Component {
             </button>
           </li>
           <li>
-            <a href='/'>Sign up / Log in</a>
+            <button>Sign up / Log in</button>
           </li>
         </ul>
       </Nav>
