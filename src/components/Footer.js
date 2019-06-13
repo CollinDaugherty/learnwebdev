@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import Container from './styles/blocks/Container';
+
+const Foot = styled.footer`
+  background: ${props => props.theme.color.primary};
+  color: white;
+  text-align: center;
+  font-size: 1.4rem;
+  width: 100%;
+`;
 
 class Footer extends Component {
   render() {
     return (
-      <div>
-        <h1>Footer Goes Here</h1>
-      </div>
+      <Foot>
+        <Container>
+          <p>Made with &lt;3 by Collin Daugherty</p>
+        </Container>
+      </Foot>
     );
   }
 }

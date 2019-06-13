@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TutorialItem from './TutorialItem';
 
 // Styled-Components
 import Card from './styles/blocks/Card';
@@ -132,8 +131,6 @@ class TutorialForm extends Component {
             <Btn>Submit Tutorial</Btn>
           </Form>
         </Card>
-
-        <TutorialItem data={this.state} />
       </Container>
     );
   }

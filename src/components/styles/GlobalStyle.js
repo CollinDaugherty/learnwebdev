@@ -39,7 +39,19 @@ a {
   color: ${props => props.theme.color.primary};
 
   &:hover {
-    color: ${props => props.theme.color.primaryHover};
+    color: ${props => props.theme.color.primaryDark};
+  }
+}
+
+button {
+  border: none;
+  background: transparent
+  font-size: inherit;
+  cursor: pointer;
+  color: ${props => props.theme.color.primary};
+
+  &:hover {
+    color: ${props => props.theme.color.primaryDark};
   }
 }
 

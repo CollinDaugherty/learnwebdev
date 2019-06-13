@@ -15,6 +15,7 @@ const Btn = styled.button`
   &:hover {
     background: ${props => props.theme.color.primaryDark};
     border-color: ${props => props.theme.color.primaryDark};
+    color: white;
   }
 
   /* Secondary */
