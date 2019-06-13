@@ -11,14 +11,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      showSubmitForm: false
+      showTutorialForm: false
     };
-    this.renderSubmitForm = this.renderSubmitForm.bind(this);
+    this.renderTutorialForm = this.renderTutorialForm.bind(this);
   }
 
-  renderSubmitForm() {
+  renderTutorialForm() {
     this.setState({
-      showSubmitForm: !this.state.showSubmitForm
+      showTutorialForm: !this.state.showTutorialForm
     });
   }
 
@@ -26,8 +26,8 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <div>
-          <Navbar renderSubmitForm={this.renderSubmitForm} />
-          <Content showSubmitForm={this.state.showSubmitForm} />
+          <Navbar renderTutorialForm={this.renderTutorialForm} />
+          <Content showTutorialForm={this.state.showTutorialForm} />
           <Footer />
           <GlobalStyle />
         </div>

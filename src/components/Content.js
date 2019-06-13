@@ -7,7 +7,7 @@ class Content extends Component {
     return (
       <Container>
         <h1>Page Content</h1>
-        {this.props.showSubmitForm ? <TutorialForm /> : null}
+        {this.props.showTutorialForm ? <TutorialForm /> : null}
       </Container>
     );
   }

@@ -46,7 +46,7 @@ class Navbar extends Component {
         <input type='text' placeholder='Search...' />
         <ul>
           <li>
-            <button onClick={this.props.renderSubmitForm}>
+            <button onClick={this.props.renderTutorialForm}>
               + Submit a tutorial
             </button>
           </li>
