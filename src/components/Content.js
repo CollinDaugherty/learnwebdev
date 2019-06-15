@@ -33,8 +33,10 @@ class Content extends Component {
     return (
       <Container>
         <h1>Page Content</h1>
-        {this.props.showTutorialForm ? <TutorialForm /> : null}
-        {this.props.showSignUpForm ? <SignUpLogIn>{form}</SignUpLogIn> : null}
+        {this.props.route === 'TutorialForm' ? <TutorialForm /> : null}
+        {this.props.route === 'SignUp' ? (
+          <SignUpLogIn>{form}</SignUpLogIn>
+        ) : null}
       </Container>
     );
   }

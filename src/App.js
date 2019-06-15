@@ -11,27 +11,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      showTutorialForm: false,
-      showSignUpForm: false,
-      showLogInForm: false
+      route: ''
     };
-    this.renderTutorialForm = this.renderTutorialForm.bind(this);
-    this.renderSignUpForm = this.renderSignUpForm.bind(this);
+    this.renderForm = this.renderForm.bind(this);
   }
 
-  renderTutorialForm() {
+  renderForm(form) {
     this.setState({
-      showTutorialForm: true,
-      showSignUpForm: false,
-      showLogInForm: false
-    });
-  }
-
-  renderSignUpForm() {
-    this.setState({
-      showTutorialForm: false,
-      showSignUpForm: true,
-      showLogInForm: false
+      route: form
     });
   }
 
@@ -39,14 +26,8 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <div>
-          <Navbar
-            renderTutorialForm={this.renderTutorialForm}
-            renderSignUpForm={this.renderSignUpForm}
-          />
-          <Content
-            showTutorialForm={this.state.showTutorialForm}
-            showSignUpForm={this.state.showSignUpForm}
-          />
+          <Navbar renderForm={this.renderForm} />
+          <Content route={this.state.route} />
           <Footer />
           <GlobalStyle />
         </div>
