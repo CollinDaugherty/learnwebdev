@@ -20,7 +20,7 @@ class SignUpForm extends Component {
         <Btn>Log In</Btn>
 
         <p>
-          Don't have an account?
+          Don't have an account?{' '}
           <button onClick={this.props.changeForm}>Sign up</button>
         </p>
       </Form>

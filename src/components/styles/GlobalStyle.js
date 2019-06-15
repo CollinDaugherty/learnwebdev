@@ -47,4 +47,10 @@ a, button {
   }
 }
 
+hr {
+  border: 0px;
+  height: 1px;
+  background-color: ${props => props.theme.color.primary};
+}
+
 `;

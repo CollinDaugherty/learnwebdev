@@ -23,8 +23,8 @@ class SignUpForm extends Component {
         <Btn>Create Account</Btn>
 
         <p>
-          Already have an account?
-          <button onClick={this.props.changeForm}>Log in</button>
+          Already have an account?{' '}
+          <button onClick={this.props.changeForm}> Log in</button>
         </p>
       </Form>
     );

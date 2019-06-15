@@ -15,6 +15,14 @@ const Form = styled.form`
     line-height: 1;
     font-size: inherit;
     -webkit-appearance: none;
+
+    &:focus {
+      border-color: ${props => props.theme.color.primaryLight};
+    }
+  }
+
+  p {
+    margin: 0 auto;
   }
 
   fieldset {
