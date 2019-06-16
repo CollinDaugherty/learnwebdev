@@ -36,12 +36,22 @@ class App extends Component {
   }
 
   render() {
+    document.addEventListener('keydown', event => {
+      if (event.keyCode === 27) {
+        this.setState({
+          route: null,
+          showSignUp: true
+        });
+      }
+    });
+
     let form;
     if (this.state.showSignUp) {
       form = <SignUpForm changeForm={this.changeForm} />;
     } else {
       form = <LogInForm changeForm={this.changeForm} />;
     }
+
     let popup;
     if (this.state.route === 'TutorialForm') {
       popup = <TutorialForm />;
