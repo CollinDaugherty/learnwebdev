@@ -21,6 +21,7 @@ class App extends Component {
     };
     this.renderForm = this.renderForm.bind(this);
     this.changeForm = this.changeForm.bind(this);
+    this.closeForm = this.closeForm.bind(this);
   }
 
   renderForm(form) {
@@ -35,16 +36,24 @@ class App extends Component {
     });
   }
 
-  render() {
-    document.addEventListener('keydown', event => {
-      if (event.keyCode === 27) {
-        this.setState({
-          route: null,
-          showSignUp: true
-        });
-      }
-    });
+  closeForm(e) {
+    if (e.keyCode === 27) {
+      this.setState({
+        route: null,
+        showSignUp: true
+      });
+    }
+  }
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.closeForm);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.closeForm);
+  }
+
+  render() {
     let form;
     if (this.state.showSignUp) {
       form = <SignUpForm changeForm={this.changeForm} />;
