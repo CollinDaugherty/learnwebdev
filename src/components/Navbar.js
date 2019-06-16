@@ -56,18 +56,12 @@ class Navbar extends Component {
         <input type='text' placeholder='Search...' />
         <ul>
           <li>
-            <button
-              value='TutorialForm'
-              onClick={() => this.props.renderForm('TutorialForm')}
-            >
+            <button onClick={() => this.props.renderForm('TutorialForm')}>
               + Submit a tutorial
             </button>
           </li>
           <li>
-            <button
-              value='SignUp'
-              onClick={() => this.props.renderForm('SignUp')}
-            >
+            <button onClick={() => this.props.renderForm('SignUp')}>
               Sign up / Log in
             </button>
           </li>

@@ -18,11 +18,11 @@ const Container = styled.div`
       max-width: 1000px;
     `}
 
-    ${props =>
-      props.small &&
-      css`
-        max-width: 800px;
-      `}
+  ${props =>
+    props.small &&
+    css`
+      max-width: 800px;
+    `}
 `;
 
 export default Container;

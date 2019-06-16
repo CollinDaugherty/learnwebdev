@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 // Styled-Components
 import Card from './styles/blocks/Card';
-import Container from './styles/blocks/Container';
+import PopUp from './styles/blocks/PopUp';
 
 class SignUpLogIn extends Component {
   constructor() {
@@ -24,9 +24,9 @@ class SignUpLogIn extends Component {
 
   render(props) {
     return (
-      <Container small>
+      <PopUp>
         <Card>{this.props.children}</Card>
-      </Container>
+      </PopUp>
     );
   }
 }

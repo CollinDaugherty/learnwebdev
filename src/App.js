@@ -7,13 +7,20 @@ import Navbar from './components/Navbar';
 import Content from './components/Content';
 import Footer from './components/Footer';
 
+import TutorialForm from './components/TutorialForm';
+import SignUpLogIn from './components/SignUpLogIn';
+import SignUpForm from './components/SignUpForm';
+import LogInForm from './components/LogInForm';
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      route: ''
+      route: null,
+      showSignUp: true
     };
     this.renderForm = this.renderForm.bind(this);
+    this.changeForm = this.changeForm.bind(this);
   }
 
   renderForm(form) {
@@ -22,12 +29,34 @@ class App extends Component {
     });
   }
 
+  changeForm() {
+    this.setState({
+      showSignUp: !this.state.showSignUp
+    });
+  }
+
   render() {
+    let form;
+    if (this.state.showSignUp) {
+      form = <SignUpForm changeForm={this.changeForm} />;
+    } else {
+      form = <LogInForm changeForm={this.changeForm} />;
+    }
+    let popup;
+    if (this.state.route === 'TutorialForm') {
+      popup = <TutorialForm />;
+    } else if (this.state.route === 'SignUp') {
+      popup = <SignUpLogIn>{form}</SignUpLogIn>;
+    } else {
+      popup = null;
+    }
+
     return (
       <ThemeProvider theme={theme}>
         <div>
           <Navbar renderForm={this.renderForm} />
-          <Content route={this.state.route} />
+          {popup}
+          <Content />
           <Footer />
           <GlobalStyle />
         </div>

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Card from './styles/blocks/Card';
 import Btn from './styles/blocks/Button';
 import Form from './styles/blocks/Form';
-import Container from './styles/blocks/Container';
+import PopUp from './styles/blocks/PopUp';
 
 class TutorialForm extends Component {
   constructor() {
@@ -32,7 +32,7 @@ class TutorialForm extends Component {
 
   render() {
     return (
-      <Container small>
+      <PopUp>
         <Card>
           <Form>
             <label htmlFor='title'>Title</label>
@@ -131,7 +131,7 @@ class TutorialForm extends Component {
             <Btn>Submit Tutorial</Btn>
           </Form>
         </Card>
-      </Container>
+      </PopUp>
     );
   }
 }
