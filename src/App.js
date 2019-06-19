@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+
 import { ThemeProvider } from 'styled-components';
 import * as theme from './components/styles/Variables';
 import { GlobalStyle } from './components/styles/GlobalStyle';
@@ -16,41 +18,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      route: null,
       showSignUp: true
     };
-    this.renderForm = this.renderForm.bind(this);
     this.changeForm = this.changeForm.bind(this);
-    this.closeForm = this.closeForm.bind(this);
-  }
-
-  renderForm(form) {
-    this.setState({
-      route: form
-    });
   }
 
   changeForm() {
     this.setState({
       showSignUp: !this.state.showSignUp
     });
-  }
-
-  closeForm(e) {
-    if (e.keyCode === 27) {
-      this.setState({
-        route: null,
-        showSignUp: true
-      });
-    }
-  }
-
-  componentDidMount() {
-    document.addEventListener('keydown', this.closeForm);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.closeForm);
   }
 
   render() {
@@ -61,21 +37,16 @@ class App extends Component {
       form = <LogInForm changeForm={this.changeForm} />;
     }
 
-    let popup;
-    if (this.state.route === 'TutorialForm') {
-      popup = <TutorialForm />;
-    } else if (this.state.route === 'SignUp') {
-      popup = <SignUpLogIn>{form}</SignUpLogIn>;
-    } else {
-      popup = null;
-    }
-
     return (
       <ThemeProvider theme={theme}>
         <div>
-          <Navbar renderForm={this.renderForm} />
-          {popup}
-          <Content />
+          <Navbar />
+          <Route exact path='/' component={Content} />
+          <Route path='/submit' component={TutorialForm} />
+          <Route
+            path='/signup'
+            render={() => <SignUpLogIn>{form}</SignUpLogIn>}
+          />
           <Footer />
           <GlobalStyle />
         </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
@@ -6,14 +7,13 @@ const Nav = styled.nav`
   align-items: center;
   border-bottom: 1px solid #f2f2f2;
   background: ${props => props.theme.color.bg};
-  //box-shadow: ${props => props.theme.boxShadow};
   padding: 2rem;
 
   h1 {
     flex: 1;
   }
 
-  input[type=text] {
+  input[type='text'] {
     flex: 1;
     border: none;
     border-radius: ${props => props.theme.border.radius};
@@ -35,7 +35,8 @@ const Nav = styled.nav`
       display: inline-block;
       margin-left: 1rem;
 
-      a, button{
+      a,
+      button {
         padding: 0.8rem;
         border-radius: ${props => props.theme.border.radius};
 
@@ -43,7 +44,6 @@ const Nav = styled.nav`
           background: ${props => props.theme.color.alternateBg};
         }
       }
-      
     }
   }
 `;
@@ -56,14 +56,11 @@ class Navbar extends Component {
         <input type='text' placeholder='Search...' />
         <ul>
           <li>
-            <button onClick={() => this.props.renderForm('TutorialForm')}>
-              + Submit a tutorial
-            </button>
+            <Link to='/submit'>+ Submit a tutorial</Link>
           </li>
+
           <li>
-            <button onClick={() => this.props.renderForm('SignUp')}>
-              Sign up / Log in
-            </button>
+            <Link to='/signup'>Sign up / Log in</Link>
           </li>
         </ul>
       </Nav>
