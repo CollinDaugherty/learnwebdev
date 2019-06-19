@@ -32,106 +32,104 @@ class TutorialForm extends Component {
 
   render() {
     return (
-      <PopUp>
-        <Card>
-          <Form>
-            <label htmlFor='title'>Title</label>
-            <input
-              type='text'
-              name='title'
-              value={this.state.title}
-              onChange={this.handleChange}
-              placeholder='Title'
-            />
+      <Card>
+        <Form>
+          <label htmlFor='title'>Title</label>
+          <input
+            type='text'
+            name='title'
+            value={this.state.title}
+            onChange={this.handleChange}
+            placeholder='Title'
+          />
 
-            <label htmlFor='url'>URL</label>
-            <input
-              type='text'
-              name='url'
-              value={this.state.url}
-              onChange={this.handleChange}
-              placeholder='URL'
-            />
+          <label htmlFor='url'>URL</label>
+          <input
+            type='text'
+            name='url'
+            value={this.state.url}
+            onChange={this.handleChange}
+            placeholder='URL'
+          />
 
-            <label htmlFor='categories'>Categories</label>
-            <input
-              type='text'
-              name='categories'
-              value={this.state.categories}
-              onChange={this.handleChange}
-              placeholder='HTML, CSS, JS, React, etc.'
-            />
+          <label htmlFor='categories'>Categories</label>
+          <input
+            type='text'
+            name='categories'
+            value={this.state.categories}
+            onChange={this.handleChange}
+            placeholder='HTML, CSS, JS, React, etc.'
+          />
 
-            <fieldset>
-              <div>
-                <input
-                  type='radio'
-                  value='free'
-                  onChange={this.handleChange}
-                  name='cost'
-                />
-                <label htmlFor='free'>Free</label>
-              </div>
+          <fieldset>
+            <div>
+              <input
+                type='radio'
+                value='free'
+                onChange={this.handleChange}
+                name='cost'
+              />
+              <label htmlFor='free'>Free</label>
+            </div>
 
-              <div>
-                <input
-                  type='radio'
-                  value='paid'
-                  onChange={this.handleChange}
-                  name='cost'
-                />
-                <label htmlFor='paid'>Paid</label>
-              </div>
-            </fieldset>
+            <div>
+              <input
+                type='radio'
+                value='paid'
+                onChange={this.handleChange}
+                name='cost'
+              />
+              <label htmlFor='paid'>Paid</label>
+            </div>
+          </fieldset>
 
-            <fieldset>
-              <div>
-                <input
-                  type='radio'
-                  onChange={this.handleChange}
-                  value='article'
-                  name='medium'
-                />
-                <label htmlFor='article'>Article</label>
-              </div>
+          <fieldset>
+            <div>
+              <input
+                type='radio'
+                onChange={this.handleChange}
+                value='article'
+                name='medium'
+              />
+              <label htmlFor='article'>Article</label>
+            </div>
 
-              <div>
-                <input
-                  type='radio'
-                  onChange={this.handleChange}
-                  value='video'
-                  name='medium'
-                />
-                <label htmlFor='video'>Video</label>
-              </div>
-            </fieldset>
+            <div>
+              <input
+                type='radio'
+                onChange={this.handleChange}
+                value='video'
+                name='medium'
+              />
+              <label htmlFor='video'>Video</label>
+            </div>
+          </fieldset>
 
-            <fieldset>
-              <div>
-                <input
-                  type='radio'
-                  onChange={this.handleChange}
-                  value='beginner'
-                  name='difficulty'
-                />
-                <label htmlFor='beginner'>Beginner</label>
-              </div>
+          <fieldset>
+            <div>
+              <input
+                type='radio'
+                onChange={this.handleChange}
+                value='beginner'
+                name='difficulty'
+              />
+              <label htmlFor='beginner'>Beginner</label>
+            </div>
 
-              <div>
-                <input
-                  type='radio'
-                  onChange={this.handleChange}
-                  value='advanced'
-                  name='difficulty'
-                />
-                <label htmlFor='advanced'>Advanced</label>
-              </div>
-            </fieldset>
+            <div>
+              <input
+                type='radio'
+                onChange={this.handleChange}
+                value='advanced'
+                name='difficulty'
+              />
+              <label htmlFor='advanced'>Advanced</label>
+            </div>
+          </fieldset>
 
-            <Btn>Submit Tutorial</Btn>
-          </Form>
-        </Card>
-      </PopUp>
+          <Btn>Submit Tutorial</Btn>
+        </Form>
+      </Card>
     );
   }
 }

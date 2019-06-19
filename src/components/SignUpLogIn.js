@@ -23,11 +23,7 @@ class SignUpLogIn extends Component {
   }
 
   render(props) {
-    return (
-      <PopUp>
-        <Card>{this.props.children}</Card>
-      </PopUp>
-    );
+    return <Card>{this.props.children}</Card>;
   }
 }
 

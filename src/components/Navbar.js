@@ -52,7 +52,9 @@ class Navbar extends Component {
   render() {
     return (
       <Nav>
-        <h1>LearnWebDev.io</h1>
+        <h1>
+          <Link to='/'>LearnWebDev.io</Link>
+        </h1>
         <input type='text' placeholder='Search...' />
         <ul>
           <li>
