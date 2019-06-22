@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import CurrentUser from './CurrentUser';
+
 const Nav = styled.nav`
   display: flex;
   align-items: center;
@@ -50,21 +52,28 @@ const Nav = styled.nav`
 
 class Navbar extends Component {
   render() {
+    const { user } = this.props;
     return (
       <Nav>
         <h1>
           <Link to='/'>LearnWebDev.io</Link>
         </h1>
-        <input type='text' placeholder='Search...' />
-        <ul>
-          <li>
-            <Link to='/submit'>+ Submit a tutorial</Link>
-          </li>
 
-          <li>
-            <Link to='/signup'>Sign up / Log in</Link>
-          </li>
-        </ul>
+        <input type='text' placeholder='Search...' />
+
+        {user.name.length > 0 ? (
+          <CurrentUser user={user} />
+        ) : (
+          <ul>
+            <li>
+              <Link to='/submit'>+ Submit a tutorial</Link>
+            </li>
+
+            <li>
+              <Link to='/signup'>Sign up / Log in</Link>
+            </li>
+          </ul>
+        )}
       </Nav>
     );
   }

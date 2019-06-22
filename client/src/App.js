@@ -10,43 +10,50 @@ import Content from './components/Content';
 import Footer from './components/Footer';
 
 import TutorialForm from './components/TutorialForm';
-import SignUpLogIn from './components/SignUpLogIn';
 import SignUpForm from './components/SignUpForm';
 import LogInForm from './components/LogInForm';
+
+import Container from './components/styles/blocks/Container';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      showSignUp: true
+      isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        joined: ''
+      }
     };
-    this.changeForm = this.changeForm.bind(this);
   }
 
-  changeForm() {
+  loadUser = data => {
     this.setState({
-      showSignUp: !this.state.showSignUp
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        joined: data.joined
+      }
     });
-  }
+  };
 
   render() {
-    let form;
-    if (this.state.showSignUp) {
-      form = <SignUpForm changeForm={this.changeForm} />;
-    } else {
-      form = <LogInForm changeForm={this.changeForm} />;
-    }
-
     return (
       <ThemeProvider theme={theme}>
         <div>
-          <Navbar />
-          <Route exact path='/' component={Content} />
-          <Route path='/submit' component={TutorialForm} />
-          <Route
-            path='/signup'
-            render={() => <SignUpLogIn>{form}</SignUpLogIn>}
-          />
+          <Navbar user={this.state.user} />
+          <Container>
+            <Route exact path='/' component={Content} />
+            <Route path='/submit' component={TutorialForm} />
+            <Route path='/signup' component={SignUpForm} />
+            <Route
+              path='/login'
+              render={() => <LogInForm loadUser={this.loadUser} />}
+            />
+          </Container>
           <Footer />
           <GlobalStyle />
         </div>
