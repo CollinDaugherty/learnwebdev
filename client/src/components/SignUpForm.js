@@ -10,6 +10,7 @@ class SignUpForm extends Component {
   constructor() {
     super();
     this.state = {
+      error: '',
       redirect: false,
       name: '',
       email: '',
@@ -48,37 +49,42 @@ class SignUpForm extends Component {
       <Card>
         <Form onSubmit={this.handleSubmit}>
           <h1>Welcome!</h1>
-          <hr />
 
-          <label htmlFor='name'>Full Name</label>
-          <input
-            type='text'
-            value={this.state.name}
-            name='name'
-            id='name'
-            placeholder='Full Name'
-            onChange={this.handleChange}
-          />
+          <label>
+            Full Name
+            <input
+              type='text'
+              value={this.state.name}
+              name='name'
+              placeholder='Full Name'
+              onChange={this.handleChange}
+              required
+            />
+          </label>
 
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            value={this.state.email}
-            name='email'
-            id='email'
-            placeholder='Email'
-            onChange={this.handleChange}
-          />
+          <label>
+            Email
+            <input
+              type='email'
+              value={this.state.email}
+              name='email'
+              placeholder='Email'
+              onChange={this.handleChange}
+              required
+            />
+          </label>
 
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            value={this.state.password}
-            name='password'
-            id='password'
-            placeholder='Password'
-            onChange={this.handleChange}
-          />
+          <label>
+            Password
+            <input
+              type='password'
+              value={this.state.password}
+              name='password'
+              placeholder='Password'
+              onChange={this.handleChange}
+              required
+            />
+          </label>
 
           <Btn full type='submit'>
             Create Account

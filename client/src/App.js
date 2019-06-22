@@ -19,7 +19,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      isSignedIn: false,
       user: {
         id: '',
         name: '',

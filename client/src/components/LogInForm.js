@@ -58,27 +58,30 @@ class SignUpForm extends Component {
         <Form onSubmit={this.handleSubmit}>
           <h3>{this.state.error}</h3>
           <h1>Welcome Back!</h1>
-          <hr />
 
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            value={this.state.email}
-            name='email'
-            id='email'
-            placeholder='Email'
-            onChange={this.handleChange}
-          />
+          <label>
+            Email
+            <input
+              type='email'
+              value={this.state.email}
+              name='email'
+              placeholder='Email'
+              onChange={this.handleChange}
+              required
+            />
+          </label>
 
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            value={this.state.password}
-            name='password'
-            id='password'
-            placeholder='Password'
-            onChange={this.handleChange}
-          />
+          <label>
+            Password
+            <input
+              type='password'
+              value={this.state.password}
+              name='password'
+              placeholder='Password'
+              onChange={this.handleChange}
+              required
+            />
+          </label>
 
           <Btn full type='submit'>
             Log in
