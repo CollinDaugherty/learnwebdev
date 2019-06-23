@@ -46,12 +46,14 @@ class App extends Component {
           <Navbar user={this.state.user} />
           <Container>
             <Route exact path='/' component={Content} />
-            <Route path='/submit' component={TutorialForm} />
-            <Route path='/signup' component={SignUpForm} />
-            <Route
-              path='/login'
-              render={() => <LogInForm loadUser={this.loadUser} />}
-            />
+            <Container small>
+              <Route path='/submit' component={TutorialForm} />
+              <Route path='/signup' component={SignUpForm} />
+              <Route
+                path='/login'
+                render={() => <LogInForm loadUser={this.loadUser} />}
+              />
+            </Container>
           </Container>
           <Footer />
           <GlobalStyle />

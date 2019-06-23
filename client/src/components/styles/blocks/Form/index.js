@@ -6,10 +6,10 @@ const Form = styled.form`
 
   /* Text Inputs */
   input:not([type='submit']):not([type='file']):not([type='radio']) {
-    border: ${props => props.theme.border.border};
+    border: none;
+    background-color: ${props => props.theme.color.neutral100};
     border-radius: ${props => props.theme.border.radius};
     padding: 1rem;
-    outline: none;
     margin-bottom: 1rem;
     width: 100%;
     line-height: 1;
@@ -17,7 +17,7 @@ const Form = styled.form`
     -webkit-appearance: none;
 
     &:focus {
-      border-color: ${props => props.theme.color.primaryLight};
+      border-color: ${props => props.theme.color.primary400};
     }
   }
 
@@ -30,7 +30,7 @@ const Form = styled.form`
     display: flex;
 
     div {
-      background: ${props => props.theme.color.secondary};
+      background: ${props => props.theme.color.secondary300};
       color: white;
       margin: 0.5rem;
       padding: 0.5rem 1.2rem;

@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "http-proxy-middleware": "^0.19.1",
-    "polished": "^3.4.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",

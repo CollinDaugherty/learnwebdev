@@ -7,9 +7,9 @@ import CurrentUser from './CurrentUser';
 const Nav = styled.nav`
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #f2f2f2;
-  background: ${props => props.theme.color.bg};
+  background: white;
   padding: 2rem;
+  box-shadow: ${props => props.theme.shadow.low};
 
   h1 {
     flex: 1;
@@ -19,12 +19,12 @@ const Nav = styled.nav`
     flex: 1;
     border: none;
     border-radius: ${props => props.theme.border.radius};
-    background: ${props => props.theme.color.alternateBg};
+    background: ${props => props.theme.color.neutral100};
     padding: 0.8rem;
     font-size: 1.5rem;
 
     &:focus {
-      color: ${props => props.theme.color.primary};
+      color: ${props => props.theme.color.primary500};
     }
   }
 
@@ -43,7 +43,7 @@ const Nav = styled.nav`
         border-radius: ${props => props.theme.border.radius};
 
         &:hover {
-          background: ${props => props.theme.color.alternateBg};
+          background: ${props => props.theme.color.neutral100};
         }
       }
     }
