@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
 const Btn = styled.button`
-  background: ${props => props.theme.color.primary500};
+  background: ${props => props.theme.color.primary._500};
   color: white;
   border-radius: ${props => props.theme.border.radius};
-  border: 2px solid ${props => props.theme.color.primary500};
+  border: 2px solid ${props => props.theme.color.primary._500};
   font-size: ${props => props.theme.body.fontSize};
   font-weight: 700;
   text-align: center;
@@ -14,8 +14,8 @@ const Btn = styled.button`
   transition: .2s ease;
 
   &:hover {
-    background: ${props => props.theme.color.primary600};
-    border: 2px solid ${props => props.theme.color.primary600};
+    background: ${props => props.theme.color.primary._600};
+    border: 2px solid ${props => props.theme.color.primary._600};
     color: white;
   }
 
@@ -23,12 +23,12 @@ const Btn = styled.button`
   ${props =>
     props.neutral &&
     css`
-      background: ${props => props.theme.color.neutral800};
-      border: 2px solid ${props => props.theme.color.neutral800};
+      background: ${props => props.theme.color.neutral._800};
+      border: 2px solid ${props => props.theme.color.neutral._800};
 
       &:hover {
-        background: ${props => props.theme.color.neutral900};
-        border: 2px solid ${props => props.theme.color.neutral900};
+        background: ${props => props.theme.color.neutral._900};
+        border: 2px solid ${props => props.theme.color.neutral._900};
       }
     `}
 
@@ -36,12 +36,12 @@ const Btn = styled.button`
   ${props =>
     props.secondary &&
     css`
-      background: ${props => props.theme.color.secondary300};
-      border: 2px solid ${props => props.theme.color.secondary300};
+      background: ${props => props.theme.color.secondary._300};
+      border: 2px solid ${props => props.theme.color.secondary._300};
 
       &:hover {
-        background: ${props => props.theme.color.secondary400};
-        border: 2px solid ${props => props.theme.color.secondary400};
+        background: ${props => props.theme.color.secondary._400};
+        border: 2px solid ${props => props.theme.color.secondary._400};
       }
     `}
   
@@ -49,12 +49,12 @@ const Btn = styled.button`
   ${props =>
     props.accent &&
     css`
-      background: ${props => props.theme.color.accent300};
-      border: 2px solid ${props => props.theme.color.accent300};
+      background: ${props => props.theme.color.accent._300};
+      border: 2px solid ${props => props.theme.color.accent._300};
 
       &:hover {
-        background: ${props => props.theme.color.accent400};
-        border: 2px solid ${props => props.theme.color.accent400};
+        background: ${props => props.theme.color.accent._400};
+        border: 2px solid ${props => props.theme.color.accent._400};
       }
     `}
 

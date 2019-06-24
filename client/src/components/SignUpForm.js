@@ -12,6 +12,8 @@ class SignUpForm extends Component {
     this.state = {
       error: '',
       redirect: false,
+      pw1: '',
+      pw2: '',
       name: '',
       email: '',
       password: ''
@@ -26,18 +28,25 @@ class SignUpForm extends Component {
   };
 
   handleSubmit = e => {
-    fetch('/api/register/', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password
-      })
-    });
-    this.setState({
-      redirect: true
-    });
+    if (this.state.pw1 !== this.state.pw2) {
+      this.setState({
+        error: 'Passwords do not match'
+      });
+    } else {
+      fetch('/api/register/', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.pw2
+        })
+      });
+      this.setState({
+        redirect: true
+      });
+    }
+
     e.preventDefault();
   };
 
@@ -48,44 +57,44 @@ class SignUpForm extends Component {
     return (
       <Card>
         <Form onSubmit={this.handleSubmit}>
+          <h3>{this.state.error}</h3>
           <h1>Welcome!</h1>
-
-          <label>
-            Full Name
-            <input
-              type='text'
-              value={this.state.name}
-              name='name'
-              placeholder='Full Name'
-              onChange={this.handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Email
-            <input
-              type='email'
-              value={this.state.email}
-              name='email'
-              placeholder='Email'
-              onChange={this.handleChange}
-              required
-            />
-          </label>
-
-          <label>
-            Password
-            <input
-              type='password'
-              value={this.state.password}
-              name='password'
-              placeholder='Password'
-              onChange={this.handleChange}
-              required
-            />
-          </label>
-
+          <input
+            aria-label='name'
+            type='text'
+            value={this.state.name}
+            name='name'
+            placeholder='Name'
+            onChange={this.handleChange}
+            required
+          />
+          <input
+            aria-label='email'
+            type='email'
+            value={this.state.email}
+            name='email'
+            placeholder='Email'
+            onChange={this.handleChange}
+            required
+          />
+          <input
+            aria-label='password'
+            type='password'
+            value={this.state.pw1}
+            name='pw1'
+            placeholder='Password'
+            onChange={this.handleChange}
+            required
+          />
+          <input
+            aria-label='confirm password'
+            type='password'
+            value={this.state.pw2}
+            name='pw2'
+            placeholder='Confirm Password'
+            onChange={this.handleChange}
+            required
+          />
           <Btn full type='submit'>
             Create Account
           </Btn>

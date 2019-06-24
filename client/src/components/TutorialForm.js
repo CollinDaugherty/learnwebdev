@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 // Styled-Components
 import Card from './styles/blocks/Card';
@@ -9,68 +10,82 @@ class TutorialForm extends Component {
   constructor() {
     super();
     this.state = {
-      id: '',
+      redirect: false,
       title: '',
       url: '',
-      instructor: '',
-      submittedBy: '',
-      categories: [],
+      categories: '',
       cost: '',
       medium: '',
       difficulty: ''
     };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-  }
+  };
+
+  handleSubmit = e => {
+    fetch('/api/tutorial/', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: this.state.title,
+        url: this.state.url,
+        categories: this.state.categories,
+        cost: this.state.cost,
+        medium: this.state.medium,
+        difficulty: this.state.difficulty
+      })
+    });
+    this.setState({
+      redirect: true
+    });
+    e.preventDefault();
+  };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to='/' />;
+    }
     return (
       <Card>
         <Form>
           <h1>Submit a Tutorial</h1>
-          <label>
-            Title
-            <input
-              type='text'
-              name='title'
-              value={this.state.title}
-              onChange={this.handleChange}
-              placeholder='Title'
-              required
-            />
-          </label>
+          <input
+            aria-label='title'
+            type='text'
+            name='title'
+            value={this.state.title}
+            onChange={this.handleChange}
+            placeholder='Title'
+            required
+          />
 
-          <label>
-            URL
-            <input
-              type='text'
-              name='url'
-              value={this.state.url}
-              onChange={this.handleChange}
-              placeholder='URL'
-              required
-            />
-          </label>
+          <input
+            aria-label='url'
+            type='text'
+            name='url'
+            value={this.state.url}
+            onChange={this.handleChange}
+            placeholder='URL'
+            required
+          />
 
-          <label>
-            Categories
-            <input
-              type='text'
-              name='categories'
-              value={this.state.categories}
-              onChange={this.handleChange}
-              placeholder='HTML, CSS, JS, React, etc.'
-              required
-            />
-          </label>
+          <input
+            aria-label='categories'
+            type='text'
+            name='categories'
+            value={this.state.categories}
+            onChange={this.handleChange}
+            placeholder='HTML, CSS, JS, React, etc.'
+            required
+          />
 
-          <fieldset>
+          <div className='radio-group'>
+            <span>Tags:</span>
             <div>
               <label>
                 <input
@@ -82,9 +97,7 @@ class TutorialForm extends Component {
                 />
                 Free
               </label>
-            </div>
 
-            <div>
               <label>
                 <input
                   type='radio'
@@ -95,11 +108,7 @@ class TutorialForm extends Component {
                 />
                 Paid
               </label>
-            </div>
-          </fieldset>
 
-          <fieldset>
-            <div>
               <label>
                 <input
                   type='radio'
@@ -110,9 +119,7 @@ class TutorialForm extends Component {
                 />
                 Article
               </label>
-            </div>
 
-            <div>
               <label>
                 <input
                   type='radio'
@@ -124,9 +131,10 @@ class TutorialForm extends Component {
                 Video
               </label>
             </div>
-          </fieldset>
+          </div>
 
-          <fieldset>
+          <div className='radio-group'>
+            <span>Difficulty:</span>
             <div>
               <label>
                 <input
@@ -138,9 +146,7 @@ class TutorialForm extends Component {
                 />
                 Beginner
               </label>
-            </div>
 
-            <div>
               <label>
                 <input
                   type='radio'
@@ -152,9 +158,11 @@ class TutorialForm extends Component {
                 Advanced
               </label>
             </div>
-          </fieldset>
+          </div>
 
-          <Btn>Submit Tutorial</Btn>
+          <Btn full type='submit'>
+            Submit Tutorial
+          </Btn>
         </Form>
       </Card>
     );

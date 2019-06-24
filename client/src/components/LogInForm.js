@@ -59,29 +59,25 @@ class SignUpForm extends Component {
           <h3>{this.state.error}</h3>
           <h1>Welcome Back!</h1>
 
-          <label>
-            Email
-            <input
-              type='email'
-              value={this.state.email}
-              name='email'
-              placeholder='Email'
-              onChange={this.handleChange}
-              required
-            />
-          </label>
+          <input
+            aria-label='email'
+            type='email'
+            value={this.state.email}
+            name='email'
+            placeholder='Email'
+            onChange={this.handleChange}
+            required
+          />
 
-          <label>
-            Password
-            <input
-              type='password'
-              value={this.state.password}
-              name='password'
-              placeholder='Password'
-              onChange={this.handleChange}
-              required
-            />
-          </label>
+          <input
+            aria-label='password'
+            type='password'
+            value={this.state.password}
+            name='password'
+            placeholder='Password'
+            onChange={this.handleChange}
+            required
+          />
 
           <Btn full type='submit'>
             Log in

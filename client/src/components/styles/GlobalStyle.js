@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  background: ${props => props.theme.color.neutral100};
+  background: ${props => props.theme.color.neutral._100};
   font-family: ${props => props.theme.body.fontFamily};
   font-weight: ${props => props.theme.body.fontWeight};
   font-size: ${props => props.theme.body.fontSize};
@@ -40,17 +40,17 @@ a, button {
   font-size: inherit;
   cursor: pointer;
   text-decoration: none;
-  color: ${props => props.theme.color.primary500};
+  color: ${props => props.theme.color.primary._500};
 
   &:hover {
-    color: ${props => props.theme.color.primary600};
+    color: ${props => props.theme.color.primary._600};
   }
 }
 
 hr {
   border: 0px;
   height: 1px;
-  background-color: ${props => props.theme.color.primary400};
+  background-color: ${props => props.theme.color.primary._400};
 }
 
 `;

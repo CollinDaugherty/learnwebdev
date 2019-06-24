@@ -88,6 +88,20 @@ app.post('/api/register', (req, res) => {
   }).catch(err => res.status(400).json('unable to join'));
 });
 
+app.post('/api/tutorial', (req, res) => {
+  const { title, url, categories, cost, medium, difficulty } = req.body;
+  return db
+    .insert({
+      title: title,
+      url: url,
+      categories: categories,
+      cost: cost,
+      medium: medium,
+      difficulty: difficulty
+    })
+    .into('tutorials');
+});
+
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 // });
