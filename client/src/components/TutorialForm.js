@@ -7,13 +7,13 @@ import Btn from './styles/blocks/Button';
 import Form from './styles/blocks/Form';
 
 class TutorialForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       redirect: false,
       title: '',
       url: '',
-      categories: '',
+      categories: [],
       cost: '',
       medium: '',
       difficulty: ''
@@ -37,7 +37,8 @@ class TutorialForm extends Component {
         categories: this.state.categories,
         cost: this.state.cost,
         medium: this.state.medium,
-        difficulty: this.state.difficulty
+        difficulty: this.state.difficulty,
+        submittedBy: this.props.user.name
       })
     });
     this.setState({
@@ -52,7 +53,7 @@ class TutorialForm extends Component {
     }
     return (
       <Card>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <h1>Submit a Tutorial</h1>
           <input
             aria-label='title'

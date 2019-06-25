@@ -58,22 +58,22 @@ class Navbar extends Component {
         <h1>
           <Link to='/'>LearnWebDev.io</Link>
         </h1>
-
         <input type='text' placeholder='Search...' />
+        <ul>
+          <li>
+            <Link to='/submit'>+ Submit a tutorial</Link>
+          </li>
 
-        {user.name.length > 0 ? (
-          <CurrentUser user={user} />
-        ) : (
-          <ul>
+          {user.name.length > 0 ? (
             <li>
-              <Link to='/submit'>+ Submit a tutorial</Link>
+              <CurrentUser user={user} />
             </li>
-
+          ) : (
             <li>
               <Link to='/signup'>Sign up / Log in</Link>
             </li>
-          </ul>
-        )}
+          )}
+        </ul>
       </Nav>
     );
   }

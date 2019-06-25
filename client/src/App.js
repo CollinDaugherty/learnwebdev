@@ -47,7 +47,10 @@ class App extends Component {
           <Container>
             <Route exact path='/' component={Content} />
             <Container small>
-              <Route path='/submit' component={TutorialForm} />
+              <Route
+                path='/submit'
+                render={() => <TutorialForm user={this.state.user} />}
+              />
               <Route path='/signup' component={SignUpForm} />
               <Route
                 path='/login'

@@ -89,17 +89,26 @@ app.post('/api/register', (req, res) => {
 });
 
 app.post('/api/tutorial', (req, res) => {
-  const { title, url, categories, cost, medium, difficulty } = req.body;
-  return db
+  const {
+    title,
+    url,
+    categories,
+    cost,
+    medium,
+    difficulty,
+    submittedBy
+  } = req.body;
+  db('tutorials')
     .insert({
       title: title,
       url: url,
       categories: categories,
       cost: cost,
       medium: medium,
-      difficulty: difficulty
+      difficulty: difficulty,
+      submittedby: submittedBy
     })
-    .into('tutorials');
+    .then(console.log);
 });
 
 // app.get('*', (req, res) => {
