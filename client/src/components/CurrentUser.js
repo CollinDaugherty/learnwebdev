@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class CurrentUser extends Component {
   render() {
     return (
       <ul>
         <li>
-          <button>{this.props.user.name}</button>
+          <button>
+            <FontAwesomeIcon icon='user-circle' />
+            {this.props.user.name}
+          </button>
         </li>
       </ul>
     );

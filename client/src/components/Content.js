@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import TutorialList from './TutorialList';
+
+import Container from './styles/blocks/Container';
 
 class Content extends Component {
   constructor() {
@@ -11,7 +14,9 @@ class Content extends Component {
   render() {
     return (
       <div>
-        <h1>content</h1>
+        <Container medium>
+          <TutorialList />
+        </Container>
       </div>
     );
   }

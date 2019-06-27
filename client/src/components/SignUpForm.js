@@ -56,53 +56,55 @@ class SignUpForm extends Component {
     }
     return (
       <Card>
-        <Form onSubmit={this.handleSubmit}>
-          <h3>{this.state.error}</h3>
-          <h1>Welcome!</h1>
-          <input
-            aria-label='name'
-            type='text'
-            value={this.state.name}
-            name='name'
-            placeholder='Name'
-            onChange={this.handleChange}
-            required
-          />
-          <input
-            aria-label='email'
-            type='email'
-            value={this.state.email}
-            name='email'
-            placeholder='Email'
-            onChange={this.handleChange}
-            required
-          />
-          <input
-            aria-label='password'
-            type='password'
-            value={this.state.pw1}
-            name='pw1'
-            placeholder='Password'
-            onChange={this.handleChange}
-            required
-          />
-          <input
-            aria-label='confirm password'
-            type='password'
-            value={this.state.pw2}
-            name='pw2'
-            placeholder='Confirm Password'
-            onChange={this.handleChange}
-            required
-          />
-          <Btn full type='submit'>
-            Create Account
-          </Btn>
+        <Card.Content>
+          <Form onSubmit={this.handleSubmit}>
+            <h3>{this.state.error}</h3>
+            <h1>Welcome!</h1>
+            <input
+              aria-label='name'
+              type='text'
+              value={this.state.name}
+              name='name'
+              placeholder='Name'
+              onChange={this.handleChange}
+              required
+            />
+            <input
+              aria-label='email'
+              type='email'
+              value={this.state.email}
+              name='email'
+              placeholder='Email'
+              onChange={this.handleChange}
+              required
+            />
+            <input
+              aria-label='password'
+              type='password'
+              value={this.state.pw1}
+              name='pw1'
+              placeholder='Password'
+              onChange={this.handleChange}
+              required
+            />
+            <input
+              aria-label='confirm password'
+              type='password'
+              value={this.state.pw2}
+              name='pw2'
+              placeholder='Confirm Password'
+              onChange={this.handleChange}
+              required
+            />
+            <Btn full type='submit'>
+              Create Account
+            </Btn>
 
-          <p>
-            Already have an account? <Link to='/login'>Log in</Link>
-          </p>
-        </Form>
+            <p>
+              Already have an account? <Link to='/login'>Log in</Link>
+            </p>
+          </Form>
+        </Card.Content>
       </Card>
     );
   }

@@ -9,6 +9,7 @@ const Nav = styled.nav`
   align-items: center;
   background: white;
   padding: 2rem;
+  margin-bottom: 2rem;
   box-shadow: ${props => props.theme.shadow.low};
 
   h1 {
@@ -64,7 +65,7 @@ class Navbar extends Component {
             <Link to='/submit'>+ Submit a tutorial</Link>
           </li>
 
-          {user.name.length > 0 ? (
+          {user.name ? (
             <li>
               <CurrentUser user={user} />
             </li>

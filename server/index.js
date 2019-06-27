@@ -88,7 +88,7 @@ app.post('/api/register', (req, res) => {
   }).catch(err => res.status(400).json('unable to join'));
 });
 
-app.post('/api/tutorial', (req, res) => {
+app.post('/api/tutorials', (req, res) => {
   const {
     title,
     url,
@@ -108,7 +108,30 @@ app.post('/api/tutorial', (req, res) => {
       difficulty: difficulty,
       submittedby: submittedBy
     })
-    .then(console.log);
+    .catch(err => res.status(400).json('error submitting tutorial'));
+});
+
+app.get('/api/tutorials', (req, res) => {
+  db.select('*')
+    .from('tutorials')
+    .then(tutorials => {
+      res.json(tutorials);
+    });
+});
+
+app.get('/api/tutorials/:id', (req, res) => {
+  const { id } = req.params;
+  db.select('*')
+    .from('tutorials')
+    .where({ id })
+    .then(tutorial => {
+      if (tutorial.length) {
+        res.json(tutorial[0]);
+      } else {
+        res.status(400).json('not found');
+      }
+    })
+    .catch(err => res.status(400).json('error getting tutorial'));
 });
 
 // app.get('*', (req, res) => {

@@ -15,6 +15,11 @@ import LogInForm from './components/LogInForm';
 
 import Container from './components/styles/blocks/Container';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faUserCircle);
+
 class App extends Component {
   constructor() {
     super();

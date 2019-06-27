@@ -28,7 +28,7 @@ class TutorialForm extends Component {
   };
 
   handleSubmit = e => {
-    fetch('/api/tutorial/', {
+    fetch('/api/tutorials/', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -38,7 +38,7 @@ class TutorialForm extends Component {
         cost: this.state.cost,
         medium: this.state.medium,
         difficulty: this.state.difficulty,
-        submittedBy: this.props.user.name
+        submittedBy: this.props.user.id
       })
     });
     this.setState({
@@ -53,118 +53,120 @@ class TutorialForm extends Component {
     }
     return (
       <Card>
-        <Form onSubmit={this.handleSubmit}>
-          <h1>Submit a Tutorial</h1>
-          <input
-            aria-label='title'
-            type='text'
-            name='title'
-            value={this.state.title}
-            onChange={this.handleChange}
-            placeholder='Title'
-            required
-          />
+        <Card.Content>
+          <Form onSubmit={this.handleSubmit}>
+            <h1>Submit a Tutorial</h1>
+            <input
+              aria-label='title'
+              type='text'
+              name='title'
+              value={this.state.title}
+              onChange={this.handleChange}
+              placeholder='Title'
+              required
+            />
 
-          <input
-            aria-label='url'
-            type='text'
-            name='url'
-            value={this.state.url}
-            onChange={this.handleChange}
-            placeholder='URL'
-            required
-          />
+            <input
+              aria-label='url'
+              type='text'
+              name='url'
+              value={this.state.url}
+              onChange={this.handleChange}
+              placeholder='URL'
+              required
+            />
 
-          <input
-            aria-label='categories'
-            type='text'
-            name='categories'
-            value={this.state.categories}
-            onChange={this.handleChange}
-            placeholder='HTML, CSS, JS, React, etc.'
-            required
-          />
+            <input
+              aria-label='categories'
+              type='text'
+              name='categories'
+              value={this.state.categories}
+              onChange={this.handleChange}
+              placeholder='HTML, CSS, JS, React, etc.'
+              required
+            />
 
-          <div className='radio-group'>
-            <span>Tags:</span>
-            <div>
-              <label>
-                <input
-                  type='radio'
-                  value='free'
-                  onChange={this.handleChange}
-                  name='cost'
-                  required
-                />
-                Free
-              </label>
+            <div className='radio-group'>
+              <span>Tags:</span>
+              <div>
+                <label>
+                  <input
+                    type='radio'
+                    value='free'
+                    onChange={this.handleChange}
+                    name='cost'
+                    required
+                  />
+                  Free
+                </label>
 
-              <label>
-                <input
-                  type='radio'
-                  value='paid'
-                  onChange={this.handleChange}
-                  name='cost'
-                  required
-                />
-                Paid
-              </label>
+                <label>
+                  <input
+                    type='radio'
+                    value='paid'
+                    onChange={this.handleChange}
+                    name='cost'
+                    required
+                  />
+                  Paid
+                </label>
 
-              <label>
-                <input
-                  type='radio'
-                  onChange={this.handleChange}
-                  value='article'
-                  name='medium'
-                  required
-                />
-                Article
-              </label>
+                <label>
+                  <input
+                    type='radio'
+                    onChange={this.handleChange}
+                    value='article'
+                    name='medium'
+                    required
+                  />
+                  Article
+                </label>
 
-              <label>
-                <input
-                  type='radio'
-                  onChange={this.handleChange}
-                  value='video'
-                  name='medium'
-                  required
-                />
-                Video
-              </label>
+                <label>
+                  <input
+                    type='radio'
+                    onChange={this.handleChange}
+                    value='video'
+                    name='medium'
+                    required
+                  />
+                  Video
+                </label>
+              </div>
             </div>
-          </div>
 
-          <div className='radio-group'>
-            <span>Difficulty:</span>
-            <div>
-              <label>
-                <input
-                  type='radio'
-                  onChange={this.handleChange}
-                  value='beginner'
-                  name='difficulty'
-                  required
-                />
-                Beginner
-              </label>
+            <div className='radio-group'>
+              <span>Difficulty:</span>
+              <div>
+                <label>
+                  <input
+                    type='radio'
+                    onChange={this.handleChange}
+                    value='beginner'
+                    name='difficulty'
+                    required
+                  />
+                  Beginner
+                </label>
 
-              <label>
-                <input
-                  type='radio'
-                  onChange={this.handleChange}
-                  value='advanced'
-                  name='difficulty'
-                  required
-                />
-                Advanced
-              </label>
+                <label>
+                  <input
+                    type='radio'
+                    onChange={this.handleChange}
+                    value='advanced'
+                    name='difficulty'
+                    required
+                  />
+                  Advanced
+                </label>
+              </div>
             </div>
-          </div>
 
-          <Btn full type='submit'>
-            Submit Tutorial
-          </Btn>
-        </Form>
+            <Btn full type='submit'>
+              Submit Tutorial
+            </Btn>
+          </Form>
+        </Card.Content>
       </Card>
     );
   }

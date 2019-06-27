@@ -55,38 +55,40 @@ class SignUpForm extends Component {
     }
     return (
       <Card>
-        <Form onSubmit={this.handleSubmit}>
-          <h3>{this.state.error}</h3>
-          <h1>Welcome Back!</h1>
+        <Card.Content>
+          <Form onSubmit={this.handleSubmit}>
+            <h3>{this.state.error}</h3>
+            <h1>Welcome Back!</h1>
 
-          <input
-            aria-label='email'
-            type='email'
-            value={this.state.email}
-            name='email'
-            placeholder='Email'
-            onChange={this.handleChange}
-            required
-          />
+            <input
+              aria-label='email'
+              type='email'
+              value={this.state.email}
+              name='email'
+              placeholder='Email'
+              onChange={this.handleChange}
+              required
+            />
 
-          <input
-            aria-label='password'
-            type='password'
-            value={this.state.password}
-            name='password'
-            placeholder='Password'
-            onChange={this.handleChange}
-            required
-          />
+            <input
+              aria-label='password'
+              type='password'
+              value={this.state.password}
+              name='password'
+              placeholder='Password'
+              onChange={this.handleChange}
+              required
+            />
 
-          <Btn full type='submit'>
-            Log in
-          </Btn>
+            <Btn full type='submit'>
+              Log in
+            </Btn>
 
-          <p>
-            Don't have an account? <Link to='/signup'>Sign up</Link>
-          </p>
-        </Form>
+            <p>
+              Don't have an account? <Link to='/signup'>Sign up</Link>
+            </p>
+          </Form>
+        </Card.Content>
       </Card>
     );
   }
