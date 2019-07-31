@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Instructor = styled.div`
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 
   svg,
   img {

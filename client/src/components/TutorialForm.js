@@ -13,7 +13,7 @@ class TutorialForm extends Component {
       redirect: false,
       title: '',
       url: '',
-      categories: [],
+      categories: '',
       cost: '',
       medium: '',
       difficulty: ''
@@ -27,7 +27,16 @@ class TutorialForm extends Component {
     });
   };
 
+  splitCategories = () => {
+    const str = this.state.categories.replace(/\s+/g, '');
+    const arr = str.split(',');
+    this.setState({
+      categories: arr
+    });
+  };
+
   handleSubmit = e => {
+    this.splitCategories();
     fetch('/api/tutorials/', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },

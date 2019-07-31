@@ -36,36 +36,35 @@ const Form = styled.form`
 
     div {
       flex: 3;
-    
 
-    input {
+      /* input {
       opacity: 0;
       width: 0px;
       z-index -1;
-    }
+    } */
 
-    label {
-      border: 2px solid ${props => props.theme.color.primary._200};
-      background: props.color;
-      border-radius: ${props => props.theme.border.radius};
-      font-weight: 400;
-      margin-right: 0.7rem;
-      padding: 0.5rem 1rem;
-      border-radius: ${props => props.theme.border.radius};
-      cursor: pointer;
+      label {
+        border: 2px solid ${props => props.theme.color.primary._200};
+        background: props.color;
+        border-radius: ${props => props.theme.border.radius};
+        font-weight: 400;
+        margin-right: 0.7rem;
+        padding: 0.5rem 1rem;
+        border-radius: ${props => props.theme.border.radius};
+        cursor: pointer;
 
-      &:hover {
+        &:hover {
+          background: ${props => props.theme.color.primary._200};
+        }
+      }
+
+      label ~ input:checked {
         background: ${props => props.theme.color.primary._200};
       }
-    }
 
-    label ~ input:checked {
-      background: ${props => props.theme.color.primary._200};
-    }
-
-    label:nth-of-type(3) {
-      margin-left: 1.2rem;
-    }
+      label:nth-of-type(3) {
+        margin-left: 1.2rem;
+      }
     }
   }
 `;

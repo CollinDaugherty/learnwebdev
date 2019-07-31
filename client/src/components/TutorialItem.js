@@ -3,11 +3,10 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUserCircle,
-  faCaretSquareUp,
+  faArrowUp,
   faHeart,
   faComment
 } from '@fortawesome/free-solid-svg-icons';
-import { faCaretSquareUp as farCaretSquareUp } from '@fortawesome/free-regular-svg-icons';
 
 import Card from './styles/blocks/Card';
 
@@ -29,20 +28,19 @@ class TutorialItem extends Component {
     const {
       title,
       url,
-      categories,
       cost,
       medium,
       difficulty,
-      submittedby,
+      submittedBy,
       instructor
     } = this.props;
     return (
       <Card tutorialCard>
         <Card.Upvote onClick={this.onUpvote}>
           {this.state.upvoted ? (
-            <FontAwesomeIcon icon={faCaretSquareUp} size='3x' />
+            <FontAwesomeIcon icon={faArrowUp} size='3x' />
           ) : (
-            <FontAwesomeIcon icon={farCaretSquareUp} size='3x' />
+            <FontAwesomeIcon icon={faArrowUp} size='2x' />
           )}
         </Card.Upvote>
         <Card.Content>
@@ -56,7 +54,7 @@ class TutorialItem extends Component {
             <p>
               Instructor:
               <br />
-              <span>Steve Rogers</span>
+              {instructor ? <span>{instructor}</span> : <span>unknown</span>}
             </p>
           </Card.Instructor>
         </Card.Content>
@@ -64,7 +62,7 @@ class TutorialItem extends Component {
         <Card.Footer>
           <ul>
             <li>
-              Submitted By: <a href='/'>{submittedby}</a>
+              Submitted By: <a href='/'>{submittedBy}</a>
             </li>
             <li>3.2k views</li>
             <li>

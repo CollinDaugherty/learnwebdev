@@ -62,7 +62,7 @@ class Navbar extends Component {
         <input type='text' placeholder='Search...' />
         <ul>
           <li>
-            <Link to='/submit'>+ Submit a tutorial</Link>
+            <Link to='/tutorials/submit'>+ Submit a tutorial</Link>
           </li>
 
           {user.name ? (

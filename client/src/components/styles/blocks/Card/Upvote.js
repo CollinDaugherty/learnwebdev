@@ -10,6 +10,14 @@ const Upvote = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.2s ease;
+
+  &:hover {
+    background: ${props => props.theme.color.secondary._300};
+    svg {
+      color: white;
+    }
+  }
 `;
 
 export default Upvote;

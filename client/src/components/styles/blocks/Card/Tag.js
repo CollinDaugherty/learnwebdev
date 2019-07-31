@@ -10,6 +10,7 @@ const Tag = styled.div`
   padding: 0.1rem 1rem;
   margin-right: 1rem;
   text-transform: capitalize;
+  float: right;
 `;
 
 export default Tag;

@@ -12,11 +12,10 @@ class SignUpForm extends Component {
     this.state = {
       error: '',
       redirect: false,
-      pw1: '',
-      pw2: '',
       name: '',
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     };
   }
 
@@ -28,18 +27,18 @@ class SignUpForm extends Component {
   };
 
   handleSubmit = e => {
-    if (this.state.pw1 !== this.state.pw2) {
+    if (this.state.password !== this.state.confirmPassword) {
       this.setState({
         error: 'Passwords do not match'
       });
     } else {
-      fetch('/api/register/', {
+      fetch('/api/register', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: this.state.name,
           email: this.state.email,
-          password: this.state.pw2
+          password: this.state.password
         })
       });
       this.setState({
@@ -81,8 +80,8 @@ class SignUpForm extends Component {
             <input
               aria-label='password'
               type='password'
-              value={this.state.pw1}
-              name='pw1'
+              value={this.state.password}
+              name='password'
               placeholder='Password'
               onChange={this.handleChange}
               required
@@ -90,8 +89,8 @@ class SignUpForm extends Component {
             <input
               aria-label='confirm password'
               type='password'
-              value={this.state.pw2}
-              name='pw2'
+              value={this.state.confirmPassword}
+              name='confirmPassword'
               placeholder='Confirm Password'
               onChange={this.handleChange}
               required
