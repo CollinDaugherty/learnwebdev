@@ -1,4 +1,7 @@
+const bcrypt = require('bcrypt');
 const uuidv4 = require('uuid/v4');
+
+const saltRounds = 10;
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
@@ -11,8 +14,7 @@ exports.seed = function(knex, Promise) {
           id: uuidv4(),
           name: 'Tony Stark',
           email: 'tonystark@starkindustries.com',
-          password:
-            '$2y$12$opytrRf6QugaIege4JASduUX5vYFMQAN/daJrxcySSklSCcy/f.aW', // hash for WarMachineSux
+          password: bcrypt.hashSync('WarMachineSux', saltRounds),
           joined: new Date(),
           is_admin: true
         },
@@ -20,8 +22,7 @@ exports.seed = function(knex, Promise) {
           id: uuidv4(),
           name: 'Steve Rogers',
           email: 'steverogers@shield.gov',
-          password:
-            '$2y$12$xF8aTgXRxMMGpjunavNFAucKyN.W340F.YRRo6rkMsrgyNQK9D2B6', // hash for Peggy
+          password: bcrypt.hashSync('Peggy', saltRounds),
           joined: new Date(),
           is_admin: false
         },
@@ -29,8 +30,7 @@ exports.seed = function(knex, Promise) {
           id: uuidv4(),
           name: 'Thor Odinson',
           email: 'godofthunder@asgard.space',
-          password:
-            '$2y$12$kzV2xXA5qXU75xYzPkXx.e/leTaWtS1nUfQr33KsJHnDrx0GioaXO', // hash for StrongestAvenger
+          password: bcrypt.hashSync('StrongestAvenger', saltRounds),
           joined: new Date(),
           is_admin: false
         }
