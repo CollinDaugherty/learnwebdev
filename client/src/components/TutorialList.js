@@ -37,8 +37,9 @@ class TutorialList extends Component {
                   cost={item.cost}
                   medium={item.medium}
                   difficulty={item.difficulty}
-                  submittedby={item.submittedby}
-                  instructor={item.instructor}
+                  user={item.users.name}
+                  instructor={item.instructors.name}
+                  views={item.views}
                 />
               );
             })}

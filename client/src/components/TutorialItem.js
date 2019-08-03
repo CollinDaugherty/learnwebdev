@@ -31,8 +31,9 @@ class TutorialItem extends Component {
       cost,
       medium,
       difficulty,
-      submittedBy,
-      instructor
+      user,
+      instructor,
+      views
     } = this.props;
     return (
       <Card tutorialCard>
@@ -62,9 +63,9 @@ class TutorialItem extends Component {
         <Card.Footer>
           <ul>
             <li>
-              Submitted By: <a href='/'>{submittedBy}</a>
+              Submitted By: <a href='/'>{user}</a>
             </li>
-            <li>3.2k views</li>
+            <li>{views} views</li>
             <li>
               <FontAwesomeIcon icon={faComment} /> 41 Comments
             </li>
