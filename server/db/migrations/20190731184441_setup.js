@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
         // USERS TABLE
         knex.schema.createTable('users', t => {
           t.uuid('id')
+            .primary()
             .unique()
             .notNullable();
           t.string('name').notNullable();
@@ -21,7 +22,9 @@ exports.up = function(knex, Promise) {
 
         // INSTRUCTORS TABLE
         knex.schema.createTable('instructors', t => {
-          t.increments('id').notNullable();
+          t.increments('id')
+            .primary()
+            .notNullable();
           t.string('name').notNullable();
           t.text('website');
           t.string('github');
@@ -31,7 +34,9 @@ exports.up = function(knex, Promise) {
 
         // TUTORIALS TABLE
         knex.schema.createTable('tutorials', t => {
-          t.increments('id').notNullable();
+          t.increments('id')
+            .primary()
+            .notNullable();
           t.uuid('user_id')
             .unique()
             .notNullable();
@@ -51,11 +56,14 @@ exports.up = function(knex, Promise) {
           t.integer('views')
             .defaultTo(0)
             .notNullable();
+          t.specificType('categories', 'text ARRAY').notNullable();
         }),
 
         // COMMENTS TABLE
         knex.schema.createTable('comments', t => {
-          t.increments('id').notNullable();
+          t.increments('id')
+            .primary()
+            .notNullable();
           t.uuid('user_id').notNullable();
           t.integer('tutorial_id').notNullable();
           t.integer('isChildOf');
@@ -67,18 +75,6 @@ exports.up = function(knex, Promise) {
           t.integer('downvotes')
             .defaultTo(0)
             .notNullable();
-        }),
-
-        // CATEGORIES TABLE
-        knex.schema.createTable('categories', t => {
-          t.increments('id').notNullable();
-          t.string('name').notNullable();
-        }),
-
-        // TUTORIALS_CATEGORIES TABLE
-        knex.schema.createTable('tutorials_categories', t => {
-          t.integer('tutorial_id').notNullable();
-          t.integer('category_id').notNullable();
         })
       ]);
 
@@ -97,9 +93,7 @@ exports.down = function(knex, Promise) {
         knex.schema.dropTable('users'),
         knex.schema.dropTable('instructors'),
         knex.schema.dropTable('tutorials'),
-        knex.schema.dropTable('comments'),
-        knex.schema.dropTable('categories'),
-        knex.schema.dropTable('tutorials_categories')
+        knex.schema.dropTable('comments')
       ]);
 
       console.log('Tables dropped');

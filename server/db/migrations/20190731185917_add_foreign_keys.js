@@ -17,14 +17,6 @@ exports.up = function(knex, Promise) {
           t.foreign('tutorial_id')
             .references('id')
             .inTable('tutorials');
-        }),
-        knex.schema.alterTable('tutorials_categories', t => {
-          t.foreign('tutorial_id')
-            .references('id')
-            .inTable('tutorials');
-          t.foreign('category_id')
-            .references('id')
-            .inTable('categories');
         })
       ]);
 
@@ -41,22 +33,12 @@ exports.down = function(knex, Promise) {
     try {
       await Promise.all([
         knex.schema.table('tutorials', t => {
-          t.dropForeign('user_id', 'tutorials_user_id_foreign');
-          t.dropForeign('instructor_id', 'tutorials_instructor_id_foreign');
+          t.dropForeign('user_id');
+          t.dropForeign('instructor_id');
         }),
         knex.schema.table('comments', t => {
-          t.dropForeign('user_id', 'comments_user_id_foreign');
-          t.dropForeign('tutorial_id', 'comments_tutorial_id_foreign');
-        }),
-        knex.schema.table('tutorials_categories', t => {
-          t.dropForeign(
-            'tutorial_id',
-            'tutorials_comments_tutorial_id_foreign'
-          );
-          t.dropForeign(
-            'category_id',
-            'tutorials_comments_category_id_foreign'
-          );
+          t.dropForeign('user_id');
+          t.dropForeign('tutorial_id');
         })
       ]);
 

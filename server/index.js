@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const path = require('path');
-const knex = require('knex');
+const knex = require('./db/knex');
 const uuidv4 = require('uuid/v4');
+
+const { raw } = require('objection');
 
 const User = require('./models/User');
 const Tutorial = require('./models/Tutorial');
@@ -19,6 +21,7 @@ app.use(express.static(path.join(__dirname, '/client/build')));
 app.get('/api/user/:id', (req, res) => {
   const { id } = req.params;
   User.query()
+    .select('id', 'name', 'joined', 'avatar')
     .where('id', id)
     .then(user => {
       res.json(user);
@@ -55,43 +58,25 @@ app.post('/api/register', (req, res) => {
 });
 
 app.post('/api/tutorials', (req, res) => {
-  const {
-    title,
-    url,
-    categories,
-    cost,
-    medium,
-    difficulty,
-    submittedBy
-  } = req.body;
-
-  Tutorial.query()
-    .insert({
-      title: title,
-      url: url,
-      cost: cost,
-      medium: medium,
-      difficulty: difficulty,
-      user_id: submittedBy
-    })
-    .catch(err => res.status(400).json(err));
+  const { title, url, categories, cost, medium, difficulty, user } = req.body;
 });
 
 // List of tutorials
 app.get('/api/tutorials', (req, res) => {
   Tutorial.query()
-    .select()
+    .eager('[users(defaultSelects), instructors(defaultSelects)]')
     .then(tutorials => {
       res.json(tutorials);
     })
-    .catch(err => res.status(400).json('error getting tutorials'));
+    .catch(err => res.status(400).json(err));
 });
 
-// Get single tutorial
+// Get single tutorial by ID
 app.get('/api/tutorials/:id', (req, res) => {
   const { id } = req.params;
   Tutorial.query()
     .where('id', id)
+    .eager('[users(defaultSelects), instructors(defaultSelects), comments]')
     .then(tutorial => {
       if (tutorial.length) {
         res.json(tutorial[0]);
@@ -100,6 +85,18 @@ app.get('/api/tutorials/:id', (req, res) => {
       }
     })
     .catch(err => res.status(400).json('error getting tutorial'));
+});
+
+app.get('/api/tutorials/search/:searchTerms', (req, res) => {
+  const { searchTerms } = req.params;
+  Tutorial.query()
+    .where(raw(`'${searchTerms}'=ANY(categories)`))
+    .orWhere(raw(`title ILIKE '%${searchTerms}%'`))
+    .eager('[users(defaultSelects), instructors(defaultSelects)]')
+    .then(tutorials => {
+      res.json(tutorials);
+    })
+    .catch(err => res.status(400).json('No tutorials found'));
 });
 
 // app.get('*', (req, res) => {
