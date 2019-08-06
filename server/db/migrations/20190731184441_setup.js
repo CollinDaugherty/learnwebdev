@@ -22,8 +22,9 @@ exports.up = function(knex, Promise) {
 
         // INSTRUCTORS TABLE
         knex.schema.createTable('instructors', t => {
-          t.increments('id')
+          t.uuid('id')
             .primary()
+            .unique()
             .notNullable();
           t.string('name').notNullable();
           t.text('website');
@@ -34,15 +35,16 @@ exports.up = function(knex, Promise) {
 
         // TUTORIALS TABLE
         knex.schema.createTable('tutorials', t => {
-          t.increments('id')
+          t.uuid('id')
             .primary()
-            .notNullable();
-          t.uuid('user_id')
             .unique()
             .notNullable();
-          t.integer('instructor_id');
+          t.uuid('user_id').notNullable();
+          t.uuid('instructor_id');
           t.string('title').notNullable();
-          t.text('url').notNullable();
+          t.text('url')
+            .unique()
+            .notNullable();
           t.timestamp('posted', { useTz: false }).notNullable();
           t.enum('cost', ['free', 'paid']).notNullable();
           t.enum('medium', ['article', 'video']).notNullable();
@@ -61,12 +63,13 @@ exports.up = function(knex, Promise) {
 
         // COMMENTS TABLE
         knex.schema.createTable('comments', t => {
-          t.increments('id')
+          t.uuid('id')
             .primary()
+            .unique()
             .notNullable();
           t.uuid('user_id').notNullable();
-          t.integer('tutorial_id').notNullable();
-          t.integer('isChildOf');
+          t.uuid('tutorial_id').notNullable();
+          t.uuid('isChildOf');
           t.text('body').notNullable();
           t.timestamp('posted', { useTz: false }).notNullable();
           t.integer('upvotes')

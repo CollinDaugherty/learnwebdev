@@ -47,7 +47,7 @@ class TutorialForm extends Component {
         cost: this.state.cost,
         medium: this.state.medium,
         difficulty: this.state.difficulty,
-        submittedBy: this.props.user.id
+        user: this.props.user.id
       })
     });
     this.setState({

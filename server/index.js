@@ -59,6 +59,19 @@ app.post('/api/register', (req, res) => {
 
 app.post('/api/tutorials', (req, res) => {
   const { title, url, categories, cost, medium, difficulty, user } = req.body;
+  Tutorial.query()
+    .insert({
+      id: uuidv4(),
+      title: title,
+      url: url,
+      categories: `{${categories}}`,
+      cost: cost,
+      medium: medium,
+      difficulty: difficulty,
+      posted: new Date(),
+      user_id: user
+    })
+    .catch(err => res.status(400).json(err));
 });
 
 // List of tutorials
@@ -90,8 +103,8 @@ app.get('/api/tutorials/:id', (req, res) => {
 app.get('/api/tutorials/search/:searchTerms', (req, res) => {
   const { searchTerms } = req.params;
   Tutorial.query()
-    .where(raw(`'${searchTerms}'=ANY(categories)`))
-    .orWhere(raw(`title ILIKE '%${searchTerms}%'`))
+    .where(raw('?=ANY(categories)', searchTerms))
+    .orWhere(raw('title ILIKE ?', searchTerms))
     .eager('[users(defaultSelects), instructors(defaultSelects)]')
     .then(tutorials => {
       res.json(tutorials);
