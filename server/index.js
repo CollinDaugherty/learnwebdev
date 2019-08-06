@@ -104,7 +104,7 @@ app.get('/api/tutorials/search/:searchTerms', (req, res) => {
   const { searchTerms } = req.params;
   Tutorial.query()
     .where(raw('?=ANY(categories)', searchTerms))
-    .orWhere(raw('title ILIKE ?', searchTerms))
+    .orWhere(raw('title ILIKE ?', `%${searchTerms}%`))
     .eager('[users(defaultSelects), instructors(defaultSelects)]')
     .then(tutorials => {
       res.json(tutorials);
