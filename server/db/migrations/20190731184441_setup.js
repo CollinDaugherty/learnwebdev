@@ -26,7 +26,10 @@ exports.up = function(knex, Promise) {
             .primary()
             .unique()
             .notNullable();
-          t.string('name').notNullable();
+          t.string('name')
+            .unique()
+            .notNullable();
+          t.timestamp('created', { useTz: false }).notNullable();
           t.text('website');
           t.string('github');
           t.string('twitter');

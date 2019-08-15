@@ -8,6 +8,7 @@ exports.seed = function(knex, Promise) {
         {
           id: '9d3a947b-7a29-4995-9dd7-6eae776deb21',
           name: 'Tania Rascia',
+          created: new Date(),
           website: 'https://taniarascia.com',
           github: 'taniarascia',
           twitter: 'taniarascia',
@@ -16,6 +17,7 @@ exports.seed = function(knex, Promise) {
         {
           id: '26565a7a-833e-4c5c-8d56-7eba5f6b0fb4',
           name: 'Wes Bos',
+          created: new Date(),
           website: 'https://wesbos.com',
           github: 'wesbos',
           twitter: 'wesbos',
@@ -24,6 +26,7 @@ exports.seed = function(knex, Promise) {
         {
           id: '914b36bc-930a-4030-b27c-f2e83b540d61',
           name: 'Chris Coyier',
+          created: new Date(),
           website: 'https://chriscoyier.net/',
           github: 'chriscoyier',
           twitter: 'chriscoyier',

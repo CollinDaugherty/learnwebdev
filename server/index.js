@@ -9,6 +9,7 @@ const uuidv4 = require('uuid/v4');
 const { raw } = require('objection');
 
 const User = require('./models/User');
+const Instructor = require('./models/Instructor');
 const Tutorial = require('./models/Tutorial');
 
 const app = express();
@@ -57,9 +58,19 @@ app.post('/api/register', (req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
-app.post('/api/tutorials', (req, res) => {
-  const { title, url, categories, cost, medium, difficulty, user } = req.body;
-  Tutorial.query()
+app.post('/api/tutorials', async (req, res) => {
+  const {
+    title,
+    url,
+    instructorName,
+    categories,
+    cost,
+    medium,
+    difficulty,
+    user
+  } = req.body;
+
+  const tutorial = await Tutorial.query()
     .insert({
       id: uuidv4(),
       title: title,
@@ -71,7 +82,27 @@ app.post('/api/tutorials', (req, res) => {
       posted: new Date(),
       user_id: user
     })
-    .catch(err => res.status(400).json(err));
+    .catch(err => console.log(err));
+
+  let instructor = await Instructor.query()
+    .findOne({ name: req.body.instructorName })
+    .catch(err => console.log(err));
+
+  if (instructor) {
+    await tutorial
+      .$relatedQuery('instructors')
+      .relate(instructor)
+      .catch(err => console.log(err));
+  } else {
+    await tutorial
+      .$relatedQuery('instructors')
+      .insert({
+        id: uuidv4(),
+        name: instructorName,
+        created: new Date()
+      })
+      .catch(err => console.log(err));
+  }
 });
 
 // List of tutorials

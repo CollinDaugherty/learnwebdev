@@ -13,6 +13,7 @@ class TutorialForm extends Component {
       redirect: false,
       title: '',
       url: '',
+      instructor: '',
       categories: '',
       cost: '',
       medium: '',
@@ -43,6 +44,7 @@ class TutorialForm extends Component {
       body: JSON.stringify({
         title: this.state.title,
         url: this.state.url,
+        instructorName: this.state.instructorName,
         categories: this.state.categories,
         cost: this.state.cost,
         medium: this.state.medium,
@@ -82,6 +84,16 @@ class TutorialForm extends Component {
               value={this.state.url}
               onChange={this.handleChange}
               placeholder='URL'
+              required
+            />
+
+            <input
+              aria-label='instructor'
+              type='text'
+              name='instructorName'
+              value={this.state.instructorName}
+              onChange={this.handleChange}
+              placeholder='Instructor Name'
               required
             />
 
