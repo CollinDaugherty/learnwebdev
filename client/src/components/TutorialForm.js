@@ -13,7 +13,7 @@ class TutorialForm extends Component {
       redirect: false,
       title: '',
       url: '',
-      instructor: '',
+      instructorName: '',
       categories: '',
       cost: '',
       medium: '',

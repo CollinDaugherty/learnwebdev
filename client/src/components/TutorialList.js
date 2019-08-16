@@ -39,7 +39,6 @@ class TutorialList extends Component {
                   difficulty={item.difficulty}
                   user={item.users.name}
                   instructor={item.instructors.name}
-                  views={item.views}
                 />
               );
             })}

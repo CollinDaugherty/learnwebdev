@@ -58,9 +58,6 @@ exports.up = function(knex, Promise) {
           t.integer('downvotes')
             .defaultTo(0)
             .notNullable();
-          t.integer('views')
-            .defaultTo(0)
-            .notNullable();
           t.specificType('categories', 'text ARRAY').notNullable();
         }),
 

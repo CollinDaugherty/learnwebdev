@@ -32,8 +32,7 @@ class TutorialItem extends Component {
       medium,
       difficulty,
       user,
-      instructor,
-      views
+      instructor
     } = this.props;
     return (
       <Card tutorialCard>
@@ -47,9 +46,7 @@ class TutorialItem extends Component {
         <Card.Content>
           <Card.Title>{title}</Card.Title>
           <Card.Subtitle href={url}>{url}</Card.Subtitle>
-          <Card.Tag>{cost}</Card.Tag>
-          <Card.Tag>{medium}</Card.Tag>
-          <Card.Tag>{difficulty}</Card.Tag>
+
           <Card.Instructor>
             <FontAwesomeIcon icon={faUserCircle} size='2x' />
             <p>
@@ -63,15 +60,17 @@ class TutorialItem extends Component {
         <Card.Footer>
           <ul>
             <li>
-              Submitted By: <a href='/'>{user}</a>
-            </li>
-            <li>{views} views</li>
-            <li>
               <FontAwesomeIcon icon={faComment} /> 41 Comments
             </li>
             <li>
               <FontAwesomeIcon icon={faHeart} /> Favorite
             </li>
+            <li>
+              Submitted By: <a href='/'>{user}</a>
+            </li>
+            <Card.Tag>{difficulty}</Card.Tag>
+            <Card.Tag>{medium}</Card.Tag>
+            <Card.Tag>{cost}</Card.Tag>
           </ul>
         </Card.Footer>
       </Card>
