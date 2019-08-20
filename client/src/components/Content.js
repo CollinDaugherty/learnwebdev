@@ -6,16 +6,14 @@ import Container from './styles/blocks/Container';
 class Content extends Component {
   constructor() {
     super();
-    this.state = {
-      list: []
-    };
+    this.state = {};
   }
 
   render() {
     return (
       <div>
         <Container medium>
-          <TutorialList />
+          <TutorialList updateList={this.props.updateList} />
         </Container>
       </div>
     );

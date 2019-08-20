@@ -1,56 +1,60 @@
 import React, { Component } from 'react';
 
+import SearchContext, { SearchConsumer } from '../SearchContext';
+
 import TutorialItem from './TutorialItem';
 
 class TutorialList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      list: []
-    };
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
   componentDidMount() {
-    this.getTutorials();
+    this.getAllTutorials();
   }
 
-  getTutorials = () => {
+  getAllTutorials = () => {
     fetch('/api/tutorials')
       .then(res => res.json())
-      .then(list => this.setState({ list }));
+      .then(list => this.props.updateList(list));
   };
 
   render() {
-    const { list } = this.state;
-
     return (
-      <div>
-        {list.length ? (
+      <SearchConsumer>
+        {({ list }) => (
           <div>
-            {/* Render the list of items */}
-            {list.map(item => {
-              return (
-                <TutorialItem
-                  title={item.title}
-                  url={item.url}
-                  categories={item.categories}
-                  cost={item.cost}
-                  medium={item.medium}
-                  difficulty={item.difficulty}
-                  user={item.users.name}
-                  instructor={item.instructors.name}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <div>
-            <h2>No Tutorials Found</h2>
+            {list.length ? (
+              <div>
+                {/* Render the list of items */}
+                {list.map(item => {
+                  return (
+                    <TutorialItem
+                      key={item.id}
+                      title={item.title}
+                      url={item.url}
+                      categories={item.categories}
+                      cost={item.cost}
+                      medium={item.medium}
+                      difficulty={item.difficulty}
+                      user={item.users.name}
+                      instructor={item.instructors.name}
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+              <div>
+                <h2>No Tutorials Found</h2>
+              </div>
+            )}
           </div>
         )}
-      </div>
+      </SearchConsumer>
     );
   }
 }
+TutorialList.contextType = SearchContext;
 
 export default TutorialList;

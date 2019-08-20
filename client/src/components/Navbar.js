@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { SearchConsumer } from '../SearchContext';
+
 import CurrentUser from './CurrentUser';
 
 const Nav = styled.nav`
@@ -59,7 +61,20 @@ class Navbar extends Component {
         <h1>
           <Link to='/'>LearnWebDev.io</Link>
         </h1>
-        <input type='text' placeholder='Search...' />
+
+        <SearchConsumer>
+          {({ searchTerms, updateSearchTerms, searchTutorials }) => (
+            <form onSubmit={searchTutorials}>
+              <input
+                type='text'
+                name='searchTerms'
+                onChange={updateSearchTerms}
+                placeholder='Search...'
+              />
+            </form>
+          )}
+        </SearchConsumer>
+
         <ul>
           <li>
             <Link to='/tutorials/submit'>+ Submit a tutorial</Link>

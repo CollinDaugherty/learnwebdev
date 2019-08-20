@@ -5,6 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import * as theme from './components/styles/Variables';
 import { GlobalStyle } from './components/styles/GlobalStyle';
 
+import { SearchProvider } from './SearchContext';
+
 import Navbar from './components/Navbar';
 import Content from './components/Content';
 import Footer from './components/Footer';
@@ -23,7 +25,36 @@ library.add(faUserCircle);
 class App extends Component {
   constructor() {
     super();
+
+    this.updateList = list => {
+      console.log('list updated');
+      this.setState({
+        list: list
+      });
+    };
+
+    this.updateSearchTerms = event => {
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
+    };
+
+    this.searchTutorials = e => {
+      if (this.state.searchTerms.length) {
+        fetch(`/api/tutorials/search/${this.state.searchTerms}`)
+          .then(res => res.json())
+          .then(list => this.setState({ list }));
+      }
+      e.preventDefault();
+    };
+
     this.state = {
+      list: [],
+      searchTerms: '',
+      updateSearchTerms: this.updateSearchTerms,
+      searchTutorials: this.searchTutorials,
+
       user: {
         id: '',
         name: '',
@@ -47,25 +78,31 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <div>
-          <Navbar user={this.state.user} />
-          <Container>
-            <Route exact path='/' component={Content} />
-            <Container small>
+        <SearchProvider value={this.state}>
+          <div>
+            <Navbar user={this.state.user} />
+            <Container>
               <Route
-                path='/tutorials/submit'
-                render={() => <TutorialForm user={this.state.user} />}
+                exact
+                path='/'
+                render={() => <Content updateList={this.updateList} />}
               />
-              <Route path='/signup' component={SignUpForm} />
-              <Route
-                path='/login'
-                render={() => <LogInForm loadUser={this.loadUser} />}
-              />
+              <Container small>
+                <Route
+                  path='/tutorials/submit'
+                  render={() => <TutorialForm user={this.state.user} />}
+                />
+                <Route path='/signup' component={SignUpForm} />
+                <Route
+                  path='/login'
+                  render={() => <LogInForm loadUser={this.loadUser} />}
+                />
+              </Container>
             </Container>
-          </Container>
-          <Footer />
-          <GlobalStyle />
-        </div>
+            <Footer />
+            <GlobalStyle />
+          </div>
+        </SearchProvider>
       </ThemeProvider>
     );
   }
