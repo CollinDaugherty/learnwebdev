@@ -18,16 +18,20 @@ const Nav = styled.nav`
     flex: 1;
   }
 
-  input[type='text'] {
+  form {
     flex: 1;
-    border: none;
-    border-radius: ${props => props.theme.border.radius};
-    background: ${props => props.theme.color.neutral._100};
-    padding: 0.8rem;
-    font-size: 1.5rem;
 
-    &:focus {
-      color: ${props => props.theme.color.primary._700};
+    input[type='text'] {
+      width: 100%;
+      border: none;
+      border-radius: ${props => props.theme.border.radius};
+      background: ${props => props.theme.color.neutral._100};
+      padding: 0.8rem;
+      font-size: 1.5rem;
+
+      &:focus {
+        color: ${props => props.theme.color.primary._700};
+      }
     }
   }
 
