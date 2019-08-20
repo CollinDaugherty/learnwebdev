@@ -27,7 +27,6 @@ class App extends Component {
     super();
 
     this.updateList = list => {
-      console.log('list updated');
       this.setState({
         list: list
       });
@@ -43,6 +42,10 @@ class App extends Component {
     this.searchTutorials = e => {
       if (this.state.searchTerms.length) {
         fetch(`/api/tutorials/search/${this.state.searchTerms}`)
+          .then(res => res.json())
+          .then(list => this.setState({ list }));
+      } else {
+        fetch('/api/tutorials')
           .then(res => res.json())
           .then(list => this.setState({ list }));
       }
