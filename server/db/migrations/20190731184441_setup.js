@@ -44,6 +44,7 @@ exports.up = function(knex, Promise) {
             .notNullable();
           t.uuid('user_id').notNullable();
           t.uuid('instructor_id');
+          t.string('instructor_name');
           t.string('title').notNullable();
           t.text('url')
             .unique()

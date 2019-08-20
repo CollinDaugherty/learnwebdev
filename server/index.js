@@ -80,7 +80,8 @@ app.post('/api/tutorials', async (req, res) => {
       medium: medium,
       difficulty: difficulty,
       posted: new Date(),
-      user_id: user
+      user_id: user,
+      instructor_name: instructorName
     })
     .catch(err => console.log(err));
 
@@ -136,11 +137,12 @@ app.get('/api/tutorials/search/:searchTerms', (req, res) => {
   Tutorial.query()
     .where(raw('?=ANY(categories)', searchTerms))
     .orWhere(raw('title ILIKE ?', `%${searchTerms}%`))
+    .orWhere(raw('instructor_name ILIKE ?', `%${searchTerms}%`))
     .eager('[users(defaultSelects), instructors(defaultSelects)]')
     .then(tutorials => {
       res.json(tutorials);
     })
-    .catch(err => res.status(400).json('No tutorials found'));
+    .catch(err => res.status(400).json(err));
 });
 
 // app.get('*', (req, res) => {
