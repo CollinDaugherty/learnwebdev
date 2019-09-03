@@ -14,6 +14,12 @@ class TutorialList extends Component {
     this.getAllTutorials();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.list !== prevProps.list) {
+      this.getAllTutorials();
+    }
+  }
+
   getAllTutorials = () => {
     fetch('/api/tutorials')
       .then(res => res.json())
