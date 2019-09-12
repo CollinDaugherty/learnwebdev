@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import history from '../history';
 
 // Styled-Components
 import Btn from './styles/blocks/Button';
@@ -40,7 +41,7 @@ class SignUpForm extends Component {
           password: this.state.password
         })
       });
-      this.props.history.push('/');
+      history.push('/');
     }
 
     e.preventDefault();

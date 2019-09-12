@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {} from 'react-router-dom';
+import history from '../history';
 
 // Styled-Components
 import Card from './styles/blocks/Card';
@@ -51,7 +52,7 @@ class TutorialForm extends Component {
         user: this.props.user.id
       })
     });
-    this.props.history.push('/');
+    history.push('/');
     e.preventDefault();
   };
 
