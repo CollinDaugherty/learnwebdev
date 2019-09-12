@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 const uuidv4 = require('uuid/v4');
+const passport = require('../passport');
 
 const User = require('../models/User');
 const Instructor = require('../models/Instructor');
 const Tutorial = require('../models/Tutorial');
 
 // Submit Tutorial
-router.post('/api/tutorials', async (req, res) => {
+router.post('/tutorials', async (req, res) => {
   const {
     title,
     url,
@@ -61,7 +62,7 @@ router.post('/api/tutorials', async (req, res) => {
 });
 
 // List of tutorials
-router.get('/api/tutorials', (req, res) => {
+router.get('/tutorials', (req, res) => {
   Tutorial.query()
     .eager('[users(defaultSelects), instructors(defaultSelects)]')
     .then(tutorials => {
@@ -71,7 +72,7 @@ router.get('/api/tutorials', (req, res) => {
 });
 
 // Get single tutorial by ID
-router.get('/api/tutorials/:id', (req, res) => {
+router.get('/tutorials/:id', (req, res) => {
   const { id } = req.params;
   Tutorial.query()
     .where('id', id)
@@ -87,7 +88,7 @@ router.get('/api/tutorials/:id', (req, res) => {
 });
 
 // Search Tutorials
-router.get('/api/tutorials/search/:searchTerms', (req, res) => {
+router.get('/tutorials/search/:searchTerms', (req, res) => {
   const { searchTerms } = req.params;
   Tutorial.query()
     .where(raw('?=ANY(categories)', searchTerms))

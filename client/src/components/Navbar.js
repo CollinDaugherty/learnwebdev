@@ -68,7 +68,7 @@ class Navbar extends Component {
 
         <SearchConsumer>
           {({ searchTerms, updateSearchTerms, searchTutorials }) => (
-            <form onSubmit={searchTutorials}>
+            <form method='get' onSubmit={searchTutorials}>
               <input
                 type='text'
                 name='searchTerms'

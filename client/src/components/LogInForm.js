@@ -42,7 +42,7 @@ class SignUpForm extends Component {
           });
         } else {
           this.setState({
-            error: 'Incorrect username or password'
+            error: 'Incorrect email or password'
           });
         }
       });
@@ -56,7 +56,7 @@ class SignUpForm extends Component {
     return (
       <Card>
         <Card.Content>
-          <Form onSubmit={this.handleSubmit}>
+          <Form method='POST' onSubmit={this.handleSubmit}>
             <h3>{this.state.error}</h3>
             <h1>Welcome Back!</h1>
 

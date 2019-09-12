@@ -56,7 +56,7 @@ class SignUpForm extends Component {
     return (
       <Card>
         <Card.Content>
-          <Form onSubmit={this.handleSubmit}>
+          <Form method='post' onSubmit={this.handleSubmit}>
             <h3>{this.state.error}</h3>
             <h1>Welcome!</h1>
             <input

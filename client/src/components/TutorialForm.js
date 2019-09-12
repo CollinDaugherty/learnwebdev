@@ -65,7 +65,7 @@ class TutorialForm extends Component {
     return (
       <Card>
         <Card.Content>
-          <Form onSubmit={this.handleSubmit}>
+          <Form method='post' onSubmit={this.handleSubmit}>
             <h1>Submit a Tutorial</h1>
             <input
               aria-label='title'
