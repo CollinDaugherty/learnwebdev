@@ -18,7 +18,7 @@ const RegisterStrategy = new LocalStrategy(
       .catch(err => console.log(err));
 
     if (user) {
-      return console.log('an account with that email already exists');
+      return done('an account with that email already exists', null);
     } else {
       User.query()
         .insert({

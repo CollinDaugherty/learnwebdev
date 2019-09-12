@@ -45,6 +45,9 @@ class SignUpForm extends Component {
             error: 'Incorrect email or password'
           });
         }
+      })
+      .catch(error => {
+        console.log(`Error: ${error.response}`);
       });
     e.preventDefault();
   };

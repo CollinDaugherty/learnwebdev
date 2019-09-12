@@ -10,7 +10,6 @@ const LoginStrategy = new LocalStrategy(
     usernameField: 'email'
   },
   async function(req, email, password, done) {
-    let error = null;
     const user = await User.query()
       .where('email', '=', req.body.email)
       .then(async user => {
@@ -22,15 +21,14 @@ const LoginStrategy = new LocalStrategy(
           delete user[0].password;
           return user[0];
         } else {
-          let error = 'wrong credentials';
-          return error;
+          return done('Incorrect email or password', null);
         }
       })
       .catch(err => {
         let error = err;
       });
 
-    done(error, user);
+    done(null, user);
   }
 );
 
