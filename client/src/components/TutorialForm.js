@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import {} from 'react-router-dom';
 
 // Styled-Components
 import Card from './styles/blocks/Card';
@@ -10,7 +10,6 @@ class TutorialForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: false,
       title: '',
       url: '',
       instructorName: '',
@@ -52,16 +51,11 @@ class TutorialForm extends Component {
         user: this.props.user.id
       })
     });
-    this.setState({
-      redirect: true
-    });
+    this.props.history.push('/');
     e.preventDefault();
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to='/' />;
-    }
     return (
       <Card>
         <Card.Content>

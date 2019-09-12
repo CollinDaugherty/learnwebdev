@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Styled-Components
 import Btn from './styles/blocks/Button';
@@ -11,7 +11,6 @@ class SignUpForm extends Component {
     super();
     this.state = {
       error: '',
-      redirect: false,
       name: '',
       email: '',
       password: '',
@@ -41,18 +40,13 @@ class SignUpForm extends Component {
           password: this.state.password
         })
       });
-      this.setState({
-        redirect: true
-      });
+      this.props.history.push('/');
     }
 
     e.preventDefault();
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to='/' />;
-    }
     return (
       <Card>
         <Card.Content>

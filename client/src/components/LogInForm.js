@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import history from '../history';
 
 // Styled-Components
 import Btn from './styles/blocks/Button';
 import Form from './styles/blocks/Form';
 import Card from './styles/blocks/Card';
 
-class SignUpForm extends Component {
+class LogInForm extends Component {
   constructor() {
     super();
     this.state = {
       error: '',
-      redirect: false,
       email: '',
       password: ''
     };
@@ -37,9 +37,7 @@ class SignUpForm extends Component {
       .then(user => {
         if (user.id) {
           this.props.loadUser(user);
-          this.setState({
-            redirect: true
-          });
+          history.push('/');
         } else {
           this.setState({
             error: 'Incorrect email or password'
@@ -53,9 +51,6 @@ class SignUpForm extends Component {
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to='/' />;
-    }
     return (
       <Card>
         <Card.Content>
@@ -97,4 +92,4 @@ class SignUpForm extends Component {
   }
 }
 
-export default SignUpForm;
+export default LogInForm;

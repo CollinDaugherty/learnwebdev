@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 import * as theme from './components/styles/Variables';
@@ -91,15 +91,18 @@ class App extends Component {
                 render={() => <Content updateList={this.updateList} />}
               />
               <Container small>
-                <Route
-                  path='/tutorials/submit'
-                  render={() => <TutorialForm user={this.state.user} />}
-                />
-                <Route path='/signup' component={SignUpForm} />
-                <Route
-                  path='/login'
-                  render={() => <LogInForm loadUser={this.loadUser} />}
-                />
+                <Switch>
+                  <Route
+                    path='/tutorials/submit'
+                    render={() => <TutorialForm user={this.state.user} />}
+                  />
+                  <Route exact path='/signup' render={() => <SignUpForm />} />
+                  <Route
+                    exact
+                    path='/login'
+                    render={() => <LogInForm loadUser={this.loadUser} />}
+                  />
+                </Switch>
               </Container>
             </Container>
             <Footer />
