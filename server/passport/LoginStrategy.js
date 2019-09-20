@@ -1,6 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const uuidv4 = require('uuid/v4');
 
 const User = require('../models/User');
 
@@ -10,25 +9,18 @@ const LoginStrategy = new LocalStrategy(
     usernameField: 'email'
   },
   async function(req, email, password, done) {
-    const user = await User.query()
-      .where('email', '=', req.body.email)
-      .then(async user => {
-        const isValid = await bcrypt.compare(
-          req.body.password,
-          user[0].password
-        );
-        if (isValid) {
-          delete user[0].password;
-          return user[0];
-        } else {
-          return done('Incorrect email or password', null);
-        }
-      })
-      .catch(err => {
-        let error = err;
-      });
+    try {
+      const [user] = await User.query().where('email', '=', req.body.email);
+      if (user === null) throw new Error('Incorrect email or password');
 
-    done(null, user);
+      const isValid = await bcrypt.compare(req.body.password, user.password);
+      if (!isValid) throw new Error('Incorrect email or password');
+
+      delete user.password;
+      done(null, user);
+    } catch (err) {
+      done(err.message);
+    }
   }
 );
 

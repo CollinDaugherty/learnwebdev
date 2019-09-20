@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { raw } = require('objection');
+
 const uuidv4 = require('uuid/v4');
 const passport = require('../passport');
 

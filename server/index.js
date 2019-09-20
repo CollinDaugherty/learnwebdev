@@ -8,14 +8,32 @@ const cors = require('cors');
 const path = require('path');
 const knex = require('./db/knex');
 const passport = require('./passport');
+const session = require('express-session');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: false
+  })
+);
 app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.session());
+
+// gets user from session
+app.get('/api/user_data', function(req, res) {
+  if (req.user === undefined) {
+    // user is not logged in
+    res.json();
+  } else {
+    res.json(req.user);
+  }
+});
 
 app.use('/api', require('./routes/users'));
 app.use('/api', require('./routes/tutorials'));

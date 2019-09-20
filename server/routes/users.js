@@ -11,9 +11,15 @@ router.post('/register', (req, res, next) => {
   passport.authenticate('local-register', function(error, user, info) {
     if (error) {
       return res.status(400).json(error);
-    } else {
-      return res.json(user);
     }
+
+    req.logIn(user, error => {
+      if (error) {
+        return res.status(400).json(error);
+      } else {
+        return res.status(200).json(user);
+      }
+    });
   })(req, res, next);
 });
 
@@ -21,9 +27,16 @@ router.post('/login', (req, res, next) => {
   passport.authenticate('local-login', function(error, user, info) {
     if (error) {
       return res.status(400).json(error);
-    } else {
-      return res.status(200).json(user);
     }
+
+    req.logIn(user, error => {
+      if (error) {
+        return res.status(400).json(error);
+      } else {
+        user.isAuthenticated = true;
+        return res.status(200).json(user);
+      }
+    });
   })(req, res, next);
 });
 
