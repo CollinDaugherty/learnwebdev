@@ -58,25 +58,25 @@ class App extends Component {
       updateSearchTerms: this.updateSearchTerms,
       searchTutorials: this.searchTutorials,
 
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        joined: ''
-      }
+      user: ''
     };
   }
 
-  loadUser = data => {
-    this.setState({
-      user: {
-        id: data.id,
-        name: data.name,
-        email: data.email,
-        joined: data.joined
-      }
-    });
+  loadUser = () => {
+    fetch('/api/user_data')
+      .then(response => response.json())
+      .then(user => {
+        if (user.id) {
+          this.setState({
+            user: user.name
+          });
+        }
+      });
   };
+
+  componentDidMount() {
+    this.loadUser();
+  }
 
   render() {
     return (

@@ -40,8 +40,17 @@ class SignUpForm extends Component {
           email: this.state.email,
           password: this.state.password
         })
-      });
-      history.push('/');
+      })
+        .then(response => response.json())
+        .then(response => {
+          if (response.id) {
+            history.push('/');
+          } else {
+            this.setState({
+              error: response
+            });
+          }
+        });
     }
 
     e.preventDefault();

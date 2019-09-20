@@ -8,7 +8,7 @@ class CurrentUser extends Component {
         <li>
           <button>
             <FontAwesomeIcon icon='user-circle' />
-            {this.props.user.name}
+            {this.props.user}
           </button>
         </li>
       </ul>

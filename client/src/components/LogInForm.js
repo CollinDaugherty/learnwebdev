@@ -34,18 +34,15 @@ class LogInForm extends Component {
       })
     })
       .then(response => response.json())
-      .then(user => {
-        if (user.id) {
-          this.props.loadUser(user);
+      .then(data => {
+        if (data.id) {
+          this.props.loadUser();
           history.push('/');
         } else {
           this.setState({
-            error: 'Incorrect email or password'
+            error: data
           });
         }
-      })
-      .catch(error => {
-        console.log(`Error: ${error.response}`);
       });
     e.preventDefault();
   };
