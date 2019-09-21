@@ -26,7 +26,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // gets user from session
-app.get('/api/user_data', function(req, res) {
+app.get('/api/user_session', function(req, res) {
   if (req.user === undefined) {
     // user is not logged in
     res.json();

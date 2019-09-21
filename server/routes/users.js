@@ -40,6 +40,11 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.json();
+});
+
 // Get single user
 router.get('/user/:id', (req, res) => {
   const { id } = req.params;

@@ -63,7 +63,7 @@ class App extends Component {
   }
 
   loadUser = () => {
-    fetch('/api/user_data')
+    fetch('/api/user_session')
       .then(response => response.json())
       .then(user => {
         if (user.id) {
