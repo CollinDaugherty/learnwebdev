@@ -5,13 +5,14 @@ const { raw } = require('objection');
 
 const uuidv4 = require('uuid/v4');
 const passport = require('../passport');
+const isAuthenticated = require('../passport/isAuthenticated');
 
 const User = require('../models/User');
 const Instructor = require('../models/Instructor');
 const Tutorial = require('../models/Tutorial');
 
 // Submit Tutorial
-router.post('/tutorials', async (req, res) => {
+router.post('/tutorials', isAuthenticated, async (req, res) => {
   const {
     title,
     url,

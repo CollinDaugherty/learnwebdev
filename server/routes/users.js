@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const uuidv4 = require('uuid/v4');
 const passport = require('../passport');
+const isAuthenticated = require('../passport/isAuthenticated');
 
 const User = require('../models/User');
 
