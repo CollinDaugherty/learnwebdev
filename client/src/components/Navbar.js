@@ -84,7 +84,7 @@ class Navbar extends Component {
             <Link to='/tutorials/submit'>+ Submit a tutorial</Link>
           </li>
 
-          {user ? (
+          {user.id ? (
             <li>
               <CurrentUser user={this.props.user} />
             </li>

@@ -31,6 +31,7 @@ app.get('/api/user_data', function(req, res) {
     // user is not logged in
     res.json();
   } else {
+    delete req.user.password;
     res.json(req.user);
   }
 });

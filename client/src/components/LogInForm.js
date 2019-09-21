@@ -35,7 +35,7 @@ class LogInForm extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.id) {
+        if (data.isAuthenticated) {
           this.props.loadUser();
           history.push('/');
         } else {

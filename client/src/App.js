@@ -58,7 +58,7 @@ class App extends Component {
       updateSearchTerms: this.updateSearchTerms,
       searchTutorials: this.searchTutorials,
 
-      user: ''
+      user: {}
     };
   }
 
@@ -68,7 +68,12 @@ class App extends Component {
       .then(user => {
         if (user.id) {
           this.setState({
-            user: user.name
+            user: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              avatar: user.avatar
+            }
           });
         }
       });
