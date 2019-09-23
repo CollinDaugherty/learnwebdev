@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import * as theme from './components/styles/Variables';
 import { GlobalStyle } from './components/styles/GlobalStyle';
 
+import { UserProvider } from './UserContext';
 import { SearchProvider } from './SearchContext';
 
 import Navbar from './components/Navbar';
@@ -27,36 +28,58 @@ class App extends Component {
     super();
 
     this.updateList = list => {
-      this.setState({
-        list: list
-      });
+      this.setState(prevState => ({
+        search: {
+          ...prevState.search,
+          list: list
+        }
+      }));
     };
 
     this.updateSearchTerms = event => {
-      const { name, value } = event.target;
-      this.setState({
-        [name]: value
-      });
+      const { value } = event.target;
+      this.setState(prevState => ({
+        search: {
+          ...prevState.search,
+          searchTerms: value
+        }
+      }));
     };
 
     this.searchTutorials = e => {
-      if (this.state.searchTerms.length) {
-        fetch(`/api/tutorials/search/${this.state.searchTerms}`)
+      if (this.state.search.searchTerms.length) {
+        fetch(`/api/tutorials/search/${this.state.search.searchTerms}`)
           .then(res => res.json())
-          .then(list => this.setState({ list }));
+          .then(list =>
+            this.setState(prevState => ({
+              search: {
+                ...prevState.search,
+                list: list
+              }
+            }))
+          );
       } else {
         fetch('/api/tutorials')
           .then(res => res.json())
-          .then(list => this.setState({ list }));
+          .then(list =>
+            this.setState(prevState => ({
+              search: {
+                ...prevState.search,
+                list: list
+              }
+            }))
+          );
       }
       e.preventDefault();
     };
 
     this.state = {
-      list: [],
-      searchTerms: '',
-      updateSearchTerms: this.updateSearchTerms,
-      searchTutorials: this.searchTutorials,
+      search: {
+        list: [],
+        searchTerms: '',
+        updateSearchTerms: this.updateSearchTerms,
+        searchTutorials: this.searchTutorials
+      },
 
       user: {}
     };
@@ -86,34 +109,36 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <SearchProvider value={this.state}>
-          <div>
-            <Navbar user={this.state.user} />
-            <Container>
-              <Route
-                exact
-                path='/'
-                render={() => <Content updateList={this.updateList} />}
-              />
-              <Container small>
-                <Switch>
-                  <Route
-                    path='/tutorials/submit'
-                    render={() => <TutorialForm user={this.state.user} />}
-                  />
-                  <Route exact path='/signup' render={() => <SignUpForm />} />
-                  <Route
-                    exact
-                    path='/login'
-                    render={() => <LogInForm loadUser={this.loadUser} />}
-                  />
-                </Switch>
+        <UserProvider value={this.state.user}>
+          <SearchProvider value={this.state.search}>
+            <div>
+              <Navbar />
+              <Container>
+                <Route
+                  exact
+                  path='/'
+                  render={() => <Content updateList={this.updateList} />}
+                />
+                <Container small>
+                  <Switch>
+                    <Route
+                      path='/tutorials/submit'
+                      render={() => <TutorialForm user={this.state.user} />}
+                    />
+                    <Route exact path='/signup' render={() => <SignUpForm />} />
+                    <Route
+                      exact
+                      path='/login'
+                      render={() => <LogInForm loadUser={this.loadUser} />}
+                    />
+                  </Switch>
+                </Container>
               </Container>
-            </Container>
-            <Footer />
-            <GlobalStyle />
-          </div>
-        </SearchProvider>
+              <Footer />
+              <GlobalStyle />
+            </div>
+          </SearchProvider>
+        </UserProvider>
       </ThemeProvider>
     );
   }

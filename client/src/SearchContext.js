@@ -1,11 +1,6 @@
 import React from 'react';
 
-const SearchContext = React.createContext({
-  list: [],
-  searchTerms: '',
-  updateSearchTerms: () => {},
-  searchTutorials: () => {}
-});
+const SearchContext = React.createContext({});
 
 export const SearchProvider = SearchContext.Provider;
 export const SearchConsumer = SearchContext.Consumer;
