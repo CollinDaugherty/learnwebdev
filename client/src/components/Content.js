@@ -3,11 +3,11 @@ import TutorialList from './TutorialList';
 
 import Container from './styles/blocks/Container';
 
-const Content = () => {
+const Content = props => {
   return (
     <div>
       <Container medium>
-        <TutorialList updateList={this.props.updateList} />
+        <TutorialList updateList={props.updateList} />
       </Container>
     </div>
   );
