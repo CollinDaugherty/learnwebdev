@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -58,50 +58,48 @@ const Nav = styled.nav`
   }
 `;
 
-class Navbar extends Component {
-  render() {
-    return (
-      <UserConsumer>
-        {({ id, name }) => (
-          <Nav>
-            <h1>
-              <Link to='/'>LearnWebDev.io</Link>
-            </h1>
+const Navbar = () => {
+  return (
+    <UserConsumer>
+      {({ id, name }) => (
+        <Nav>
+          <h1>
+            <Link to='/'>LearnWebDev.io</Link>
+          </h1>
 
-            <SearchConsumer>
-              {({ searchTerms, updateSearchTerms, searchTutorials }) => (
-                <form method='get' onSubmit={searchTutorials}>
-                  <input
-                    type='text'
-                    name='searchTerms'
-                    onChange={updateSearchTerms}
-                    placeholder='Search...'
-                  />
-                </form>
-              )}
-            </SearchConsumer>
+          <SearchConsumer>
+            {({ searchTerms, updateSearchTerms, searchTutorials }) => (
+              <form method='get' onSubmit={searchTutorials}>
+                <input
+                  type='text'
+                  name='searchTerms'
+                  onChange={updateSearchTerms}
+                  placeholder='Search...'
+                />
+              </form>
+            )}
+          </SearchConsumer>
 
-            <ul>
+          <ul>
+            <li>
+              <Link to='/tutorials/submit'>+ Submit a tutorial</Link>
+            </li>
+
+            {id ? (
               <li>
-                <Link to='/tutorials/submit'>+ Submit a tutorial</Link>
+                <CurrentUser />
               </li>
-
-              {id ? (
-                <li>
-                  <CurrentUser />
-                </li>
-              ) : (
-                <li>
-                  <Link to='/signup'>Sign up / Log in</Link>
-                </li>
-              )}
-            </ul>
-          </Nav>
-        )}
-      </UserConsumer>
-    );
-  }
-}
+            ) : (
+              <li>
+                <Link to='/signup'>Sign up / Log in</Link>
+              </li>
+            )}
+          </ul>
+        </Nav>
+      )}
+    </UserConsumer>
+  );
+};
 Navbar.contextType = UserContext;
 
 export default Navbar;

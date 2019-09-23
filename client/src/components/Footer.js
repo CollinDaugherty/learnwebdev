@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Container from './styles/blocks/Container';
 
@@ -9,16 +9,14 @@ const Foot = styled.footer`
   width: 100%;
 `;
 
-class Footer extends Component {
-  render() {
-    return (
-      <Foot>
-        <Container>
-          <p>Made with &lt;3 by Collin Daugherty</p>
-        </Container>
-      </Foot>
-    );
-  }
-}
+const Footer = () => {
+  return (
+    <Foot>
+      <Container>
+        <p>Made with &lt;3 by Collin Daugherty</p>
+      </Container>
+    </Foot>
+  );
+};
 
 export default Footer;
