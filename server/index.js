@@ -32,6 +32,7 @@ app.get('/api/user_session', function(req, res) {
     res.json();
   } else {
     delete req.user.password;
+    req.user.isAuthenticated = true;
     res.json(req.user);
   }
 });

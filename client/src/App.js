@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 
 import { ThemeProvider } from 'styled-components';
 import * as theme from './components/styles/Variables';
@@ -95,7 +96,8 @@ class App extends Component {
               id: user.id,
               name: user.name,
               email: user.email,
-              avatar: user.avatar
+              avatar: user.avatar,
+              isAuthenticated: user.isAuthenticated
             }
           });
         }
@@ -121,7 +123,7 @@ class App extends Component {
                 />
                 <Container small>
                   <Switch>
-                    <Route
+                    <PrivateRoute
                       path='/tutorials/submit'
                       render={() => <TutorialForm user={this.state.user} />}
                     />
