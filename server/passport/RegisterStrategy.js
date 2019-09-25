@@ -10,27 +10,28 @@ const RegisterStrategy = new LocalStrategy(
     usernameField: 'email'
   },
   async function(req, email, password, done) {
-    const name = req.body.name;
-    const hash = await bcrypt.hash(password, 10);
+    try {
+      const name = req.body.name;
+      const hash = await bcrypt.hash(password, 10);
 
-    const user = await User.query()
-      .findOne({ email: req.body.email })
-      .catch(err => console.log(err));
+      const checkUser = await User.query()
+        .findOne({ email: req.body.email })
+        .catch(err => console.log(err));
 
-    if (user) {
-      return done('Email already in use', null);
-    } else {
-      User.query()
-        .insert({
+      if (checkUser) {
+        return done('Email already in use', null);
+      } else {
+        const user = await User.query().insert({
           id: uuidv4(),
           name: name,
           email: email,
           password: hash,
           joined: new Date()
-        })
-        .catch(err => res.status(400).json(err));
-
-      done(null, 'user signed up');
+        });
+        done(null, user);
+      }
+    } catch (err) {
+      done(err.message);
     }
   }
 );
