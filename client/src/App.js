@@ -117,7 +117,6 @@ class App extends Component {
               isAuthenticated: user.isAuthenticated
             }
           }));
-          console.log(`${this.state.user.name} has logged in`);
         }
       });
   };

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import history from '../history';
 
+import UserContext from '../UserContext';
+
 // Styled-Components
 import Card from './styles/blocks/Card';
 import Btn from './styles/blocks/Button';
 import Form from './styles/blocks/Form';
 
 class TutorialForm extends Component {
+  static contextType = UserContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -47,8 +50,8 @@ class TutorialForm extends Component {
         categories: this.state.categories,
         cost: this.state.cost,
         medium: this.state.medium,
-        difficulty: this.state.difficulty
-        //user: this.props.user.id
+        difficulty: this.state.difficulty,
+        user: this.context.id
       })
     });
     history.push('/');
@@ -188,5 +191,6 @@ class TutorialForm extends Component {
     );
   }
 }
+TutorialForm.contextType = UserContext;
 
 export default TutorialForm;
