@@ -42,8 +42,9 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/logout', function(req, res) {
+  req.session.destroy();
   req.logout();
-  res.json();
+  res.json('user logged out');
 });
 
 // Get single user

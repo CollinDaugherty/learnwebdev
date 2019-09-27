@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import UserContext, { UserConsumer } from './UserContext';
+import { UserConsumer } from './UserContext';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <UserConsumer>
@@ -19,6 +19,5 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )}
   </UserConsumer>
 );
-PrivateRoute.contextType = UserContext;
 
 export default PrivateRoute;

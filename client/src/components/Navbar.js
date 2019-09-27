@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import UserContext, { UserConsumer } from '../UserContext';
+import { UserConsumer } from '../UserContext';
 import { SearchConsumer } from '../SearchContext';
 
-import CurrentUser from './CurrentUser';
+import UserMenu from './UserMenu';
 
 const Nav = styled.nav`
   display: flex;
@@ -14,6 +14,7 @@ const Nav = styled.nav`
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: ${props => props.theme.shadow.low};
+  max-height: 6rem;
 
   h1 {
     flex: 1;
@@ -61,7 +62,7 @@ const Nav = styled.nav`
 const Navbar = () => {
   return (
     <UserConsumer>
-      {({ id, name }) => (
+      {({ id, name, avatar, logout }) => (
         <Nav>
           <h1>
             <Link to='/'>LearnWebDev.io</Link>
@@ -87,7 +88,7 @@ const Navbar = () => {
 
             {id ? (
               <li>
-                <CurrentUser />
+                <UserMenu />
               </li>
             ) : (
               <li>
@@ -100,6 +101,5 @@ const Navbar = () => {
     </UserConsumer>
   );
 };
-Navbar.contextType = UserContext;
 
 export default Navbar;

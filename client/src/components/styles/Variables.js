@@ -101,8 +101,8 @@ export const border = {
 };
 
 border.border = `
-  ${border.width} 
-  ${border.style} 
+  ${border.width}
+  ${border.style}
   ${border.color}`;
 
 //=================================================

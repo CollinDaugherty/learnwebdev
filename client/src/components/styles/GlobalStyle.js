@@ -48,9 +48,10 @@ a, button {
 }
 
 hr {
+  margin: 5px 0;
   border: 0px;
   height: 1px;
-  background-color: ${props => props.theme.color.primary._400};
+  background-color: ${props => props.theme.color.neutral._400};
 }
 
 `;

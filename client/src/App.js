@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import history from './history';
 import PrivateRoute from './PrivateRoute';
 
 import { ThemeProvider } from 'styled-components';
@@ -27,6 +28,19 @@ library.add(faUserCircle);
 class App extends Component {
   constructor() {
     super();
+
+    this.logout = () => {
+      fetch('/api/logout')
+        .then(res => res.json)
+        .then(
+          this.setState({
+            user: {
+              logout: this.logout
+            }
+          })
+        )
+        .then(history.push('/'));
+    };
 
     this.updateList = list => {
       this.setState(prevState => ({
@@ -82,7 +96,9 @@ class App extends Component {
         searchTutorials: this.searchTutorials
       },
 
-      user: {}
+      user: {
+        logout: this.logout
+      }
     };
   }
 
@@ -91,15 +107,17 @@ class App extends Component {
       .then(response => response.json())
       .then(user => {
         if (user.id) {
-          this.setState({
+          this.setState(prevState => ({
             user: {
+              ...prevState.user,
               id: user.id,
               name: user.name,
               email: user.email,
               avatar: user.avatar,
               isAuthenticated: user.isAuthenticated
             }
-          });
+          }));
+          console.log(`${this.state.user.name} has logged in`);
         }
       });
   };
@@ -125,7 +143,7 @@ class App extends Component {
                   <Switch>
                     <PrivateRoute
                       path='/tutorials/submit'
-                      render={() => <TutorialForm user={this.state.user} />}
+                      component={TutorialForm}
                     />
                     <Route exact path='/signup' render={() => <SignUpForm />} />
                     <Route

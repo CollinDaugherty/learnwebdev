@@ -27,13 +27,13 @@ app.use(passport.session());
 
 // gets user from session
 app.get('/api/user_session', function(req, res) {
-  if (req.user === undefined) {
-    // user is not logged in
-    res.json();
-  } else {
+  if (req.user) {
     delete req.user.password;
     req.user.isAuthenticated = true;
     res.json(req.user);
+  } else {
+    // user is not logged in
+    res.json();
   }
 });
 
