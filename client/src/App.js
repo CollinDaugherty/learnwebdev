@@ -11,6 +11,7 @@ import { UserProvider } from './UserContext';
 import { SearchProvider } from './SearchContext';
 
 import Navbar from './components/Navbar';
+import Notifications from './components/Notifications';
 import Content from './components/Content';
 import Footer from './components/Footer';
 
@@ -33,11 +34,18 @@ class App extends Component {
       fetch('/api/logout')
         .then(res => res.json)
         .then(
-          this.setState({
+          this.setState(prevState => ({
             user: {
               logout: this.logout
-            }
-          })
+            },
+            notifications: [
+              {
+                type: 'success',
+                message: 'Successfully logged out'
+              },
+              ...prevState.notifications
+            ]
+          }))
         )
         .then(history.push('/'));
     };
@@ -89,6 +97,9 @@ class App extends Component {
     };
 
     this.state = {
+      user: {
+        logout: this.logout
+      },
       search: {
         list: [],
         searchTerms: '',
@@ -96,9 +107,7 @@ class App extends Component {
         searchTutorials: this.searchTutorials
       },
 
-      user: {
-        logout: this.logout
-      }
+      notifications: []
     };
   }
 
@@ -132,6 +141,7 @@ class App extends Component {
           <SearchProvider value={this.state.search}>
             <div>
               <Navbar />
+              <Notifications notifications={this.state.notifications} />
               <Container>
                 <Route
                   exact
