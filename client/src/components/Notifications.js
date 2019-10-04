@@ -6,7 +6,7 @@ import * as theme from './styles/Variables';
 import Container from './styles/blocks/Container';
 
 const success = {
-  text: theme.color.secondary._400,
+  text: theme.color.secondary._500,
   background: theme.color.secondary._200,
   border: theme.color.secondary._300
 };

@@ -17,6 +17,22 @@ exports.up = function(knex, Promise) {
           t.foreign('tutorial_id')
             .references('id')
             .inTable('tutorials');
+        }),
+        knex.schema.alterTable('tutorial_votes', t => {
+          t.foreign('user_id')
+            .references('id')
+            .inTable('users');
+          t.foreign('tutorial_id')
+            .references('id')
+            .inTable('tutorials');
+        }),
+        knex.schema.alterTable('comment_votes', t => {
+          t.foreign('user_id')
+            .references('id')
+            .inTable('users');
+          t.foreign('comment_id')
+            .references('id')
+            .inTable('comments');
         })
       ]);
 
@@ -39,6 +55,14 @@ exports.down = function(knex, Promise) {
         knex.schema.table('comments', t => {
           t.dropForeign('user_id');
           t.dropForeign('tutorial_id');
+        }),
+        knex.schema.table('tutorial_votes', t => {
+          t.dropForeign('user_id');
+          t.dropForeign('tutorial_id');
+        }),
+        knex.schema.table('comment_votes', t => {
+          t.dropForeign('user_id');
+          t.dropForeign('comment_id');
         })
       ]);
 

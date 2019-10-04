@@ -12,6 +12,7 @@ class Tutorial extends Model {
     const User = require('./User');
     const Instructor = require('./Instructor');
     const Comment = require('./Comment');
+    const TutorialVote = require('./TutorialVote');
 
     return {
       users: {
@@ -38,6 +39,15 @@ class Tutorial extends Model {
         join: {
           from: 'tutorials.id',
           to: 'comments.tutorial_id'
+        }
+      },
+
+      tutorial_votes: {
+        relation: Model.HasManyRelation,
+        modelClass: TutorialVote,
+        join: {
+          from: 'tutorials.id',
+          to: 'tutorial_votes.tutorial_id'
         }
       }
     };

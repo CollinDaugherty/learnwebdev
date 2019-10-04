@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components';
 import Title from './Title';
 import Subtitle from './Subtitle';
 import Content from './Content';
-import Upvote from './Upvote';
+import Vote from './Vote';
+import VoteContainer from './VoteContainer';
 import Tag from './Tag';
 import Instructor from './Instructor';
 import Categories from './Categories';
@@ -20,7 +21,7 @@ const Card = styled.div`
     css`
       display: grid;
       grid-template-columns: 7rem auto;
-      grid-template-rows: 3fr;
+      grid-template-rows: 4fr;
 
       ${Content} {
         padding-bottom: 1rem;
@@ -38,7 +39,8 @@ const Card = styled.div`
 Card.Title = Title;
 Card.Subtitle = Subtitle;
 Card.Content = Content;
-Card.Upvote = Upvote;
+Card.Vote = Vote;
+Card.VoteContainer = VoteContainer;
 Card.Tag = Tag;
 Card.Instructor = Instructor;
 Card.Categories = Categories;

@@ -17,8 +17,6 @@ exports.seed = function(knex, Promise) {
           cost: 'free',
           medium: 'article',
           difficulty: 'beginner',
-          upvotes: 1,
-          downvotes: 0,
           categories: ['html', 'css']
         },
         {
@@ -32,8 +30,6 @@ exports.seed = function(knex, Promise) {
           cost: 'free',
           medium: 'article',
           difficulty: 'advanced',
-          upvotes: 1,
-          downvotes: 0,
           categories: ['css']
         },
         {
@@ -47,8 +43,6 @@ exports.seed = function(knex, Promise) {
           cost: 'free',
           medium: 'video',
           difficulty: 'beginner',
-          upvotes: 1,
-          downvotes: 0,
           categories: ['js']
         }
       ]);

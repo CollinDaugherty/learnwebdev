@@ -10,6 +10,7 @@ const isAuthenticated = require('../passport/isAuthenticated');
 const User = require('../models/User');
 const Instructor = require('../models/Instructor');
 const Tutorial = require('../models/Tutorial');
+const TutorialVote = require('../models/TutorialVote');
 
 // Submit Tutorial
 router.post('/tutorials', isAuthenticated, async (req, res) => {
@@ -77,9 +78,12 @@ router.get('/tutorials', (req, res) => {
 // Get single tutorial by ID
 router.get('/tutorials/:id', (req, res) => {
   const { id } = req.params;
+
   Tutorial.query()
     .where('id', id)
-    .eager('[users(defaultSelects), instructors(defaultSelects), comments]')
+    .eager(
+      '[users(defaultSelects), instructors(defaultSelects), tutorial_votes, comments]'
+    )
     .then(tutorial => {
       if (tutorial.length) {
         res.json(tutorial[0]);
@@ -102,6 +106,36 @@ router.get('/tutorials/search/:searchTerms', (req, res) => {
       res.json(tutorials);
     })
     .catch(err => res.status(400).json(err));
+});
+
+//Upvotes - Downvotes
+router.post('/tutorials/vote', async (req, res) => {
+  const { tutorial_id, user_id, value } = req.body;
+
+  let finalValue;
+  if (value > 0) {
+    finalValue = 1;
+  } else if (value < 0) {
+    finalValue = -1;
+  }
+
+  const doesVoteExist = await TutorialVote.query()
+    .findOne({ tutorial_id: tutorial_id, user_id: user_id })
+    .catch(err => console.log(err));
+
+  if (!doesVoteExist) {
+    await TutorialVote.query()
+      .insert({
+        id: uuidv4(),
+        tutorial_id: tutorial_id,
+        user_id: user_id,
+        vote_value: value
+      })
+      .then(data => res.status(200).json(data))
+      .catch(err => res.status(400).json(err));
+  } else {
+    res.json(`Can't vote twice`);
+  }
 });
 
 module.exports = router;

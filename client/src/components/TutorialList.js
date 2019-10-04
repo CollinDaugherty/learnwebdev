@@ -38,6 +38,7 @@ class TutorialList extends Component {
                   return (
                     <TutorialItem
                       key={item.id}
+                      id={item.id}
                       title={item.title}
                       url={item.url}
                       categories={item.categories}

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
+import UserContext from '../UserContext';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUserCircle,
-  faArrowUp,
   faHeart,
   faComment
 } from '@fortawesome/free-solid-svg-icons';
@@ -11,16 +12,25 @@ import {
 import Card from './styles/blocks/Card';
 
 class TutorialItem extends Component {
-  constructor() {
-    super();
+  static contextType = UserContext;
+  constructor(props) {
+    super(props);
     this.state = {
-      upvoted: false
+      tutorial_id: this.props.id
     };
   }
 
-  onUpvote = () => {
-    this.setState({
-      upvoted: !this.state.upvoted
+  onVote = event => {
+    const value = event.target.value;
+    console.log(value);
+    fetch('/api/tutorials/vote', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tutorial_id: this.state.tutorial_id,
+        user_id: this.context.id,
+        value: value
+      })
     });
   };
 
@@ -34,15 +44,14 @@ class TutorialItem extends Component {
       user,
       instructor
     } = this.props;
+
     return (
       <Card tutorialCard>
-        <Card.Upvote onClick={this.onUpvote}>
-          {this.state.upvoted ? (
-            <FontAwesomeIcon icon={faArrowUp} size='3x' />
-          ) : (
-            <FontAwesomeIcon icon={faArrowUp} size='2x' />
-          )}
-        </Card.Upvote>
+        <Card.VoteContainer>
+          <Card.Vote upvote onClick={this.onVote} value={1} />
+          <Card.Vote downvote onClick={this.onVote} value={-1} />
+        </Card.VoteContainer>
+
         <Card.Content>
           <Card.Title>{title}</Card.Title>
           <Card.Subtitle href={url}>{url}</Card.Subtitle>

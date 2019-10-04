@@ -19,7 +19,7 @@ const LoginStrategy = new LocalStrategy(
       delete user.password;
       done(null, user);
     } catch (err) {
-      done(err.message);
+      done('Incorrect email or password');
     }
   }
 );
