@@ -42,13 +42,15 @@ class TutorialItem extends Component {
       medium,
       difficulty,
       user,
-      instructor
+      instructor,
+      voteCount
     } = this.props;
 
     return (
       <Card tutorialCard>
         <Card.VoteContainer>
           <Card.Vote upvote onClick={this.onVote} value={1} />
+          <span>{voteCount}</span>
           <Card.Vote downvote onClick={this.onVote} value={-1} />
         </Card.VoteContainer>
 

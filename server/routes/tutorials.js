@@ -66,26 +66,48 @@ router.post('/tutorials', isAuthenticated, async (req, res) => {
 });
 
 // List of tutorials
-router.get('/tutorials', (req, res) => {
-  Tutorial.query()
+router.get('/tutorials', async (req, res) => {
+  const list = [];
+
+  const tutorials = await Tutorial.query()
     .eager('[users(defaultSelects), instructors(defaultSelects)]')
-    .then(tutorials => {
-      res.json(tutorials);
-    })
-    .catch(err => res.status(400).json(err));
+    .then(tutorials => tutorials)
+    .catch(err => console.log(err));
+
+  for (tutorial of tutorials) {
+    let voteCount = await TutorialVote.query()
+      .where('tutorial_id', tutorial.id)
+      .sum('vote_value')
+      .then(total => total[0].sum)
+      .catch(err => console.log(err));
+
+    if (voteCount === null) {
+      voteCount = 0;
+    }
+
+    tutorial.voteCount = voteCount;
+    list.push({ ...tutorial });
+  }
+
+  return res.status(200).json(list);
 });
 
 // Get single tutorial by ID
-router.get('/tutorials/:id', (req, res) => {
+router.get('/tutorials/:id', async (req, res) => {
   const { id } = req.params;
+
+  const voteCount = await TutorialVote.query()
+    .where('tutorial_id', id)
+    .sum('vote_value')
+    .then(total => total[0].sum)
+    .catch(err => console.log(err));
 
   Tutorial.query()
     .where('id', id)
-    .eager(
-      '[users(defaultSelects), instructors(defaultSelects), tutorial_votes, comments]'
-    )
+    .eager('[users(defaultSelects), instructors(defaultSelects), comments]')
     .then(tutorial => {
       if (tutorial.length) {
+        tutorial[0].voteCount = voteCount;
         res.json(tutorial[0]);
       } else {
         res.status(400).json('tutorial not found');
