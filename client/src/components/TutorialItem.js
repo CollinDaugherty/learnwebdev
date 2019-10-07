@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import history from '../history';
 import UserContext from '../UserContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,6 +24,11 @@ class TutorialItem extends Component {
   }
 
   onVote = event => {
+    if (!this.context.user) {
+      history.push('/login');
+      return null;
+    }
+
     let value = event.target.value;
     if (Number(value) === Number(this.state.voteStatus)) {
       value = 0;
