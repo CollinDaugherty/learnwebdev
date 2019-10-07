@@ -63,6 +63,15 @@ router.post('/tutorials', isAuthenticated, async (req, res) => {
       })
       .catch(err => console.log(err));
   }
+
+  await TutorialVote.query()
+    .insert({
+      id: uuidv4(),
+      tutorial_id: tutorial.id,
+      user_id: tutorial.user_id,
+      vote_value: 1
+    })
+    .catch(err => console.log(err));
 });
 
 // List of tutorials
