@@ -78,16 +78,37 @@ router.get('/tutorials', async (req, res) => {
     let voteCount = await TutorialVote.query()
       .where('tutorial_id', tutorial.id)
       .sum('vote_value')
-      .then(total => total[0].sum)
+      .then(data => data[0].sum)
       .catch(err => console.log(err));
 
     if (voteCount === null) {
       voteCount = 0;
     }
 
+    if (req.user) {
+      const user = req.user;
+      const userObj = { ...user };
+      let voteStatus = await TutorialVote.query()
+        .where('tutorial_id', tutorial.id)
+        .where('user_id', userObj.id)
+        .then(data => data[0].vote_value)
+        .catch(err => console.log(err));
+
+      tutorial.voteStatus = voteStatus;
+    }
+
     tutorial.voteCount = voteCount;
     list.push({ ...tutorial });
   }
+
+  //sort list by upvotes
+  list.sort(function(a, b) {
+    let keyA = new Date(a.voteCount);
+    let keyB = new Date(b.voteCount);
+    if (keyA < keyB) return 1;
+    if (keyA > keyB) return -1;
+    return 0;
+  });
 
   return res.status(200).json(list);
 });
@@ -139,6 +160,8 @@ router.post('/tutorials/vote', async (req, res) => {
     finalValue = 1;
   } else if (value < 0) {
     finalValue = -1;
+  } else {
+    finalValue = 0;
   }
 
   const doesVoteExist = await TutorialVote.query()
@@ -151,12 +174,16 @@ router.post('/tutorials/vote', async (req, res) => {
         id: uuidv4(),
         tutorial_id: tutorial_id,
         user_id: user_id,
-        vote_value: value
+        vote_value: finalValue
       })
       .then(data => res.status(200).json(data))
       .catch(err => res.status(400).json(err));
   } else {
-    res.json(`Can't vote twice`);
+    await TutorialVote.query()
+      .update({ vote_value: finalValue })
+      .where('tutorial_id', tutorial_id)
+      .where('user_id', user_id)
+      .catch(err => console.log(err));
   }
 });
 

@@ -16,22 +16,62 @@ class TutorialItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tutorial_id: this.props.id
+      tutorial_id: this.props.id,
+
+      voteCount: this.props.voteCount,
+      voteStatus: this.props.voteStatus
     };
   }
 
   onVote = event => {
-    const value = event.target.value;
-    console.log(value);
+    let value = event.target.value;
+    if (Number(value) === Number(this.state.voteStatus)) {
+      value = 0;
+    }
+
+    let finalValue;
+    if (value > 0) {
+      finalValue = 1;
+    } else if (value < 0) {
+      finalValue = -1;
+    } else {
+      finalValue = 0;
+    }
+
+    console.log(finalValue);
+
     fetch('/api/tutorials/vote', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         tutorial_id: this.state.tutorial_id,
         user_id: this.context.id,
-        value: value
+        value: finalValue
       })
     });
+
+    if (
+      Number(finalValue) === 0 &&
+      Number(this.state.voteStatus) === Number(1)
+    ) {
+      this.setState(prevState => ({
+        voteStatus: 0,
+        voteCount: Number(prevState.voteCount) - 1
+      }));
+    } else if (
+      Number(finalValue) === 0 &&
+      Number(this.state.voteStatus) === Number(-1)
+    ) {
+      this.setState(prevState => ({
+        voteStatus: 0,
+        voteCount: Number(prevState.voteCount) + 1
+      }));
+    } else {
+      this.setState(prevState => ({
+        voteStatus: finalValue,
+        voteCount: Number(prevState.voteCount) + Number(finalValue)
+      }));
+    }
   };
 
   render() {
@@ -42,16 +82,25 @@ class TutorialItem extends Component {
       medium,
       difficulty,
       user,
-      instructor,
-      voteCount
+      instructor
     } = this.props;
 
     return (
       <Card tutorialCard>
         <Card.VoteContainer>
-          <Card.Vote upvote onClick={this.onVote} value={1} />
-          <span>{voteCount}</span>
-          <Card.Vote downvote onClick={this.onVote} value={-1} />
+          {this.state.voteStatus === 1 ? (
+            <Card.Vote upvote upvoted onClick={this.onVote} value={1} />
+          ) : (
+            <Card.Vote upvote onClick={this.onVote} value={1} />
+          )}
+
+          <Card.VoteCount>{this.state.voteCount}</Card.VoteCount>
+
+          {this.state.voteStatus === -1 ? (
+            <Card.Vote downvote downvoted onClick={this.onVote} value={-1} />
+          ) : (
+            <Card.Vote downvote onClick={this.onVote} value={-1} />
+          )}
         </Card.VoteContainer>
 
         <Card.Content>

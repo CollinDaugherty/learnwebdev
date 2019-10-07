@@ -48,6 +48,7 @@ class TutorialList extends Component {
                       user={item.users.name}
                       instructor={item.instructors.name}
                       voteCount={item.voteCount}
+                      voteStatus={item.voteStatus}
                     />
                   );
                 })}

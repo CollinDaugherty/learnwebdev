@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const Vote = styled.button`
-  background: ${props => props.theme.color.neutral._300};
+  background: ${props => props.theme.color.neutral._200};
   color: ${props => props.theme.color.neutral._700};
   cursor: pointer;
   display: flex;
@@ -30,6 +30,14 @@ const Vote = styled.button`
     `}
 
   ${props =>
+    props.upvoted &&
+    css`
+      &:before {
+        color: ${props => props.theme.color.secondary._300};
+      }
+    `}
+
+  ${props =>
     props.downvote &&
     css`
       border-radius: 0 0 0 5px;
@@ -44,6 +52,14 @@ const Vote = styled.button`
       &:before {
         font-family: 'icomoon';
         content: '\f063';
+      }
+    `}
+
+  ${props =>
+    props.downvoted &&
+    css`
+      &:before {
+        color: ${props => props.theme.color.primary._400};
       }
     `}
 `;
