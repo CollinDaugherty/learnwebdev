@@ -18,19 +18,19 @@ class TutorialItem extends Component {
     this.state = {
       tutorial_id: this.props.id,
 
-      voteCount: this.props.voteCount,
-      voteStatus: this.props.voteStatus
+      voteCount: Number(this.props.voteCount),
+      voteStatus: Number(this.props.voteStatus)
     };
   }
 
   onVote = event => {
-    if (!this.context.user) {
+    if (!this.context.id) {
       history.push('/login');
       return null;
     }
 
-    let value = event.target.value;
-    if (Number(value) === Number(this.state.voteStatus)) {
+    let value = Number(event.target.value);
+    if (value === this.state.voteStatus) {
       value = 0;
     }
 
@@ -55,26 +55,20 @@ class TutorialItem extends Component {
       })
     });
 
-    if (
-      Number(finalValue) === 0 &&
-      Number(this.state.voteStatus) === Number(1)
-    ) {
+    if (finalValue === 0 && this.state.voteStatus === 1) {
       this.setState(prevState => ({
         voteStatus: 0,
-        voteCount: Number(prevState.voteCount) - 1
+        voteCount: prevState.voteCount - 1
       }));
-    } else if (
-      Number(finalValue) === 0 &&
-      Number(this.state.voteStatus) === Number(-1)
-    ) {
+    } else if (finalValue === 0 && this.state.voteStatus === -1) {
       this.setState(prevState => ({
         voteStatus: 0,
-        voteCount: Number(prevState.voteCount) + 1
+        voteCount: prevState.voteCount + 1
       }));
     } else {
       this.setState(prevState => ({
         voteStatus: finalValue,
-        voteCount: Number(prevState.voteCount) + Number(finalValue)
+        voteCount: prevState.voteCount + finalValue
       }));
     }
   };
