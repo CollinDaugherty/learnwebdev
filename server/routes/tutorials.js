@@ -132,18 +132,29 @@ router.get('/tutorials/:id', async (req, res) => {
     .then(total => total[0].sum)
     .catch(err => console.log(err));
 
-  await Tutorial.query()
+  const tutorial = await Tutorial.query()
     .where('id', id)
     .eager('[users(defaultSelects), instructors(defaultSelects), comments]')
-    .then(tutorial => {
-      if (tutorial.length) {
-        tutorial[0].voteCount = voteCount;
-        res.json(tutorial[0]);
-      } else {
-        res.status(400).json('tutorial not found');
-      }
-    })
+    .then(tutorial => tutorial[0])
     .catch(err => res.status(400).json('error getting tutorial'));
+
+  if (tutorial.id) {
+    tutorial.voteCount = voteCount;
+  }
+
+  if (req.user) {
+    const user = req.user;
+    const userObj = { ...user };
+    let voteStatus = await TutorialVote.query()
+      .where('tutorial_id', tutorial.id)
+      .where('user_id', userObj.id)
+      .then(data => data[0].vote_value)
+      .catch(err => console.log(err));
+
+    tutorial.voteStatus = voteStatus;
+  }
+
+  return res.status(200).json(tutorial);
 });
 
 // Search Tutorials
