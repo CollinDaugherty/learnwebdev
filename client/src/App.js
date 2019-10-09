@@ -12,7 +12,8 @@ import { SearchProvider } from './SearchContext';
 
 import Navbar from './components/Navbar';
 import Notifications from './components/Notifications';
-import Content from './components/Content';
+import TutorialList from './components/TutorialList';
+import TutorialPage from './components/TutorialPage';
 import Footer from './components/Footer';
 
 import TutorialForm from './components/TutorialForm';
@@ -142,11 +143,16 @@ class App extends Component {
             <div>
               <Navbar />
               <Notifications notifications={this.state.notifications} />
+
               <Container>
                 <Route
                   exact
                   path='/'
-                  render={() => <Content updateList={this.updateList} />}
+                  render={() => <TutorialList updateList={this.updateList} />}
+                />
+                <Route
+                  path='/tutorials/page/:pageId'
+                  component={TutorialPage}
                 />
                 <Container small>
                   <Switch>
@@ -163,6 +169,7 @@ class App extends Component {
                   </Switch>
                 </Container>
               </Container>
+
               <Footer />
               <GlobalStyle />
             </div>

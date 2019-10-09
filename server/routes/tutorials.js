@@ -132,7 +132,7 @@ router.get('/tutorials/:id', async (req, res) => {
     .then(total => total[0].sum)
     .catch(err => console.log(err));
 
-  Tutorial.query()
+  await Tutorial.query()
     .where('id', id)
     .eager('[users(defaultSelects), instructors(defaultSelects), comments]')
     .then(tutorial => {

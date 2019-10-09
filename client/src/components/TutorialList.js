@@ -4,6 +4,8 @@ import SearchContext, { SearchConsumer } from '../SearchContext';
 
 import TutorialItem from './TutorialItem';
 
+import Container from './styles/blocks/Container';
+
 class TutorialList extends Component {
   constructor(props) {
     super(props);
@@ -28,39 +30,41 @@ class TutorialList extends Component {
 
   render() {
     return (
-      <SearchConsumer>
-        {({ list }) => (
-          <div>
-            {list.length ? (
-              <div>
-                {/* Render the list of items */}
-                {list.map(item => {
-                  return (
-                    <TutorialItem
-                      key={item.id}
-                      id={item.id}
-                      title={item.title}
-                      url={item.url}
-                      categories={item.categories}
-                      cost={item.cost}
-                      medium={item.medium}
-                      difficulty={item.difficulty}
-                      user={item.users.name}
-                      instructor={item.instructors.name}
-                      voteCount={item.voteCount}
-                      voteStatus={item.voteStatus}
-                    />
-                  );
-                })}
-              </div>
-            ) : (
-              <div>
-                <h2>No Tutorials Found</h2>
-              </div>
-            )}
-          </div>
-        )}
-      </SearchConsumer>
+      <Container medium>
+        <SearchConsumer>
+          {({ list }) => (
+            <div>
+              {list.length ? (
+                <div>
+                  {/* Render the list of items */}
+                  {list.map(item => {
+                    return (
+                      <TutorialItem
+                        key={list.indexOf(item)}
+                        id={item.id}
+                        title={item.title}
+                        url={item.url}
+                        categories={item.categories}
+                        cost={item.cost}
+                        medium={item.medium}
+                        difficulty={item.difficulty}
+                        user={item.users.name}
+                        instructor={item.instructors.name}
+                        voteCount={item.voteCount}
+                        voteStatus={item.voteStatus}
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                <div>
+                  <h2>No Tutorials Found</h2>
+                </div>
+              )}
+            </div>
+          )}
+        </SearchConsumer>
+      </Container>
     );
   }
 }

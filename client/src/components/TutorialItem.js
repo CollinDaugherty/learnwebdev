@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import history from '../history';
 import UserContext from '../UserContext';
 
@@ -75,6 +76,7 @@ class TutorialItem extends Component {
 
   render() {
     const {
+      id,
       title,
       url,
       cost,
@@ -103,7 +105,9 @@ class TutorialItem extends Component {
         </Card.VoteContainer>
 
         <Card.Content>
-          <Card.Title>{title}</Card.Title>
+          <Card.Title>
+            <Link to={`/tutorials/page/${id}`}>{title}</Link>
+          </Card.Title>
           <Card.Subtitle href={url}>{url}</Card.Subtitle>
 
           <Card.Instructor>

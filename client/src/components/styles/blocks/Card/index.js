@@ -35,6 +35,12 @@ const Card = styled.div`
         grid-row: 2 / 3;
       }
     `}
+
+  ${props =>
+    props.commentCard &&
+    css`
+      margin-bottom: 1.5rem;
+    `}
 `;
 
 Card.Title = Title;
