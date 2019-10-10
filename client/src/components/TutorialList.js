@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import SearchContext, { SearchConsumer } from '../SearchContext';
+
+import { formatDistance } from 'date-fns';
 
 import TutorialItem from './TutorialItem';
 
@@ -44,6 +45,13 @@ class TutorialList extends Component {
                         id={item.id}
                         title={item.title}
                         url={item.url}
+                        posted={formatDistance(
+                          new Date(item.posted),
+                          new Date(),
+                          {
+                            addSuffix: true
+                          }
+                        )}
                         categories={item.categories}
                         cost={item.cost}
                         medium={item.medium}

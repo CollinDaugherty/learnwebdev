@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import history from '../history';
 import UserContext from '../UserContext';
 
+import { formatDistance } from 'date-fns';
+
 import Container from './styles/blocks/Container';
 import Card from './styles/blocks/Card';
 import Form from './styles/blocks/Form';
@@ -80,6 +82,9 @@ class TutorialPage extends Component {
               id={tutorial.id}
               title={tutorial.title}
               url={tutorial.url}
+              posted={formatDistance(new Date(tutorial.posted), new Date(), {
+                addSuffix: true
+              })}
               categories={tutorial.categories}
               cost={tutorial.cost}
               medium={tutorial.medium}
@@ -110,7 +115,7 @@ class TutorialPage extends Component {
             {comments.length ? (
               <Container medium>
                 {comments.map(comment => (
-                  <Card commentCard key={comment.id}>
+                  <Card commentCard id={comment.id} key={comment.id}>
                     <Card.Content>{comment.body}</Card.Content>
                     <Card.Footer>
                       <ul>

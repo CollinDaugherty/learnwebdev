@@ -16,6 +16,14 @@ const Footer = styled.div`
 
       a {
         color: ${props => props.theme.color.neutral._700};
+
+        &:hover {
+          color: ${props => props.theme.color.neutral._800};
+        }
+      }
+
+      span {
+        color: ${props => props.theme.color.neutral._700};
       }
 
       svg {

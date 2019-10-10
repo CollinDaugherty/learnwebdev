@@ -87,6 +87,7 @@ class TutorialItem extends Component {
       id,
       title,
       url,
+      posted,
       cost,
       medium,
       difficulty,
@@ -140,7 +141,7 @@ class TutorialItem extends Component {
               <FontAwesomeIcon icon={faHeart} /> Favorite
             </li>
             <li>
-              Submitted By: <a href='/'>{user}</a>
+              submitted <span>{posted}</span> by <a href='/'>{user}</a>
             </li>
             <Card.Tag>{difficulty}</Card.Tag>
             <Card.Tag>{medium}</Card.Tag>
