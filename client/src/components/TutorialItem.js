@@ -44,8 +44,6 @@ class TutorialItem extends Component {
       finalValue = 0;
     }
 
-    console.log(finalValue);
-
     fetch('/api/tutorials/vote', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -73,7 +71,7 @@ class TutorialItem extends Component {
       }));
     } else if (finalValue === 1 && this.state.voteStatus === -1) {
       this.setState(prevState => ({
-        voteStatus: -1,
+        voteStatus: 1,
         voteCount: prevState.voteCount + 2
       }));
     } else {
