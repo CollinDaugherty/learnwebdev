@@ -66,6 +66,16 @@ class TutorialItem extends Component {
         voteStatus: 0,
         voteCount: prevState.voteCount + 1
       }));
+    } else if (finalValue === -1 && this.state.voteStatus === 1) {
+      this.setState(prevState => ({
+        voteStatus: -1,
+        voteCount: prevState.voteCount - 2
+      }));
+    } else if (finalValue === 1 && this.state.voteStatus === -1) {
+      this.setState(prevState => ({
+        voteStatus: -1,
+        voteCount: prevState.voteCount + 2
+      }));
     } else {
       this.setState(prevState => ({
         voteStatus: finalValue,
