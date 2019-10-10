@@ -91,7 +91,8 @@ class TutorialItem extends Component {
       medium,
       difficulty,
       user,
-      instructor
+      instructor,
+      commentCount
     } = this.props;
 
     return (
@@ -131,7 +132,7 @@ class TutorialItem extends Component {
         <Card.Footer>
           <ul>
             <li>
-              <FontAwesomeIcon icon={faComment} /> 41 Comments
+              <FontAwesomeIcon icon={faComment} /> {commentCount} Comments
             </li>
             <li>
               <FontAwesomeIcon icon={faHeart} /> Favorite

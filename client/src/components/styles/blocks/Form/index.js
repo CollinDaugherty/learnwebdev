@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Form = styled.form`
   /* Text Inputs */
@@ -16,6 +16,19 @@ const Form = styled.form`
     &:focus {
       color: ${props => props.theme.color.primary._700};
     }
+  }
+
+  textarea {
+    background: white;
+    border: none;
+    border-radius: ${props => props.theme.border.radius};
+    padding: 1rem;
+    margin-bottom: 1.3rem;
+    width: 100%;
+    line-height: 1;
+    font-size: inherit;
+    font-family: inherit;
+    -webkit-appearance: none;
   }
 
   p {
@@ -67,6 +80,14 @@ const Form = styled.form`
       }
     }
   }
+
+  ${props =>
+    props.white &&
+    css`
+      input:not([type='submit']):not([type='file']):not([type='radio']) {
+        background: white;
+      }
+    `}
 `;
 
 export default Form;

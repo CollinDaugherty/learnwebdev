@@ -64,7 +64,6 @@ exports.up = function(knex, Promise) {
             .notNullable();
           t.uuid('user_id').notNullable();
           t.uuid('tutorial_id').notNullable();
-          t.uuid('isChildOf');
           t.text('body').notNullable();
           t.timestamp('posted', { useTz: false }).notNullable();
         }),

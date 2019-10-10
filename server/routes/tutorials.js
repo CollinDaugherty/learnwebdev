@@ -11,6 +11,7 @@ const User = require('../models/User');
 const Instructor = require('../models/Instructor');
 const Tutorial = require('../models/Tutorial');
 const TutorialVote = require('../models/TutorialVote');
+const Comment = require('../models/Comment');
 
 // Submit Tutorial
 router.post('/tutorials', isAuthenticated, async (req, res) => {
@@ -84,6 +85,13 @@ router.get('/tutorials', async (req, res) => {
     .catch(err => console.log(err));
 
   for (tutorial of tutorials) {
+    const commentCount = await Comment.query()
+      .where('tutorial_id', tutorial.id)
+      .count('id')
+      .catch(err => console.log(err));
+
+    tutorial.commentCount = Number(commentCount[0].count);
+
     let voteCount = await TutorialVote.query()
       .where('tutorial_id', tutorial.id)
       .sum('vote_value')
@@ -97,6 +105,7 @@ router.get('/tutorials', async (req, res) => {
     if (req.user) {
       const user = req.user;
       const userObj = { ...user };
+
       let voteStatus = await TutorialVote.query()
         .where('tutorial_id', tutorial.id)
         .where('user_id', userObj.id)
@@ -126,7 +135,7 @@ router.get('/tutorials', async (req, res) => {
 router.get('/tutorials/:id', async (req, res) => {
   const { id } = req.params;
 
-  const voteCount = await TutorialVote.query()
+  let voteCount = await TutorialVote.query()
     .where('tutorial_id', id)
     .sum('vote_value')
     .then(total => total[0].sum)
@@ -137,6 +146,24 @@ router.get('/tutorials/:id', async (req, res) => {
     .eager('[users(defaultSelects), instructors(defaultSelects), comments]')
     .then(tutorial => tutorial[0])
     .catch(err => res.status(400).json('error getting tutorial'));
+
+  const commentCount = await Comment.query()
+    .where('tutorial_id', id)
+    .count('id')
+    .catch(err => console.log(err));
+
+  tutorial.commentCount = Number(commentCount[0].count);
+
+  for (comment of tutorial.comments) {
+    let commentUsername = await User.query()
+      .where('id', comment.user_id)
+      .then(comment => comment[0].name)
+      .catch(err => console.log(err));
+
+    let index = tutorial.comments.indexOf(comment);
+
+    tutorial.comments[index].username = commentUsername;
+  }
 
   if (tutorial.id) {
     tutorial.voteCount = voteCount;
@@ -171,7 +198,7 @@ router.get('/tutorials/search/:searchTerms', (req, res) => {
     .catch(err => res.status(400).json(err));
 });
 
-//Upvotes - Downvotes
+// Upvotes - Downvotes
 router.post('/tutorials/vote', async (req, res) => {
   const { tutorial_id, user_id, value } = req.body;
 
