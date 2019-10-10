@@ -123,7 +123,15 @@ class TutorialPage extends Component {
                           <FontAwesomeIcon icon={faUserCircle} size='1x' />{' '}
                           {comment.username}
                         </li>
-                        <li>2 hours ago</li>
+                        <li>
+                          {formatDistance(
+                            new Date(comment.posted),
+                            new Date(),
+                            {
+                              addSuffix: true
+                            }
+                          )}
+                        </li>
                         <li>
                           <FontAwesomeIcon icon={faComment} size='1x' /> Reply
                         </li>
