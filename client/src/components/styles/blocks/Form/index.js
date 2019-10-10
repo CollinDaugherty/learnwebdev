@@ -20,7 +20,7 @@ const Form = styled.form`
 
   textarea {
     background: white;
-    border: none;
+    border: 1px solid ${props => props.theme.color.neutral._200};
     border-radius: ${props => props.theme.border.radius};
     padding: 1rem;
     margin-bottom: 1.3rem;

@@ -14,6 +14,10 @@ const Footer = styled.div`
       display: inline;
       margin-right: 2rem;
 
+      a {
+        color: ${props => props.theme.color.neutral._700};
+      }
+
       svg {
         color: ${props => props.theme.color.neutral._500};
       }

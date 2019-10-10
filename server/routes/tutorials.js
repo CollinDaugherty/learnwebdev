@@ -234,4 +234,21 @@ router.post('/tutorials/vote', async (req, res) => {
   }
 });
 
+// Comment Submission
+router.post('/tutorials/:id/comments', (req, res) => {
+  const { user_id, tutorial_id, body } = req.body;
+  let comment = Comment.query()
+    .insert({
+      id: uuidv4(),
+      user_id: user_id,
+      tutorial_id: tutorial_id,
+      body: body,
+      posted: new Date()
+    })
+    .then(comment => res.status(200).json(comment))
+    .catch(err => res.status(400).json(err));
+
+  console.log(comment);
+});
+
 module.exports = router;

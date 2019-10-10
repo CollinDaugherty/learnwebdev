@@ -132,7 +132,9 @@ class TutorialItem extends Component {
         <Card.Footer>
           <ul>
             <li>
-              <FontAwesomeIcon icon={faComment} /> {commentCount} Comments
+              <Link to={`/tutorials/page/${id}`}>
+                <FontAwesomeIcon icon={faComment} /> {commentCount} Comments
+              </Link>
             </li>
             <li>
               <FontAwesomeIcon icon={faHeart} /> Favorite
