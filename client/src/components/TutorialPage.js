@@ -19,6 +19,8 @@ import {
   faClock
 } from '@fortawesome/free-solid-svg-icons';
 
+const uuidv4 = require('uuid/v4');
+
 class TutorialPage extends Component {
   static contextType = UserContext;
   constructor(props) {
@@ -65,6 +67,17 @@ class TutorialPage extends Component {
         body: this.state.commentBody
       })
     });
+    console.log(this.state.comments);
+    this.setState(prevState => ({
+      commentBody: '',
+      ...prevState.comments.push({
+        id: uuidv4(),
+        user_id: this.context.id,
+        tutorial_id: this.state.tutorial.id,
+        body: this.state.commentBody,
+        posted: new Date()
+      })
+    }));
     event.preventDefault();
   };
 

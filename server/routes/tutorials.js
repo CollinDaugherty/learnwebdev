@@ -236,14 +236,14 @@ router.post('/tutorials/vote', async (req, res) => {
 
 // Comment Submission
 router.post('/tutorials/:id/comments', (req, res) => {
-  const { user_id, tutorial_id, body } = req.body;
+  const { id, user_id, tutorial_id, body, posted } = req.body;
   let comment = Comment.query()
     .insert({
-      id: uuidv4(),
+      id: id,
       user_id: user_id,
       tutorial_id: tutorial_id,
       body: body,
-      posted: new Date()
+      posted: posted
     })
     .then(comment => res.status(200).json(comment))
     .catch(err => res.status(400).json(err));
