@@ -22,7 +22,7 @@ const Form = styled.form`
     background: white;
     border: 1px solid ${props => props.theme.color.neutral._200};
     border-radius: ${props => props.theme.border.radius};
-    padding: 1rem;
+    padding: 1.5rem;
     margin-bottom: 1.3rem;
     width: 100%;
     line-height: 1;

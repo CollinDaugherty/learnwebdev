@@ -47,6 +47,16 @@ a, button {
   }
 }
 
+blockquote {
+  border-left: 4px solid ${props => props.theme.color.neutral._300};
+  background: ${props => props.theme.color.neutral._100};
+  padding: 1rem;
+  padding-left: 1.3rem;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  color: ${props => props.theme.color.neutral._700};
+}
+
 hr {
   margin: 5px 0;
   border: 0px;

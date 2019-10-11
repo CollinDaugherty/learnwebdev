@@ -3,6 +3,7 @@ import history from '../history';
 import UserContext from '../UserContext';
 
 import { formatDistance } from 'date-fns';
+import ReactMarkdown from 'react-markdown';
 
 import Container from './styles/blocks/Container';
 import Card from './styles/blocks/Card';
@@ -12,7 +13,11 @@ import Btn from './styles/blocks/Button';
 import TutorialItem from './TutorialItem';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faComment } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUserCircle,
+  faComment,
+  faClock
+} from '@fortawesome/free-solid-svg-icons';
 
 class TutorialPage extends Component {
   static contextType = UserContext;
@@ -27,6 +32,18 @@ class TutorialPage extends Component {
       commentBody: ''
     };
   }
+
+  formatReply = event => {
+    const parentId = event.target.parentElement.parentElement.parentElement.id;
+    const parentUserString =
+      event.target.previousSibling.previousSibling.textContent;
+    const parentUser = parentUserString.trim();
+    const parentText = event.target.dataset.text;
+
+    this.setState({
+      commentBody: `> [@${parentUser}](#${parentId}) \n\n > ${parentText} \n\n`
+    });
+  };
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -116,7 +133,9 @@ class TutorialPage extends Component {
               <Container medium>
                 {comments.map(comment => (
                   <Card commentCard id={comment.id} key={comment.id}>
-                    <Card.Content>{comment.body}</Card.Content>
+                    <Card.Content>
+                      <ReactMarkdown source={comment.body} />
+                    </Card.Content>
                     <Card.Footer>
                       <ul>
                         <li>
@@ -124,6 +143,7 @@ class TutorialPage extends Component {
                           {comment.username}
                         </li>
                         <li>
+                          <FontAwesomeIcon icon={faClock} size='1x' />{' '}
                           {formatDistance(
                             new Date(comment.posted),
                             new Date(),
@@ -132,7 +152,7 @@ class TutorialPage extends Component {
                             }
                           )}
                         </li>
-                        <li>
+                        <li data-text={comment.body} onClick={this.formatReply}>
                           <FontAwesomeIcon icon={faComment} size='1x' /> Reply
                         </li>
                       </ul>
