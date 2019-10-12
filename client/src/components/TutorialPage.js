@@ -45,7 +45,7 @@ class TutorialPage extends Component {
     const parentText = event.target.dataset.text;
 
     this.setState({
-      commentBody: `> [@${parentUser}](#${parentId}) \n\n > ${parentText} \n\n`
+      commentBody: `> [@${parentUser}](#${parentId}) \n\n> ${parentText} \n\n`
     });
   };
 
@@ -82,7 +82,8 @@ class TutorialPage extends Component {
         user_id: this.context.id,
         tutorial_id: this.state.tutorial.id,
         body: this.state.commentBody,
-        posted: date
+        posted: date,
+        username: this.context.name
       })
     }));
     event.preventDefault();
