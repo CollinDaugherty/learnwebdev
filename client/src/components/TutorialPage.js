@@ -19,7 +19,9 @@ import {
   faClock
 } from '@fortawesome/free-solid-svg-icons';
 
-const uuidv4 = require('uuid/v4');
+import uuidv4 from 'uuid';
+
+//const uuidv4 = require('uuid/v4');
 
 class TutorialPage extends Component {
   static contextType = UserContext;
@@ -55,6 +57,9 @@ class TutorialPage extends Component {
   };
 
   handleSubmit = event => {
+    const urlId = uuidv4().slice(0, 8);
+    const date = new Date();
+
     if (!this.context.id) {
       return history.push('/login');
     }
@@ -62,20 +67,22 @@ class TutorialPage extends Component {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        id: urlId,
         user_id: this.context.id,
         tutorial_id: this.state.tutorial.id,
-        body: this.state.commentBody
+        body: this.state.commentBody,
+        posted: date
       })
     });
     console.log(this.state.comments);
     this.setState(prevState => ({
       commentBody: '',
       ...prevState.comments.push({
-        id: uuidv4(),
+        id: urlId,
         user_id: this.context.id,
         tutorial_id: this.state.tutorial.id,
         body: this.state.commentBody,
-        posted: new Date()
+        posted: date
       })
     }));
     event.preventDefault();
