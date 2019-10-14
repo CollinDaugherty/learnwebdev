@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import history from '../history';
 
+import uuidv4 from 'uuid';
+
 import UserContext from '../UserContext';
 
 // Styled-Components
@@ -39,11 +41,16 @@ class TutorialForm extends Component {
   };
 
   handleSubmit = e => {
+    const id = uuidv4().slice(0, 8);
+    const date = new Date();
+
     this.splitCategories();
+
     fetch('/api/tutorials/', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        id: id,
         title: this.state.title,
         url: this.state.url,
         instructorName: this.state.instructorName,
@@ -51,7 +58,8 @@ class TutorialForm extends Component {
         cost: this.state.cost,
         medium: this.state.medium,
         difficulty: this.state.difficulty,
-        user: this.context.id
+        user: this.context.id,
+        posted: date
       })
     });
     history.push('/');

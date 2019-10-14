@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import history from '../history';
 import UserContext from '../UserContext';
 
+import uuidv4 from 'uuid';
 import { formatDistance } from 'date-fns';
 import ReactMarkdown from 'react-markdown';
 
@@ -18,8 +19,6 @@ import {
   faComment,
   faClock
 } from '@fortawesome/free-solid-svg-icons';
-
-import uuidv4 from 'uuid';
 
 //const uuidv4 = require('uuid/v4');
 
@@ -57,7 +56,7 @@ class TutorialPage extends Component {
   };
 
   handleSubmit = event => {
-    const urlId = uuidv4().slice(0, 8);
+    const id = uuidv4().slice(0, 8);
     const date = new Date();
 
     if (!this.context.id) {
@@ -67,18 +66,17 @@ class TutorialPage extends Component {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        id: urlId,
+        id: id,
         user_id: this.context.id,
         tutorial_id: this.state.tutorial.id,
         body: this.state.commentBody,
         posted: date
       })
     });
-    console.log(this.state.comments);
     this.setState(prevState => ({
       commentBody: '',
       ...prevState.comments.push({
-        id: urlId,
+        id: id,
         user_id: this.context.id,
         tutorial_id: this.state.tutorial.id,
         body: this.state.commentBody,

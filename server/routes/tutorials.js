@@ -16,6 +16,7 @@ const Comment = require('../models/Comment');
 // Submit Tutorial
 router.post('/tutorials', isAuthenticated, async (req, res) => {
   const {
+    id,
     title,
     url,
     instructorName,
@@ -23,20 +24,21 @@ router.post('/tutorials', isAuthenticated, async (req, res) => {
     cost,
     medium,
     difficulty,
-    user
+    user,
+    posted
   } = req.body;
 
   // inserts row in tutorials table
   const tutorial = await Tutorial.query()
     .insert({
-      id: uuidv4(),
+      id: id,
       title: title,
       url: url,
       categories: `{${categories}}`,
       cost: cost,
       medium: medium,
       difficulty: difficulty,
-      posted: new Date(),
+      posted: posted,
       user_id: user,
       instructor_name: instructorName
     })

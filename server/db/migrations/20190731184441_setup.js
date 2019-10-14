@@ -38,7 +38,7 @@ exports.up = function(knex, Promise) {
 
         // TUTORIALS TABLE
         knex.schema.createTable('tutorials', t => {
-          t.uuid('id')
+          t.string('id')
             .primary()
             .unique()
             .notNullable();
@@ -63,7 +63,7 @@ exports.up = function(knex, Promise) {
             .unique()
             .notNullable();
           t.uuid('user_id').notNullable();
-          t.uuid('tutorial_id').notNullable();
+          t.string('tutorial_id').notNullable();
           t.text('body').notNullable();
           t.timestamp('posted', { useTz: false }).notNullable();
         }),
@@ -73,7 +73,7 @@ exports.up = function(knex, Promise) {
             .primary()
             .unique()
             .notNullable();
-          t.uuid('tutorial_id').notNullable();
+          t.string('tutorial_id').notNullable();
           t.uuid('user_id').notNullable();
           t.smallint('vote_value');
         }),
