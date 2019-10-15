@@ -45,13 +45,9 @@ class TutorialList extends Component {
                         id={item.id}
                         title={item.title}
                         url={item.url}
-                        posted={formatDistance(
-                          new Date(item.posted),
-                          new Date(),
-                          {
-                            addSuffix: true
-                          }
-                        )}
+                        date={formatDistance(new Date(item.date), new Date(), {
+                          addSuffix: true
+                        })}
                         categories={item.categories}
                         cost={item.cost}
                         medium={item.medium}
@@ -61,6 +57,7 @@ class TutorialList extends Component {
                         commentCount={item.commentCount}
                         voteCount={item.voteCount}
                         voteStatus={item.voteStatus}
+                        favorited={item.favorited}
                       />
                     );
                   })}

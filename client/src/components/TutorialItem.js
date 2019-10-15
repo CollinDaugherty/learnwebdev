@@ -20,9 +20,33 @@ class TutorialItem extends Component {
       tutorial_id: this.props.id,
 
       voteCount: Number(this.props.voteCount),
-      voteStatus: Number(this.props.voteStatus)
+      voteStatus: Number(this.props.voteStatus),
+
+      favorited: this.props.favorited
     };
   }
+
+  addFavorite = event => {
+    if (!this.context.id) {
+      history.push('/login');
+      return null;
+    }
+
+    console.log('favorited');
+
+    this.setState(prevState => ({
+      favorited: !prevState.favorited
+    }));
+
+    fetch(`/api/tutorials/${this.state.tutorial_id}/favorite`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tutorial_id: this.state.tutorial_id,
+        user_id: this.context.id
+      })
+    });
+  };
 
   onVote = event => {
     if (!this.context.id) {
@@ -87,7 +111,7 @@ class TutorialItem extends Component {
       id,
       title,
       url,
-      posted,
+      date,
       cost,
       medium,
       difficulty,
@@ -137,11 +161,21 @@ class TutorialItem extends Component {
                 <FontAwesomeIcon icon={faComment} /> {commentCount} Comments
               </Link>
             </li>
+            {this.state.favorited ? (
+              <li
+                style={{ color: 'HSL(216,11%,49%)' }}
+                onClick={this.addFavorite}
+              >
+                <FontAwesomeIcon style={{ color: 'red' }} icon={faHeart} />{' '}
+                Favorited
+              </li>
+            ) : (
+              <li onClick={this.addFavorite}>
+                <FontAwesomeIcon icon={faHeart} /> Favorite
+              </li>
+            )}
             <li>
-              <FontAwesomeIcon icon={faHeart} /> Favorite
-            </li>
-            <li>
-              submitted <span>{posted}</span> by <a href='/'>{user}</a>
+              submitted <span>{date}</span> by <a href='/'>{user}</a>
             </li>
             <Card.Tag>{difficulty}</Card.Tag>
             <Card.Tag>{medium}</Card.Tag>

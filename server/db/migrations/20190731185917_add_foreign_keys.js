@@ -33,6 +33,14 @@ exports.up = function(knex, Promise) {
           t.foreign('comment_id')
             .references('id')
             .inTable('comments');
+        }),
+        knex.schema.alterTable('favorites', t => {
+          t.foreign('user_id')
+            .references('id')
+            .inTable('users');
+          t.foreign('tutorial_id')
+            .references('id')
+            .inTable('tutorials');
         })
       ]);
 
@@ -63,6 +71,10 @@ exports.down = function(knex, Promise) {
         knex.schema.table('comment_votes', t => {
           t.dropForeign('user_id');
           t.dropForeign('comment_id');
+        }),
+        knex.schema.table('favorites', t => {
+          t.dropForeign('user_id');
+          t.dropForeign('tutorial_id');
         })
       ]);
 

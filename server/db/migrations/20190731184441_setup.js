@@ -49,7 +49,7 @@ exports.up = function(knex, Promise) {
           t.text('url')
             .unique()
             .notNullable();
-          t.timestamp('posted', { useTz: false }).notNullable();
+          t.timestamp('date', { useTz: false }).notNullable();
           t.enum('cost', ['free', 'paid']).notNullable();
           t.enum('medium', ['article', 'video']).notNullable();
           t.enum('difficulty', ['beginner', 'advanced']).notNullable();
@@ -65,7 +65,7 @@ exports.up = function(knex, Promise) {
           t.uuid('user_id').notNullable();
           t.string('tutorial_id').notNullable();
           t.text('body').notNullable();
-          t.timestamp('posted', { useTz: false }).notNullable();
+          t.timestamp('date', { useTz: false }).notNullable();
         }),
 
         knex.schema.createTable('tutorial_votes', t => {
@@ -85,6 +85,15 @@ exports.up = function(knex, Promise) {
           t.string('comment_id').notNullable();
           t.uuid('user_id').notNullable();
           t.smallint('vote_value');
+        }),
+        knex.schema.createTable('favorites', t => {
+          t.uuid('id')
+            .primary()
+            .unique()
+            .notNullable();
+          t.string('tutorial_id').notNullable();
+          t.uuid('user_id').notNullable();
+          t.timestamp('date', { useTz: false }).notNullable();
         })
       ]);
 
@@ -105,7 +114,8 @@ exports.down = function(knex, Promise) {
         knex.schema.dropTable('tutorials'),
         knex.schema.dropTable('comments'),
         knex.schema.dropTable('tutorial_votes'),
-        knex.schema.dropTable('comment_votes')
+        knex.schema.dropTable('comment_votes'),
+        knex.schema.dropTable('favorites')
       ]);
 
       console.log('Tables dropped');

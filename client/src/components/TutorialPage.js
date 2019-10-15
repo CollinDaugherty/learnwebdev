@@ -20,8 +20,6 @@ import {
   faClock
 } from '@fortawesome/free-solid-svg-icons';
 
-//const uuidv4 = require('uuid/v4');
-
 class TutorialPage extends Component {
   static contextType = UserContext;
   constructor(props) {
@@ -49,13 +47,17 @@ class TutorialPage extends Component {
   };
 
   handleChange = event => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     this.setState({
-      [name]: value
+      commentBody: value
     });
   };
 
   handleSubmit = event => {
+    event.preventDefault();
+    if (!this.state.commentBody.length) {
+      return null;
+    }
     const id = uuidv4().slice(0, 8);
     const date = new Date();
 
@@ -70,7 +72,7 @@ class TutorialPage extends Component {
         user_id: this.context.id,
         tutorial_id: this.state.tutorial.id,
         body: this.state.commentBody,
-        posted: date
+        date: date
       })
     });
     this.setState(prevState => ({
@@ -80,11 +82,10 @@ class TutorialPage extends Component {
         user_id: this.context.id,
         tutorial_id: this.state.tutorial.id,
         body: this.state.commentBody,
-        posted: date,
+        date: date,
         username: this.context.name
       })
     }));
-    event.preventDefault();
   };
 
   getTutorial = () => {
@@ -118,7 +119,7 @@ class TutorialPage extends Component {
               id={tutorial.id}
               title={tutorial.title}
               url={tutorial.url}
-              posted={formatDistance(new Date(tutorial.posted), new Date(), {
+              date={formatDistance(new Date(tutorial.date), new Date(), {
                 addSuffix: true
               })}
               categories={tutorial.categories}
@@ -130,6 +131,7 @@ class TutorialPage extends Component {
               voteCount={tutorial.voteCount}
               voteStatus={tutorial.voteStatus}
               commentCount={tutorial.commentCount}
+              favorited={tutorial.favorited}
             />
 
             <br />
@@ -163,13 +165,9 @@ class TutorialPage extends Component {
                         </li>
                         <li>
                           <FontAwesomeIcon icon={faClock} size='1x' />{' '}
-                          {formatDistance(
-                            new Date(comment.posted),
-                            new Date(),
-                            {
-                              addSuffix: true
-                            }
-                          )}
+                          {formatDistance(new Date(comment.date), new Date(), {
+                            addSuffix: true
+                          })}
                         </li>
                         <li data-text={comment.body} onClick={this.formatReply}>
                           <FontAwesomeIcon icon={faComment} size='1x' /> Reply

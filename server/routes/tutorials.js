@@ -12,6 +12,7 @@ const Instructor = require('../models/Instructor');
 const Tutorial = require('../models/Tutorial');
 const TutorialVote = require('../models/TutorialVote');
 const Comment = require('../models/Comment');
+const Favorite = require('../models/Favorite');
 
 // Submit Tutorial
 router.post('/tutorials', isAuthenticated, async (req, res) => {
@@ -25,7 +26,7 @@ router.post('/tutorials', isAuthenticated, async (req, res) => {
     medium,
     difficulty,
     user,
-    posted
+    date
   } = req.body;
 
   // inserts row in tutorials table
@@ -38,7 +39,7 @@ router.post('/tutorials', isAuthenticated, async (req, res) => {
       cost: cost,
       medium: medium,
       difficulty: difficulty,
-      posted: posted,
+      date: date,
       user_id: user,
       instructor_name: instructorName
     })
@@ -80,6 +81,8 @@ router.post('/tutorials', isAuthenticated, async (req, res) => {
 // List of tutorials
 router.get('/tutorials', async (req, res) => {
   const list = [];
+  const user = req.user;
+  const userObj = { ...user };
 
   const tutorials = await Tutorial.query()
     .eager('[users(defaultSelects), instructors(defaultSelects)]')
@@ -87,6 +90,20 @@ router.get('/tutorials', async (req, res) => {
     .catch(err => console.log(err));
 
   for (tutorial of tutorials) {
+    if (req.user) {
+      const doesFavoriteExist = await Favorite.query()
+        .where('tutorial_id', tutorial.id)
+        .where('user_id', userObj.id)
+        .then(favorite => favorite)
+        .catch(err => console.log(err));
+
+      if (doesFavoriteExist.length) {
+        tutorial.favorited = true;
+      }
+    } else {
+      tutorial.favorited = false;
+    }
+
     const commentCount = await Comment.query()
       .where('tutorial_id', tutorial.id)
       .count('id')
@@ -105,9 +122,6 @@ router.get('/tutorials', async (req, res) => {
     }
 
     if (req.user) {
-      const user = req.user;
-      const userObj = { ...user };
-
       let voteStatus = await TutorialVote.query()
         .where('tutorial_id', tutorial.id)
         .where('user_id', userObj.id)
@@ -238,19 +252,44 @@ router.post('/tutorials/vote', async (req, res) => {
 
 // Comment Submission
 router.post('/tutorials/:id/comments', (req, res) => {
-  const { id, user_id, tutorial_id, body, posted } = req.body;
+  const { id, user_id, tutorial_id, body, date } = req.body;
+
   let comment = Comment.query()
     .insert({
       id: id,
       user_id: user_id,
       tutorial_id: tutorial_id,
       body: body,
-      posted: posted
+      date: date
     })
     .then(comment => res.status(200).json(comment))
     .catch(err => res.status(400).json(err));
+});
 
-  console.log(comment);
+// Add tutorial to Favorites
+router.post('/tutorials/:id/favorite', async (req, res) => {
+  const { user_id, tutorial_id, date } = req.body;
+
+  const doesFavoriteExist = await Favorite.query()
+    .findOne({ tutorial_id: tutorial_id, user_id: user_id })
+    .catch(err => console.log(err));
+
+  if (!doesFavoriteExist) {
+    const favorite = await Favorite.query()
+      .insert({
+        id: uuidv4(),
+        user_id: user_id,
+        tutorial_id: tutorial_id,
+        date: new Date()
+      })
+      .then(favorite => res.status(200).json(favorite))
+      .catch(err => res.status(400).json(err));
+  } else {
+    await Favorite.query()
+      .delete()
+      .where('tutorial_id', tutorial_id)
+      .where('user_id', user_id);
+  }
 });
 
 module.exports = router;

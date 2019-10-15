@@ -59,7 +59,7 @@ class TutorialForm extends Component {
         medium: this.state.medium,
         difficulty: this.state.difficulty,
         user: this.context.id,
-        posted: date
+        date: date
       })
     });
     history.push('/');
