@@ -285,6 +285,7 @@ router.post('/tutorials/:id/favorite', async (req, res) => {
       .then(favorite => res.status(200).json(favorite))
       .catch(err => res.status(400).json(err));
   } else {
+    // if Favorite exists, delete it
     await Favorite.query()
       .delete()
       .where('tutorial_id', tutorial_id)
