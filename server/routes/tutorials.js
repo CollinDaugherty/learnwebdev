@@ -195,6 +195,18 @@ router.get('/tutorials/:id', async (req, res) => {
       .catch(err => console.log(err));
 
     tutorial.voteStatus = voteStatus;
+
+    const doesFavoriteExist = await Favorite.query()
+      .where('tutorial_id', tutorial.id)
+      .where('user_id', userObj.id)
+      .then(favorite => favorite)
+      .catch(err => console.log(err));
+
+    if (doesFavoriteExist.length) {
+      tutorial.favorited = true;
+    }
+  } else {
+    tutorial.favorited = false;
   }
 
   return res.status(200).json(tutorial);

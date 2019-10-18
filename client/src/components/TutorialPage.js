@@ -107,8 +107,7 @@ class TutorialPage extends Component {
   }
 
   render() {
-    const { tutorial, user, instructor } = this.state;
-    const comments = this.state.comments;
+    const { tutorial, user, instructor, comments } = this.state;
 
     return (
       <Container Medium>
