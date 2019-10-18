@@ -38,26 +38,31 @@ class TutorialList extends Component {
               {list.length ? (
                 <div>
                   {/* Render the list of items */}
-                  {list.map(item => {
+                  {list.map(tutorial => {
                     return (
                       <TutorialItem
-                        key={list.indexOf(item)}
-                        id={item.id}
-                        title={item.title}
-                        url={item.url}
-                        date={formatDistance(new Date(item.date), new Date(), {
-                          addSuffix: true
-                        })}
-                        categories={item.categories}
-                        cost={item.cost}
-                        medium={item.medium}
-                        difficulty={item.difficulty}
-                        user={item.users.name}
-                        instructor={item.instructors.name}
-                        commentCount={item.commentCount}
-                        voteCount={item.voteCount}
-                        voteStatus={item.voteStatus}
-                        favorited={item.favorited}
+                        key={list.indexOf(tutorial)}
+                        id={tutorial.id}
+                        title={tutorial.title}
+                        url={tutorial.url}
+                        date={formatDistance(
+                          new Date(tutorial.date),
+                          new Date(),
+                          {
+                            addSuffix: true
+                          }
+                        )}
+                        categories={tutorial.categories}
+                        cost={tutorial.cost}
+                        medium={tutorial.medium}
+                        difficulty={tutorial.difficulty}
+                        user={tutorial.users.name}
+                        instructor={tutorial.instructors.name}
+                        instructorId={tutorial.instructors.id}
+                        commentCount={tutorial.commentCount}
+                        voteCount={tutorial.voteCount}
+                        voteStatus={tutorial.voteStatus}
+                        favorited={tutorial.favorited}
                       />
                     );
                   })}

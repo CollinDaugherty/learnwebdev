@@ -117,6 +117,7 @@ class TutorialItem extends Component {
       difficulty,
       user,
       instructor,
+      instructorId,
       commentCount
     } = this.props;
 
@@ -149,7 +150,13 @@ class TutorialItem extends Component {
             <p>
               Instructor:
               <br />
-              {instructor ? <span>{instructor}</span> : <span>unknown</span>}
+              {instructor ? (
+                <span>
+                  <Link to={`/instructors/${instructorId}`}>{instructor}</Link>
+                </span>
+              ) : (
+                <span>unknown</span>
+              )}
             </p>
           </Card.Instructor>
         </Card.Content>
