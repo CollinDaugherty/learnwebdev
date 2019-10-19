@@ -116,6 +116,7 @@ class TutorialItem extends Component {
       medium,
       difficulty,
       user,
+      userId,
       instructor,
       instructorId,
       commentCount
@@ -152,7 +153,9 @@ class TutorialItem extends Component {
               <br />
               {instructor ? (
                 <span>
-                  <Link to={`/instructors/${instructorId}`}>{instructor}</Link>
+                  <Link to={`/profile/instructors/${instructorId}`}>
+                    {instructor}
+                  </Link>
                 </span>
               ) : (
                 <span>unknown</span>
@@ -182,7 +185,8 @@ class TutorialItem extends Component {
               </li>
             )}
             <li>
-              submitted <span>{date}</span> by <a href='/'>{user}</a>
+              submitted <span>{date}</span> by{' '}
+              <Link to={`/profile/user/${userId}`}>{user}</Link>
             </li>
             <Card.Tag>{difficulty}</Card.Tag>
             <Card.Tag>{medium}</Card.Tag>

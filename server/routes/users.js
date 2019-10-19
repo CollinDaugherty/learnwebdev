@@ -53,7 +53,7 @@ router.get('/logout', function(req, res) {
 });
 
 // Get single user
-router.get('/user/:id', async (req, res) => {
+router.get('/profile/user/:id', async (req, res) => {
   const { id } = req.params;
 
   const list = [];
@@ -68,6 +68,7 @@ router.get('/user/:id', async (req, res) => {
 
   const tutorials = await Tutorial.query()
     .where('user_id', id)
+    .eager('[users(defaultSelects), instructors(defaultSelects)]')
     .then(tutorials => tutorials)
     .catch(err => res.status(400).json(err));
 

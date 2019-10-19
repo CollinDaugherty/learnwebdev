@@ -26,56 +26,62 @@ const ProfileGrid = styled.div`
   }
 `;
 
-class InstructorPage extends Component {
+class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      instructor: {}
+      profile: {}
     };
   }
 
-  getInstructor = () => {
-    const { id } = this.props.match.params;
-    fetch(`/api/instructors/${id}`)
+  getProfile = () => {
+    const { id, profileType } = this.props.match.params;
+    fetch(`/api/profile/${profileType}/${id}`)
       .then(res => res.json())
       .then(data =>
         this.setState({
-          instructor: data
+          profile: data
         })
       );
   };
 
-  componentWillMount() {
-    this.getInstructor();
+  componentDidMount() {
+    this.getProfile();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.getProfile();
+    }
   }
 
   render() {
-    const { instructor } = this.state;
+    const { profile } = this.state;
     return (
       <Container>
         <ProfileGrid>
           <Card className='profile-sidebar'>
             <Card.Content>
               <FontAwesomeIcon icon={faUserCircle} size='6x' />
-              <Card.Title>{instructor.name}</Card.Title>
-              <Card.Subtitle>{instructor.website}</Card.Subtitle>
+              <Card.Title>{profile.name}</Card.Title>
+              <Card.Subtitle>{profile.website}</Card.Subtitle>
               <hr />
-              <a href={`https://github.com/${instructor.github}`}>
+              <a href={`https://github.com/${profile.github}`}>
                 <FontAwesomeIcon icon={faGithub} size='1x' /> GitHub
               </a>
               <br />
-              <a href={`https://twitter.com/${instructor.twitter}`}>
+              <a href={`https://twitter.com/${profile.twitter}`}>
                 <FontAwesomeIcon icon={faTwitter} size='1x' /> Twitter
               </a>
             </Card.Content>
           </Card>
 
-          {instructor.tutorials ? (
+          {profile.tutorials ? (
             <div className='profile-content'>
-              {instructor.tutorials.map(tutorial => {
+              {profile.tutorials.map(tutorial => {
                 return (
                   <TutorialItem
-                    key={instructor.tutorials.indexOf(tutorial)}
+                    key={profile.tutorials.indexOf(tutorial)}
                     id={tutorial.id}
                     title={tutorial.title}
                     url={tutorial.url}
@@ -87,6 +93,7 @@ class InstructorPage extends Component {
                     medium={tutorial.medium}
                     difficulty={tutorial.difficulty}
                     user={tutorial.users.name}
+                    userId={tutorial.users.id}
                     instructor={tutorial.instructors.name}
                     instructorId={tutorial.instructors.id}
                     commentCount={tutorial.commentCount}
@@ -106,4 +113,4 @@ class InstructorPage extends Component {
   }
 }
 
-export default InstructorPage;
+export default ProfilePage;

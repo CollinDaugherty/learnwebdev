@@ -14,7 +14,7 @@ import Navbar from './components/Navbar';
 import Notifications from './components/Notifications';
 import TutorialList from './components/TutorialList';
 import TutorialPage from './components/TutorialPage';
-import InstructorPage from './components/InstructorPage';
+import ProfilePage from './components/ProfilePage';
 import Footer from './components/Footer';
 
 import TutorialForm from './components/TutorialForm';
@@ -155,7 +155,10 @@ class App extends Component {
                   path='/tutorials/page/:pageId'
                   component={TutorialPage}
                 />
-                <Route path='/instructors/:id' component={InstructorPage} />
+                <Route
+                  path='/profile/:profileType/:id'
+                  component={ProfilePage}
+                />
                 <Container small>
                   <Switch>
                     <PrivateRoute

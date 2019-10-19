@@ -126,6 +126,7 @@ class TutorialPage extends Component {
               medium={tutorial.medium}
               difficulty={tutorial.difficulty}
               user={user.name}
+              userId={user.id}
               instructor={instructor.name}
               voteCount={tutorial.voteCount}
               voteStatus={tutorial.voteStatus}

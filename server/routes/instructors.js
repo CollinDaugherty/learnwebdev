@@ -20,7 +20,7 @@ router.get('/instructors', (req, res) => {
 });
 
 // Get individual Instructor by ID
-router.get('/instructors/:id', async (req, res) => {
+router.get('/profile/instructors/:id', async (req, res) => {
   const { id } = req.params;
 
   const list = [];

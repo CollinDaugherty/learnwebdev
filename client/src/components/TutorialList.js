@@ -57,6 +57,7 @@ class TutorialList extends Component {
                         medium={tutorial.medium}
                         difficulty={tutorial.difficulty}
                         user={tutorial.users.name}
+                        userId={tutorial.users.id}
                         instructor={tutorial.instructors.name}
                         instructorId={tutorial.instructors.id}
                         commentCount={tutorial.commentCount}
