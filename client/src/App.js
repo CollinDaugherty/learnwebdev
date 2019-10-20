@@ -32,6 +32,12 @@ class App extends Component {
   constructor() {
     super();
 
+    this.clearNotification = () => {
+      this.setState(prevState => ({
+        notifications: prevState.notifications.shift()
+      }));
+    };
+
     this.logout = () => {
       fetch('/api/logout')
         .then(res => res.json)
@@ -143,7 +149,12 @@ class App extends Component {
           <SearchProvider value={this.state.search}>
             <div>
               <Navbar />
-              <Notifications notifications={this.state.notifications} />
+              {this.state.notifications.length ? (
+                <Notifications
+                  clearNotification={this.clearNotification}
+                  notifications={this.state.notifications}
+                />
+              ) : null}
 
               <Container>
                 <Route

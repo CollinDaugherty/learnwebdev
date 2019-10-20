@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import * as theme from './styles/Variables';
@@ -75,6 +75,13 @@ const Notification = styled.div`
 const Notifications = props => {
   const notifications = props.notifications;
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      props.clearNotification();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Container small>
       {notifications.length ? (
@@ -87,9 +94,7 @@ const Notifications = props => {
             );
           })}
         </div>
-      ) : (
-        <div></div>
-      )}
+      ) : null}
     </Container>
   );
 };
