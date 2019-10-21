@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Container from './styles/blocks/Container';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faCode } from '@fortawesome/free-solid-svg-icons';
+
 const Foot = styled.footer`
   background: ${props => props.theme.color.neutral._300};
   text-align: center;
@@ -13,7 +16,10 @@ const Footer = () => {
   return (
     <Foot>
       <Container>
-        <p>Made with &lt;3 by Collin Daugherty</p>
+        <p>
+          <FontAwesomeIcon icon={faCode} /> with{' '}
+          <FontAwesomeIcon icon={faHeart} /> by Collin Daugherty
+        </p>
       </Container>
     </Foot>
   );

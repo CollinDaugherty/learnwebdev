@@ -12,7 +12,6 @@ const UserMenu = () => {
         <Dropdown>
           <button>
             <FontAwesomeIcon icon='user-circle' />
-            {name}
           </button>
 
           <ul>
@@ -35,12 +34,12 @@ const UserMenu = () => {
 
             <hr />
 
-            <a href='/'>
+            {/* <a href='/'>
               <li>Help</li>
             </a>
             <a href='/'>
               <li>Settings</li>
-            </a>
+            </a> */}
             <button onClick={logout}>
               <li>Logout</li>
             </button>
