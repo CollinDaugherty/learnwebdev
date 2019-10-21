@@ -14,6 +14,10 @@ const Dropdown = styled.div`
       text-align: left;
       line-height: ${props => props.theme.body.lineHeight};
     }
+
+    svg {
+      color: ${props => props.theme.color.neutral._700};
+    }
   }
 
   span {
@@ -48,6 +52,10 @@ const Dropdown = styled.div`
         &:hover {
           color: white;
           background: ${props => props.theme.color.primary._400};
+
+          svg {
+            color: white;
+          }
         }
       }
     }

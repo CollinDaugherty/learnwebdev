@@ -44,7 +44,6 @@ const Nav = styled.nav`
 
     li {
       display: inline-block;
-      margin-left: 1rem;
 
       a,
       button {

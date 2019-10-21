@@ -176,7 +176,7 @@ class TutorialItem extends Component {
                 style={{ color: 'HSL(216,11%,49%)' }}
                 onClick={this.addFavorite}
               >
-                <FontAwesomeIcon style={{ color: 'red' }} icon={faHeart} />{' '}
+                <FontAwesomeIcon style={{ color: '#ff0266' }} icon={faHeart} />{' '}
                 Favorited
               </li>
             ) : (

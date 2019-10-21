@@ -1,5 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUser,
+  faPlusSquare,
+  faHeart,
+  faSignOutAlt
+} from '@fortawesome/free-solid-svg-icons';
 
 import { UserConsumer } from '../UserContext';
 
@@ -22,15 +30,21 @@ const UserMenu = () => {
             </span>
             <hr />
 
-            <a href='/'>
-              <li>Your Profile</li>
-            </a>
-            <a href='/'>
-              <li>Your Submissions</li>
-            </a>
-            <a href='/'>
-              <li>Your Favorites</li>
-            </a>
+            <Link to={`/profile/user/${id}`}>
+              <li>
+                <FontAwesomeIcon icon={faUser} /> Your Profile
+              </li>
+            </Link>
+            <Link to={`/profile/user/${id}`}>
+              <li>
+                <FontAwesomeIcon icon={faPlusSquare} /> Your Submissions
+              </li>
+            </Link>
+            <Link to={`/profile/user/${id}/favorites`}>
+              <li>
+                <FontAwesomeIcon icon={faHeart} /> Your Favorites
+              </li>
+            </Link>
 
             <hr />
 
@@ -41,7 +55,10 @@ const UserMenu = () => {
               <li>Settings</li>
             </a> */}
             <button onClick={logout}>
-              <li>Logout</li>
+              <li>
+                {' '}
+                <FontAwesomeIcon icon={faSignOutAlt} /> Logout
+              </li>
             </button>
           </ul>
         </Dropdown>
