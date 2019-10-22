@@ -58,7 +58,7 @@ class ProfilePage extends Component {
   render() {
     const { profile } = this.state;
     return (
-      <Container>
+      <Container full>
         <ProfileGrid>
           <div className='profile-sidebar'>
             <Card>

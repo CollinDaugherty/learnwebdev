@@ -16,6 +16,9 @@ exports.seed = function(knex, Promise) {
           email: 'tonystark@starkindustries.com',
           password: bcrypt.hashSync('WarMachineSux', saltRounds),
           joined: new Date(),
+          website: '',
+          github: '',
+          twitter: '',
           is_admin: true
         },
         {
@@ -24,6 +27,9 @@ exports.seed = function(knex, Promise) {
           email: 'steverogers@shield.gov',
           password: bcrypt.hashSync('Peggy', saltRounds),
           joined: new Date(),
+          website: '',
+          github: '',
+          twitter: '',
           is_admin: false
         },
         {
@@ -32,6 +38,9 @@ exports.seed = function(knex, Promise) {
           email: 'godofthunder@asgard.space',
           password: bcrypt.hashSync('StrongestAvenger', saltRounds),
           joined: new Date(),
+          website: '',
+          github: '',
+          twitter: '',
           is_admin: false
         }
       ]);

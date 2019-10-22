@@ -14,6 +14,9 @@ exports.up = function(knex, Promise) {
             .notNullable();
           t.string('password').notNullable();
           t.timestamp('joined', { useTz: false }).notNullable();
+          t.text('website');
+          t.string('github');
+          t.string('twitter');
           t.text('avatar');
           t.boolean('is_admin')
             .defaultTo(false)
