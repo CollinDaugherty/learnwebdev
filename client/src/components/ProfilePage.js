@@ -60,21 +60,23 @@ class ProfilePage extends Component {
     return (
       <Container>
         <ProfileGrid>
-          <Card className='profile-sidebar'>
-            <Card.Content>
-              <FontAwesomeIcon icon={faUserCircle} size='6x' />
-              <Card.Title>{profile.name}</Card.Title>
-              <Card.Subtitle>{profile.website}</Card.Subtitle>
-              <hr />
-              <a href={`https://github.com/${profile.github}`}>
-                <FontAwesomeIcon icon={faGithub} size='1x' /> GitHub
-              </a>
-              <br />
-              <a href={`https://twitter.com/${profile.twitter}`}>
-                <FontAwesomeIcon icon={faTwitter} size='1x' /> Twitter
-              </a>
-            </Card.Content>
-          </Card>
+          <div className='profile-sidebar'>
+            <Card>
+              <Card.Content>
+                <FontAwesomeIcon icon={faUserCircle} size='6x' />
+                <Card.Title>{profile.name}</Card.Title>
+                <Card.Subtitle>{profile.website}</Card.Subtitle>
+                <hr />
+                <a href={`https://github.com/${profile.github}`}>
+                  <FontAwesomeIcon icon={faGithub} size='1x' /> GitHub
+                </a>
+                <br />
+                <a href={`https://twitter.com/${profile.twitter}`}>
+                  <FontAwesomeIcon icon={faTwitter} size='1x' /> Twitter
+                </a>
+              </Card.Content>
+            </Card>
+          </div>
 
           {profile.tutorials ? (
             <div className='profile-content'>

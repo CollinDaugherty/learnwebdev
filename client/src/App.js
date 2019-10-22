@@ -14,6 +14,7 @@ import Navbar from './components/Navbar';
 import Notifications from './components/Notifications';
 import TutorialList from './components/TutorialList';
 import TutorialPage from './components/TutorialPage';
+import Favorites from './components/Favorites';
 import ProfilePage from './components/ProfilePage';
 import Footer from './components/Footer';
 
@@ -170,6 +171,7 @@ class App extends Component {
                   path='/profile/:profileType/:id'
                   component={ProfilePage}
                 />
+                <PrivateRoute path='/favorites' component={Favorites} />
                 <Container small>
                   <Switch>
                     <PrivateRoute

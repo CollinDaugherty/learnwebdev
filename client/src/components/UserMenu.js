@@ -40,7 +40,7 @@ const UserMenu = () => {
                 <FontAwesomeIcon icon={faPlusSquare} /> Your Submissions
               </li>
             </Link>
-            <Link to={`/profile/user/${id}/favorites`}>
+            <Link to={`/favorites`}>
               <li>
                 <FontAwesomeIcon icon={faHeart} /> Your Favorites
               </li>

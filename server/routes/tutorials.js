@@ -6,6 +6,7 @@ const { raw } = require('objection');
 const uuidv4 = require('uuid/v4');
 const passport = require('../passport');
 const isAuthenticated = require('../passport/isAuthenticated');
+const getTutorialDetails = require('../getTutorialDetails');
 
 const User = require('../models/User');
 const Instructor = require('../models/Instructor');
@@ -80,60 +81,12 @@ router.post('/tutorials', isAuthenticated, async (req, res) => {
 
 // List of tutorials
 router.get('/tutorials', async (req, res) => {
-  const list = [];
-  const user = req.user;
-  const userObj = { ...user };
-
   const tutorials = await Tutorial.query()
     .eager('[users(defaultSelects), instructors(defaultSelects)]')
     .then(tutorials => tutorials)
     .catch(err => console.log(err));
 
-  for (tutorial of tutorials) {
-    if (req.user) {
-      const doesFavoriteExist = await Favorite.query()
-        .where('tutorial_id', tutorial.id)
-        .where('user_id', userObj.id)
-        .then(favorite => favorite)
-        .catch(err => console.log(err));
-
-      if (doesFavoriteExist.length) {
-        tutorial.favorited = true;
-      }
-    } else {
-      tutorial.favorited = false;
-    }
-
-    const commentCount = await Comment.query()
-      .where('tutorial_id', tutorial.id)
-      .count('id')
-      .catch(err => console.log(err));
-
-    tutorial.commentCount = Number(commentCount[0].count);
-
-    let voteCount = await TutorialVote.query()
-      .where('tutorial_id', tutorial.id)
-      .sum('vote_value')
-      .then(data => data[0].sum)
-      .catch(err => console.log(err));
-
-    if (voteCount === null) {
-      voteCount = 0;
-    }
-
-    if (req.user) {
-      let voteStatus = await TutorialVote.query()
-        .where('tutorial_id', tutorial.id)
-        .where('user_id', userObj.id)
-        .then(data => data[0].vote_value)
-        .catch(err => console.log(err));
-
-      tutorial.voteStatus = voteStatus;
-    }
-
-    tutorial.voteCount = voteCount;
-    list.push({ ...tutorial });
-  }
+  const list = await getTutorialDetails(req, tutorials);
 
   //sort list by upvotes
   list.sort(function(a, b) {
@@ -186,11 +139,9 @@ router.get('/tutorials/:id', async (req, res) => {
   }
 
   if (req.user) {
-    const user = req.user;
-    const userObj = { ...user };
     let voteStatus = await TutorialVote.query()
       .where('tutorial_id', tutorial.id)
-      .where('user_id', userObj.id)
+      .where('user_id', req.user.id)
       .then(data => data[0].vote_value)
       .catch(err => console.log(err));
 
@@ -198,7 +149,7 @@ router.get('/tutorials/:id', async (req, res) => {
 
     const doesFavoriteExist = await Favorite.query()
       .where('tutorial_id', tutorial.id)
-      .where('user_id', userObj.id)
+      .where('user_id', req.user.id)
       .then(favorite => favorite)
       .catch(err => console.log(err));
 
@@ -279,7 +230,7 @@ router.post('/tutorials/:id/comments', (req, res) => {
 });
 
 // Add tutorial to Favorites
-router.post('/tutorials/:id/favorite', async (req, res) => {
+router.post('/tutorials/:id/favorite', isAuthenticated, async (req, res) => {
   const { user_id, tutorial_id, date } = req.body;
 
   const doesFavoriteExist = await Favorite.query()
@@ -302,6 +253,29 @@ router.post('/tutorials/:id/favorite', async (req, res) => {
       .delete()
       .where('tutorial_id', tutorial_id)
       .where('user_id', user_id);
+  }
+});
+
+// Get Favorites from current logged in user
+router.get('/favorites', isAuthenticated, async (req, res) => {
+  const favorites = await Favorite.query()
+    .where('user_id', req.user.id)
+    .then(favorites => favorites)
+    .catch(err => console.log(err));
+
+  const tutorialList = [];
+  for (favorite of favorites) {
+    const tutorials = await Tutorial.query()
+      .where('id', favorite.tutorial_id)
+      .eager('[users(defaultSelects), instructors(defaultSelects)]')
+      .then(tutorial => tutorialList.push(tutorial[0]))
+      .catch(err => res.status(400).json(err));
+  }
+
+  const list = await getTutorialDetails(req, tutorialList);
+
+  if (list.length) {
+    return res.status(200).json(list);
   }
 });
 
