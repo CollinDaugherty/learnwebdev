@@ -128,6 +128,7 @@ class TutorialPage extends Component {
               user={user.name}
               userId={user.id}
               instructor={instructor.name}
+              instructorId={tutorial.instructors.id}
               voteCount={tutorial.voteCount}
               voteStatus={tutorial.voteStatus}
               commentCount={tutorial.commentCount}
