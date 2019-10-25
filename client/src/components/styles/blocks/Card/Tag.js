@@ -11,6 +11,19 @@ const Tag = styled.div`
   margin-right: 1rem;
   text-transform: capitalize;
   float: right;
+
+  @media ${props => props.theme.device.mobile} {
+    font-size: 1rem;
+    background: none;
+    color: ${props => props.theme.color.neutral._600};
+    font-style: italic;
+    padding: 0rem;
+    margin-right: 0.4rem;
+
+    &:not(:first-of-type):after {
+      content: ',';
+    }
+  }
 `;
 
 export default Tag;

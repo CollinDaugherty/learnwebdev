@@ -23,6 +23,22 @@ const Instructor = styled.div`
       font-weight: 700;
     }
   }
+
+  @media ${props => props.theme.device.mobile} {
+    svg {
+      margin-right: 0.5rem;
+      font-size: 2.5rem;
+      max-width: 30px;
+    }
+
+    p {
+      font-size: 1rem;
+
+      span {
+        font-size: 1.1rem;
+      }
+    }
+  }
 `;
 
 export default Instructor;

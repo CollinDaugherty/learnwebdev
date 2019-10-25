@@ -11,6 +11,10 @@ const Vote = styled.button`
   transition: 0.2s ease;
   font-size: 2.5rem;
 
+  @media ${props => props.theme.device.mobile} {
+    font-size: 2rem;
+  }
+
   ${props =>
     props.upvote &&
     css`

@@ -13,13 +13,13 @@ import { UserConsumer } from '../UserContext';
 
 import Dropdown from './styles/blocks/Dropdown';
 
-const UserMenu = () => {
+const UserMenu = props => {
   return (
     <UserConsumer>
       {({ id, name, avatar, logout }) => (
         <Dropdown>
           <button>
-            <FontAwesomeIcon icon='user-circle' />
+            <FontAwesomeIcon icon='user-circle' size={props.size} />
           </button>
 
           <ul>

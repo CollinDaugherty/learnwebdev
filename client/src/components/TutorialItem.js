@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUserCircle,
   faHeart,
-  faComment
+  faComment,
+  faClock
 } from '@fortawesome/free-solid-svg-icons';
 
 import Card from './styles/blocks/Card';
@@ -168,7 +169,8 @@ class TutorialItem extends Component {
           <ul>
             <li>
               <Link to={`/tutorials/page/${id}`}>
-                <FontAwesomeIcon icon={faComment} /> {commentCount} Comments
+                <FontAwesomeIcon icon={faComment} /> {commentCount}{' '}
+                <div className={'extra'}>Comments</div>
               </Link>
             </li>
             {this.state.favorited ? (
@@ -177,16 +179,19 @@ class TutorialItem extends Component {
                 onClick={this.addFavorite}
               >
                 <FontAwesomeIcon style={{ color: '#ff0266' }} icon={faHeart} />{' '}
-                Favorited
+                <div className={'extra link'}>Favorited</div>
               </li>
             ) : (
               <li onClick={this.addFavorite}>
-                <FontAwesomeIcon icon={faHeart} /> Favorite
+                <FontAwesomeIcon icon={faHeart} />{' '}
+                <div className={'extra link'}>Favorite</div>
               </li>
             )}
             <li>
-              submitted <span>{date}</span> by{' '}
-              <Link to={`/profile/user/${userId}`}>{user}</Link>
+              <FontAwesomeIcon icon={faClock} /> <span>{date}</span>{' '}
+              <div className={'extra'}>
+                by <Link to={`/profile/user/${userId}`}>{user}</Link>
+              </div>
             </li>
             <Card.Tag>{difficulty}</Card.Tag>
             <Card.Tag>{medium}</Card.Tag>

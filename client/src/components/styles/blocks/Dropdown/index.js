@@ -8,6 +8,10 @@ const Dropdown = styled.div`
     position: absolute;
     z-index: 100;
 
+    @media ${props => props.theme.device.mobile} {
+      font-size: 1.5rem !important;
+    }
+
     a,
     button {
       color: ${props => props.theme.body.fontColor};
@@ -36,6 +40,10 @@ const Dropdown = styled.div`
       border-radius: ${props => props.theme.border.radius};
       box-shadow: ${props => props.theme.shadow.med};
       text-align: left;
+
+      @media ${props => props.theme.device.mobile} {
+        right: 10px;
+      }
 
       a,
       button {

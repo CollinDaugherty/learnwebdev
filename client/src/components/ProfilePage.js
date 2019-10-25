@@ -24,6 +24,12 @@ const ProfileGrid = styled.div`
   .profile-content {
     grid-column: 2 / -1;
   }
+
+  @media ${props => props.theme.device.tablet} {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0;
+  }
 `;
 
 class ProfilePage extends Component {

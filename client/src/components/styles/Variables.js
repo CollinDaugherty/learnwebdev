@@ -125,3 +125,13 @@ export const shadow = {
   high: `0 20px 45px rgba(154, 160, 185, 0.05),
          0 10px 20px rgba(166, 173, 201, 0.2)`
 };
+
+//=================================================
+// BREAKPOINTS
+//=================================================
+
+export const device = {
+  mobile: '(max-width: 415px)',
+  tablet: '(max-width: 850px)',
+  laptop: '(max-width: 1024px)'
+};

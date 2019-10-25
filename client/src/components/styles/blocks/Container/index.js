@@ -23,6 +23,10 @@ const Container = styled.div`
     css`
       max-width: 800px;
     `}
+
+  @media ${props => props.theme.device.tablet} {
+    padding: .5rem
+  };
 `;
 
 export default Container;

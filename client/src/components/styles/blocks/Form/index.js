@@ -41,9 +41,17 @@ const Form = styled.form`
     display: flex;
     flex-direction: row;
 
+    @media ${props => props.theme.device.mobile} {
+      font-size: 1.2rem;
+    }
+
     span {
       flex: 2;
       font-weight: bold;
+
+      @media ${props => props.theme.device.mobile} {
+        flex: 1;
+      }
     }
 
     div {
@@ -67,6 +75,11 @@ const Form = styled.form`
 
         &:hover {
           background: ${props => props.theme.color.primary._200};
+        }
+
+        @media ${props => props.theme.device.mobile} {
+          padding: 0 0.5rem;
+          margin: 0.1rem;
         }
       }
 

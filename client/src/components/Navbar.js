@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+
 import { UserConsumer } from '../UserContext';
 import { SearchConsumer } from '../SearchContext';
 
@@ -18,6 +21,18 @@ const Nav = styled.nav`
 
   h1 {
     flex: 1;
+
+    img {
+      margin-top: 5px;
+    }
+
+    .small-logo {
+      max-width: 50px;
+      margin-left: 15px;
+    }
+    .full-logo {
+      max-width: 225px;
+    }
   }
 
   form {
@@ -56,15 +71,66 @@ const Nav = styled.nav`
       }
     }
   }
+
+  .mobile {
+    display: none;
+  }
+
+  @media ${props => props.theme.device.tablet} {
+    h1 {
+      flex: 2;
+    }
+    form {
+      flex: 3;
+    }
+    .desktop {
+      display: none;
+    }
+    .mobile {
+      display: inline-block;
+    }
+  }
+
+  @media ${props => props.theme.device.mobile} {
+    padding: 0.5rem;
+    h1 {
+      flex: 1;
+    }
+
+    ul {
+      font-size: 1rem;
+    }
+  }
 `;
 
 const Navbar = () => {
+  let logo;
+
+  if (window.innerWidth < 415) {
+    logo = (
+      <img
+        className='small-logo'
+        alt='LearnWebdev.io'
+        aria-label='LearnWebDev.io'
+        src={require('../lwd_logo_small.svg')}
+      ></img>
+    );
+  } else {
+    logo = (
+      <img
+        className='full-logo'
+        alt='LearnWebdev.io'
+        aria-label='LearnWebDev.io'
+        src={require('../lwd_logo_full.svg')}
+      ></img>
+    );
+  }
   return (
     <UserConsumer>
       {({ id, name, avatar, logout }) => (
         <Nav>
           <h1>
-            <Link to='/'>LearnWebDev.io</Link>
+            <Link to='/'>{logo}</Link>
           </h1>
 
           <SearchConsumer>
@@ -80,7 +146,7 @@ const Navbar = () => {
             )}
           </SearchConsumer>
 
-          <ul>
+          <ul className='desktop'>
             <li>
               <Link to='/tutorials/submit'>+ Submit a tutorial</Link>
             </li>
@@ -92,6 +158,26 @@ const Navbar = () => {
             ) : (
               <li>
                 <Link to='/signup'>Sign up / Log in</Link>
+              </li>
+            )}
+          </ul>
+
+          <ul className='mobile'>
+            <li>
+              <Link to='/tutorials/submit'>
+                <FontAwesomeIcon icon={faPlus} size='2x' />
+              </Link>
+            </li>
+
+            {id ? (
+              <li>
+                <UserMenu size={'2x'} />
+              </li>
+            ) : (
+              <li>
+                <Link to='/signup'>
+                  <FontAwesomeIcon icon={faSignInAlt} size='2x' />
+                </Link>
               </li>
             )}
           </ul>

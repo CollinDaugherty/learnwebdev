@@ -34,6 +34,10 @@ const Card = styled.div`
         grid-column: 2 / 3;
         grid-row: 2 / 3;
       }
+
+      @media ${props => props.theme.device.mobile} {
+        grid-template-columns: 4rem auto;
+      }
     `}
 
   ${props =>
@@ -41,6 +45,10 @@ const Card = styled.div`
     css`
       margin-bottom: 1.5rem;
     `}
+
+  @media ${props => props.theme.device.mobile} {
+
+  };
 `;
 
 Card.Title = Title;

@@ -10,6 +10,8 @@ const Foot = styled.footer`
   text-align: center;
   font-size: 1.4rem;
   width: 100%;
+  position: fixed;
+  bottom: 0;
 `;
 
 const Footer = () => {

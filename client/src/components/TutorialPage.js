@@ -170,7 +170,11 @@ class TutorialPage extends Component {
                             addSuffix: true
                           })}
                         </li>
-                        <li data-text={comment.body} onClick={this.formatReply}>
+                        <li
+                          data-text={comment.body}
+                          onClick={this.formatReply}
+                          className={'link'}
+                        >
                           <FontAwesomeIcon icon={faComment} size='1x' /> Reply
                         </li>
                       </ul>
