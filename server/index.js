@@ -42,7 +42,7 @@ app.use('/api', require('./routes/tutorials'));
 app.use('/api', require('./routes/instructors'));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+  res.sendFile(path.join(__dirname + '../client/build/index.html'));
 });
 
 const port = process.env.PORT || 8080;
