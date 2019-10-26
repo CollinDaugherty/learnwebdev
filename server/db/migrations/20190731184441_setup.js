@@ -99,6 +99,7 @@ exports.up = function(knex, Promise) {
   ]);
 
   console.log('Tables created successfully');
+  resolve();
 };
 
 exports.down = function(knex, Promise) {
@@ -113,4 +114,5 @@ exports.down = function(knex, Promise) {
   ]);
 
   console.log('Tables dropped');
+  resolve();
 };

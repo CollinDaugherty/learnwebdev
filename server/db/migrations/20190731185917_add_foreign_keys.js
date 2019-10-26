@@ -43,6 +43,7 @@ exports.up = function(knex, Promise) {
   ]);
 
   console.log('foreign keys added');
+  resolve();
 };
 
 exports.down = function(knex, Promise) {
@@ -70,4 +71,5 @@ exports.down = function(knex, Promise) {
   ]);
 
   console.log('foreign keys dropped');
+  resolve();
 };
