@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return Promise.all([
     // USERS TABLE
     knex.schema.createTable('users', t => {
@@ -99,10 +99,9 @@ exports.up = function(knex, Promise) {
   ]);
 
   console.log('Tables created successfully');
-  resolve();
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return Promise.all([
     knex.schema.dropTable('users'),
     knex.schema.dropTable('instructors'),
@@ -114,5 +113,4 @@ exports.down = function(knex, Promise) {
   ]);
 
   console.log('Tables dropped');
-  resolve();
 };
