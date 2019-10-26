@@ -1,7 +1,5 @@
 exports.up = function(knex, Promise) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      await Promise.all([
+  return Promise.all([
         knex.schema.alterTable('tutorials', t => {
           t.foreign('user_id')
             .references('id')
@@ -48,14 +46,10 @@ exports.up = function(knex, Promise) {
       resolve();
     } catch (error) {
       reject(error);
-    }
-  });
-};
+    };
 
 exports.down = function(knex, Promise) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      await Promise.all([
+  return Promise.all([
         knex.schema.table('tutorials', t => {
           t.dropForeign('user_id');
           t.dropForeign('instructor_id');
@@ -82,6 +76,4 @@ exports.down = function(knex, Promise) {
       resolve();
     } catch (error) {
       reject(error);
-    }
-  });
-};
+    };

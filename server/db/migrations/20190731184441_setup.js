@@ -1,7 +1,5 @@
 exports.up = function(knex, Promise) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      await Promise.all([
+  return Promise.all([
         // USERS TABLE
         knex.schema.createTable('users', t => {
           t.uuid('id')
@@ -102,16 +100,10 @@ exports.up = function(knex, Promise) {
 
       console.log('Tables created successfully');
       resolve();
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
+    };
 
 exports.down = function(knex, Promise) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      await Promise.all([
+  return Promise.all([
         knex.schema.dropTable('users'),
         knex.schema.dropTable('instructors'),
         knex.schema.dropTable('tutorials'),
@@ -125,6 +117,4 @@ exports.down = function(knex, Promise) {
       resolve();
     } catch (error) {
       reject(error);
-    }
-  });
-};
+    };
