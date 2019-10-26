@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "heroku-postbuild": "knex migrate:latest && knex seed:run"
+    "heroku-postbuild": "cd server && knex migrate:latest && knex seed:run"
   },
   "keywords": [],
   "author": "",
