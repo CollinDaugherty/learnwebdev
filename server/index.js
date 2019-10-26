@@ -41,9 +41,9 @@ app.use('/api', require('./routes/users'));
 app.use('/api', require('./routes/tutorials'));
 app.use('/api', require('./routes/instructors'));
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname + '/client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 const port = process.env.PORT || 8080;
 app.listen(port);
