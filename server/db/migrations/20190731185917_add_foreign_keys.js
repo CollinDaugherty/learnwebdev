@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return Promise.all([
     knex.schema.alterTable('tutorials', t => {
       t.foreign('user_id')
@@ -43,10 +43,9 @@ exports.up = function(knex, Promise) {
   ]);
 
   console.log('foreign keys added');
-  resolve();
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return Promise.all([
     knex.schema.table('tutorials', t => {
       t.dropForeign('user_id');
@@ -71,5 +70,4 @@ exports.down = function(knex, Promise) {
   ]);
 
   console.log('foreign keys dropped');
-  resolve();
 };
