@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "knex migrate:latest && knex seed:run"
+    "build": "knex migrate:down && knex migrate:down && knex migrate:latest && knex seed:run"
   },
   "keywords": [],
   "author": "",
