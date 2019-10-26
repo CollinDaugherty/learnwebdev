@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "cd ../server && node index.js",
+    "start": "node server/index.js",
     "heroku-postbuild": "cd client && npm install && npm run-script build && cd ../server && npm install"
   }
 }
